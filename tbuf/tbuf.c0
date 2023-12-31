@@ -1,0 +1,198 @@
+/**************************************************************************/
+/*              COPYRIGHT Carnegie Mellon University 2023                 */
+/* Do not post this file or any derivative on a public site or repository */
+/**************************************************************************/
+/*
+ * Text buffers as doubly linked lists.
+ *
+ * 15-122 Principles of Imperative Computation */
+
+#use <conio>
+#use <util>
+#use <string>
+
+/*** Interface ***/
+
+typedef struct dll_node dll;
+struct dll_node {
+  dll* next;
+  char data;
+  dll* prev;
+};
+
+typedef struct tbuf_header tbuf;
+struct tbuf_header {
+  dll* start;  /* the fist node of the list (on the left)  */
+  dll* cursor; /* the position where the cursor is displayed */
+  dll* end;    /* the last node of the list (on the right) */
+};
+
+bool is_tbuf(tbuf* B);
+
+bool tbuf_at_left(tbuf* B);            /* Returns true if the cursor       */
+                                       /* is in leftmost position          */
+bool tbuf_at_right(tbuf* B);           /* Returns true if the cursor       */
+                                       /* is in rightmost position         */
+
+tbuf* tbuf_new();                      /* Creates a new, empty text buffer */
+void tbuf_forward(tbuf* B);            /* Moves the cursor forward (right) */
+void tbuf_backward(tbuf* B);           /* Moves the cursor backward (left) */
+void tbuf_insert(tbuf* B, char c);     /* Insert a character before cursor */
+char tbuf_delete(tbuf* B);             /* Remove character before cursor   */
+                                       /* (and returns the deleted char)   */
+
+int tbuf_row(tbuf* B);                 /* Returns the row of the cursor    */
+int tbuf_col(tbuf* B);                 /* Returns the column of the cursor */
+
+/*** Implementation ***/
+
+
+bool is_dll_segment(dll* start, dll* end)
+//citation: this function is adapted from lecture note 10 linkedlist
+{
+  if (start ==  end) return false;
+  dll* l = start;
+  while (l != NULL) {
+    if (l != start && l != end){
+
+      if (l->prev->next != l || l->next == NULL || l->next->prev != l) {
+        return false;}
+    }
+    else if (l == start){
+      if (l->next == NULL || l->next->prev != l) {
+        return false;}
+    }
+    else{ // l == end
+      if (l->prev->next != l) {
+        return false;}
+      return true;
+    }
+    l = l->next;
+  }
+  return false;
+}
+
+bool is_cursor_valid(dll* start, dll* end, dll*cursor)
+//citation: this function is adapted from lecture note 10 linkedlist
+{
+  if (cursor == start || start == NULL) {
+    return false;}
+  if (cursor == end) return true;
+  dll* l = start->next;
+  while (l != NULL && l != end) {
+    if (cursor == l)
+      return cursor->prev->next == cursor && cursor->next->prev == cursor;
+    l = l->next;
+  }
+  return false;
+}
+
+bool is_tbuf(tbuf* B)
+{
+  return B!=NULL 
+        && is_dll_segment(B->start, B->end) 
+        && is_cursor_valid(B->start, B->end, B->cursor);
+}
+
+//utility functions
+bool tbuf_at_left(tbuf* B)
+//@requires is_tbuf(B);
+{
+  return B->cursor == B->start->next;
+}
+
+bool tbuf_at_right(tbuf* B)
+//@requires is_tbuf(B);
+{
+  return B->cursor == B->end;
+}
+
+//interface functions
+tbuf* tbuf_new()
+//@ensures is_tbuf(\result);
+{
+  tbuf* B = alloc(tbuf);
+  dll* node_start = alloc(dll);
+  dll* node_end = alloc(dll);
+  B->start=node_start;
+  B->end=node_end;
+  B->start->next = B->end;
+  B->end->prev = B->start;
+  B->cursor = B->end;
+  return B;
+}
+
+void tbuf_forward(tbuf* B)
+//@requires is_tbuf(B);
+//@requires !tbuf_at_right(B);
+//@ensures is_tbuf(B);
+{
+  B->cursor = B->cursor->next;
+}
+
+void tbuf_backward(tbuf* B)
+//@requires is_tbuf(B);
+//@requires !tbuf_at_left(B);
+//@ensures is_tbuf(B);
+{
+  B->cursor = B->cursor->prev;
+}
+
+void tbuf_insert(tbuf* B, char c)
+//@requires is_tbuf(B);
+//@ensures is_tbuf(B);
+{
+  dll* new_node = alloc(dll);
+  new_node->data = c;
+  dll* prev_node = B->cursor->prev;
+  B->cursor->prev = new_node;
+  new_node->prev = prev_node;
+  new_node->next = B->cursor;
+  prev_node->next = new_node;
+}
+
+char tbuf_delete(tbuf* B)
+//@requires is_tbuf(B);
+//@requires !tbuf_at_left(B);
+//@ensures is_tbuf(B);
+{
+  dll* deleted_node = B->cursor->prev;
+  B->cursor->prev = deleted_node->prev;
+  deleted_node->prev->next = B->cursor;
+  return deleted_node->data;
+}
+
+int tbuf_row(tbuf* B)
+//@requires is_tbuf(B);
+{
+  int count = 1;
+  dll* current_node = B->cursor;
+  if (current_node == B->end || current_node->data == '\n'){
+    if (current_node == B->start->next) return count;
+    else { 
+      current_node = current_node->prev;}//avoid double counting the current \n
+  }
+  while (current_node != B->start) {
+    if (current_node->data == '\n') count ++;
+    current_node = current_node->prev;
+  }
+  return count;
+}
+
+int tbuf_col(tbuf* B)
+//@requires is_tbuf(B);
+{
+  int count = 0;
+  dll* current_node = B->cursor;
+  
+  // if this is the first node of the line
+  if (current_node == B->start->next || current_node->prev->data == '\n') {
+    return 0; }
+
+  // if we're at the last node of this line
+  while (current_node->prev != B->start && current_node->prev->data != '\n'){
+    count ++;
+    current_node = current_node->prev;
+  }
+  return count;
+}

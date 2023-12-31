@@ -1,0 +1,146 @@
+/**************************************************************************/
+/*              COPYRIGHT Carnegie Mellon University 2023                 */
+/* Do not post this file or any derivative on a public site or repository */
+/**************************************************************************/
+#use <conio>
+
+int main() {
+  // Create a few text buffers, some correct others incorrect 
+
+  // Using them, test your is_tbuf
+  tbuf* B = alloc(tbuf);
+  dll* node_start = alloc(dll);
+  dll* node_end = alloc(dll);
+  B->start=node_start;
+  B->end=node_end;
+  B->start->next = B->end;
+  B->end->prev = B->start;
+  print("1--\n");
+  assert(!is_tbuf(B));
+  B->cursor=B->start;
+  print("2--\n");
+  assert(!is_tbuf(B));
+  B->cursor = B->end;
+  print("3--\n");
+  assert(is_tbuf(B));
+  
+  B = alloc(tbuf);
+  B->start=NULL;
+  B->end=node_end;
+  B->cursor=B->end;
+  print("4--\n");
+  assert(!is_tbuf(B));
+
+  B = alloc(tbuf);
+  B->start=node_start;
+  B->end=NULL;
+  B->cursor=B->end;
+  print("5--\n");
+  assert(!is_tbuf(B));
+
+  //ex1
+  B = alloc(tbuf);
+  B->start=node_start;
+  B->end=node_end;
+
+  dll* node1 = alloc(dll);
+  node1->prev=B->start;
+  node1->data='a';
+  B->start->next = node1;
+
+  dll* node2 = alloc(dll);
+  node2->prev=node1;
+  node2->data='b';
+  node2->next=B->end;
+  node1->next=node2;
+  B->end->prev=node2;
+
+  dll* node2_copy=alloc(dll);
+  node2_copy->prev=B->start;
+  node2_copy->next=B->end;
+  node2_copy->data='b';
+  B->cursor = node2_copy;
+  print("6--\n");
+  assert(!is_tbuf(B));
+
+  //ex2
+  B = alloc(tbuf);
+  B->start=node_start;
+  B->end=node_end;
+
+  node1 = alloc(dll);
+  node1->prev=B->start;
+  node1->data='a';
+  B->start->next=node1;
+  B->cursor = node1;
+
+  node2 = alloc(dll);
+  node2->prev=node1;
+  node2->data='b';
+  node2->next=B->end;
+  B->end->prev=node2;
+
+  node2_copy=alloc(dll);
+  node2_copy->prev=node1;
+  node2_copy->next=B->end;
+  node2_copy->data='b';
+  node1->next=node2_copy;
+  print("7--\n");
+  assert(!is_tbuf(B));
+
+  //buffer 3
+  B = alloc(tbuf);
+  node_start = alloc(dll);
+  node_end = alloc(dll);
+  B->start=node_start;
+  B->end=node_end;
+  node1 = alloc(dll);
+  node_start->next=node1;
+  node1->prev=node_start;
+  node2 = alloc(dll);
+  node1->next=node2;
+  node2->prev=node1;
+  print("8--\n");
+  assert(!is_tbuf(B));
+
+  //buffer 4
+  B = alloc(tbuf);
+  node_start = alloc(dll);
+  node_end = alloc(dll);
+  B->start=node_start;
+  B->end=node_end;
+  node1 = alloc(dll);
+  node_start->next=node1;
+  node1->prev=node_start;
+  node2 = alloc(dll);
+  node1->next=node2;
+  node2->next=node_end;
+  node2_copy=alloc(dll);
+  node2->prev=node2_copy;
+  node2_copy->next=node2;
+  node2_copy->prev=node1;
+  print("9--\n");
+  assert(!is_tbuf(B));
+
+  //buffer 5
+  B = alloc(tbuf);
+  node_start = alloc(dll);
+  node_end = alloc(dll);
+  B->start=node_start;
+  B->end=node_end;
+  node1 = alloc(dll);
+  node_start->next=node1;
+  node1->prev=node_start;
+  node2_copy=alloc(dll);
+  node1->next=node2_copy;
+  node2_copy->prev=node1;
+  node2 = alloc(dll);
+  node2_copy->next=node2;
+  node2->prev=node1;
+  node2->next=node_end;
+  print("10--\n");
+  assert(!is_tbuf(B));
+
+  printf("All tests passed!\n");
+  return 0;
+}

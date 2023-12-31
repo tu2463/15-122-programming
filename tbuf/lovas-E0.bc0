@@ -1,0 +1,2073 @@
+C0 C0 FF EE       # magic number
+00 17             # version 11, arch = 1 (64 bits)
+
+00 02             # int pool count
+# int pool
+7F FF FF FF
+80 00 00 00
+
+00 85             # string pool total size
+# string pool
+65 64 69 74 6F 72 2E 63 30 3A 20 31 32 37 2E 35 2D 31 32 37 2E 33 36 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "editor.c0: 127.5-127.36: assert failed"
+45 30 2C 20 74 68 65 20 6D 69 6E 69 6D 61 6C 69 73 74 20 65 64 69 74 6F 72 20 2D 2D 20 5E 58 20 74 6F 20 65 78 69 74 2C 20 5E 4C 20 74 6F 20 72 65 66 72 65 73 68 00  # "E0, the minimalist editor -- ^X to exit, ^L to refresh"
+50 6F 73 69 74 69 6F 6E 20 28 00  # "Position ("
+2C 00  # ","
+29 00  # ")"
+74 68 61 6E 6B 73 20 66 6F 72 20 66 6C 79 69 6E 67 20 45 20 21 08 08 00  # "thanks for flying E !\b\b"
+
+00 21             # function count
+# function_pool
+
+#<main>
+00                # number of arguments = 0
+0C                # number of local variables = 12
+01 A2             # code length = 418 bytes
+B7 00 11 # invokenative 17    # c_initscr()
+36 00    # vstore 0           # mainwin = c_initscr();
+B7 00 12 # invokenative 18    # c_cbreak()
+57       # pop                # (ignore result)
+B7 00 13 # invokenative 19    # c_noecho()
+57       # pop                # (ignore result)
+15 00    # vload 0            # mainwin
+10 01    # bipush 1           # true
+B7 00 14 # invokenative 20    # c_keypad(mainwin, true)
+57       # pop                # (ignore result)
+10 00    # bipush 0           # 0
+B7 00 15 # invokenative 21    # c_curs_set(0)
+36 01    # vstore 1           # vis = c_curs_set(0);
+15 00    # vload 0            # mainwin
+B7 00 05 # invokenative 5     # cc_getmaxx(mainwin)
+36 02    # vstore 2           # ncols = cc_getmaxx(mainwin);
+15 00    # vload 0            # mainwin
+B7 00 0F # invokenative 15    # cc_getmaxy(mainwin)
+36 03    # vstore 3           # nlines = cc_getmaxy(mainwin);
+15 00    # vload 0            # mainwin
+B7 00 04 # invokenative 4     # cc_getbegx(mainwin)
+36 04    # vstore 4           # begx = cc_getbegx(mainwin);
+15 00    # vload 0            # mainwin
+B7 00 16 # invokenative 22    # cc_getbegy(mainwin)
+36 05    # vstore 5           # begy = cc_getbegy(mainwin);
+15 00    # vload 0            # mainwin
+15 03    # vload 3            # nlines
+10 02    # bipush 2           # 2
+64       # isub               # (nlines - 2)
+15 02    # vload 2            # ncols
+15 05    # vload 5            # begy
+10 01    # bipush 1           # 1
+60       # iadd               # (begy + 1)
+15 04    # vload 4            # begx
+B7 00 17 # invokenative 23    # c_subwin(mainwin, (nlines - 2), ncols, (begy + 1), begx)
+36 06    # vstore 6           # canvas = c_subwin(mainwin, (nlines - 2), ncols, (begy + 1), begx);
+15 00    # vload 0            # mainwin
+10 01    # bipush 1           # 1
+15 02    # vload 2            # ncols
+15 05    # vload 5            # begy
+15 04    # vload 4            # begx
+B7 00 17 # invokenative 23    # c_subwin(mainwin, 1, ncols, begy, begx)
+36 07    # vstore 7           # topbar = c_subwin(mainwin, 1, ncols, begy, begx);
+15 00    # vload 0            # mainwin
+10 01    # bipush 1           # 1
+15 02    # vload 2            # ncols
+15 03    # vload 3            # nlines
+10 02    # bipush 2           # 2
+64       # isub               # (nlines - 2)
+15 04    # vload 4            # begx
+B7 00 17 # invokenative 23    # c_subwin(mainwin, 1, ncols, (nlines - 2), begx)
+36 08    # vstore 8           # botbar = c_subwin(mainwin, 1, ncols, (nlines - 2), begx);
+B8 00 16 # invokestatic 22    # editor_new()
+36 09    # vstore 9           # E = editor_new();
+15 07    # vload 7            # topbar
+B8 00 1E # invokestatic 30    # render_topbar(topbar)
+57       # pop                # (ignore result)
+15 08    # vload 8            # botbar
+15 09    # vload 9            # E
+B8 00 1F # invokestatic 31    # render_botbar(botbar, E)
+57       # pop                # (ignore result)
+10 01    # bipush 1           # true
+36 0A    # vstore 10          # go = true;
+# <213:loop>
+15 0A    # vload 10           # go
+10 01    # bipush 1           # true
+9F 00 06 # if_cmpeq +6        # if (go == true) goto <214:body>
+A7 01 02 # goto +258          # goto <215:exit>
+# <214:body>
+15 06    # vload 6            # canvas
+15 09    # vload 9            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+B8 00 20 # invokestatic 32    # render_buf(canvas, E->buffer)
+57       # pop                # (ignore result)
+15 06    # vload 6            # canvas
+B7 00 18 # invokenative 24    # c_wrefresh(canvas)
+57       # pop                # (ignore result)
+15 08    # vload 8            # botbar
+15 09    # vload 9            # E
+B8 00 1F # invokestatic 31    # render_botbar(botbar, E)
+57       # pop                # (ignore result)
+15 08    # vload 8            # botbar
+B7 00 18 # invokenative 24    # c_wrefresh(botbar)
+57       # pop                # (ignore result)
+B7 00 19 # invokenative 25    # c_getch()
+36 0B    # vstore 11          # c = c_getch();
+15 0B    # vload 11           # c
+10 18    # bipush 24          # 24
+9F 00 06 # if_cmpeq +6        # if (c == 24) goto <216:then>
+A7 00 0A # goto +10           # goto <217:else>
+# <216:then>
+10 00    # bipush 0           # false
+36 0A    # vstore 10          # go = false;
+A7 00 CA # goto +202          # goto <218:endif>
+# <217:else>
+15 0B    # vload 11           # c
+10 0C    # bipush 12          # 12
+9F 00 06 # if_cmpeq +6        # if (c == 12) goto <219:then>
+A7 00 18 # goto +24           # goto <220:else>
+# <219:then>
+15 00    # vload 0            # mainwin
+B7 00 1A # invokenative 26    # c_wclear(mainwin)
+57       # pop                # (ignore result)
+15 07    # vload 7            # topbar
+B8 00 1E # invokestatic 30    # render_topbar(topbar)
+57       # pop                # (ignore result)
+15 00    # vload 0            # mainwin
+B7 00 18 # invokenative 24    # c_wrefresh(mainwin)
+57       # pop                # (ignore result)
+A7 00 AB # goto +171          # goto <221:endif>
+# <220:else>
+15 0B    # vload 11           # c
+B7 00 1B # invokenative 27    # cc_key_is_backspace(c)
+10 01    # bipush 1           # true
+9F 00 06 # if_cmpeq +6        # if (cc_key_is_backspace(c) == true) goto <222:then>
+A7 00 0C # goto +12           # goto <223:else>
+# <222:then>
+15 09    # vload 9            # E
+B8 00 1A # invokestatic 26    # editor_delete(E)
+57       # pop                # (ignore result)
+A7 00 95 # goto +149          # goto <224:endif>
+# <223:else>
+15 0B    # vload 11           # c
+B7 00 1C # invokenative 28    # cc_key_is_left(c)
+10 01    # bipush 1           # true
+9F 00 06 # if_cmpeq +6        # if (cc_key_is_left(c) == true) goto <225:then>
+A7 00 0C # goto +12           # goto <226:else>
+# <225:then>
+15 09    # vload 9            # E
+B8 00 18 # invokestatic 24    # editor_backward(E)
+57       # pop                # (ignore result)
+A7 00 7F # goto +127          # goto <227:endif>
+# <226:else>
+15 0B    # vload 11           # c
+B7 00 1D # invokenative 29    # cc_key_is_right(c)
+10 01    # bipush 1           # true
+9F 00 06 # if_cmpeq +6        # if (cc_key_is_right(c) == true) goto <228:then>
+A7 00 0C # goto +12           # goto <229:else>
+# <228:then>
+15 09    # vload 9            # E
+B8 00 17 # invokestatic 23    # editor_forward(E)
+57       # pop                # (ignore result)
+A7 00 69 # goto +105          # goto <230:endif>
+# <229:else>
+15 0B    # vload 11           # c
+B7 00 1E # invokenative 30    # cc_key_is_up(c)
+10 01    # bipush 1           # true
+9F 00 06 # if_cmpeq +6        # if (cc_key_is_up(c) == true) goto <231:then>
+A7 00 0C # goto +12           # goto <232:else>
+# <231:then>
+15 09    # vload 9            # E
+B8 00 1B # invokestatic 27    # editor_up(E)
+57       # pop                # (ignore result)
+A7 00 53 # goto +83           # goto <233:endif>
+# <232:else>
+15 0B    # vload 11           # c
+B7 00 1F # invokenative 31    # cc_key_is_down(c)
+10 01    # bipush 1           # true
+9F 00 06 # if_cmpeq +6        # if (cc_key_is_down(c) == true) goto <234:then>
+A7 00 0C # goto +12           # goto <235:else>
+# <234:then>
+15 09    # vload 9            # E
+B8 00 1C # invokestatic 28    # editor_down(E)
+57       # pop                # (ignore result)
+A7 00 3D # goto +61           # goto <236:endif>
+# <235:else>
+15 0B    # vload 11           # c
+B7 00 20 # invokenative 32    # cc_key_is_enter(c)
+10 01    # bipush 1           # true
+9F 00 06 # if_cmpeq +6        # if (cc_key_is_enter(c) == true) goto <237:then>
+A7 00 0E # goto +14           # goto <238:else>
+# <237:then>
+15 09    # vload 9            # E
+10 0A    # bipush 10          # '\n'
+B8 00 19 # invokestatic 25    # editor_insert(E, '\n')
+57       # pop                # (ignore result)
+A7 00 25 # goto +37           # goto <239:endif>
+# <238:else>
+10 00    # bipush 0           # 0
+15 0B    # vload 11           # c
+A4 00 06 # if_icmple +6       # if (0 <= c) goto <243:and>
+A7 00 1B # goto +27           # goto <241:else>
+# <243:and>
+15 0B    # vload 11           # c
+10 7F    # bipush 127         # 127
+A4 00 06 # if_icmple +6       # if (c <= 127) goto <240:then>
+A7 00 11 # goto +17           # goto <241:else>
+# <240:then>
+15 09    # vload 9            # E
+15 0B    # vload 11           # c
+B7 00 00 # invokenative 0     # char_chr(c)
+B8 00 19 # invokestatic 25    # editor_insert(E, char_chr(c))
+57       # pop                # (ignore result)
+A7 00 03 # goto +3            # goto <242:endif>
+# <241:else>
+# <242:endif>
+# <239:endif>
+# <236:endif>
+# <233:endif>
+# <230:endif>
+# <227:endif>
+# <224:endif>
+# <221:endif>
+# <218:endif>
+A7 FE FA # goto -262          # goto <213:loop>
+# <215:exit>
+15 01    # vload 1            # vis
+B7 00 15 # invokenative 21    # c_curs_set(vis)
+57       # pop                # (ignore result)
+B7 00 21 # invokenative 33    # c_endwin()
+57       # pop                # (ignore result)
+14 00 6D # aldc 109           # s[109] = "thanks for flying E !\b\b"
+B7 00 22 # invokenative 34    # print("thanks for flying E !\b\b")
+57       # pop                # (ignore result)
+10 00    # bipush 0           # 0
+B0       # return             # 
+
+
+#<int_size>
+00                # number of arguments = 0
+00                # number of local variables = 0
+00 03             # code length = 3 bytes
+10 04    # bipush 4           # 4
+B0       # return             # 
+
+
+#<int_max>
+00                # number of arguments = 0
+00                # number of local variables = 0
+00 04             # code length = 4 bytes
+13 00 00 # ildc 0             # c[0] = 2147483647
+B0       # return             # 
+
+
+#<int_min>
+00                # number of arguments = 0
+00                # number of local variables = 0
+00 04             # code length = 4 bytes
+13 00 01 # ildc 1             # c[1] = -2147483648
+B0       # return             # 
+
+
+#<abs>
+01                # number of arguments = 1
+01                # number of local variables = 1
+00 15             # code length = 21 bytes
+15 00    # vload 0            # x
+10 00    # bipush 0           # 0
+A1 00 06 # if_icmplt +6       # if (x < 0) goto <06:cond_true>
+A7 00 0B # goto +11           # goto <07:cond_false>
+# <06:cond_true>
+10 00    # bipush 0           # 
+15 00    # vload 0            # x
+64       # isub               # -(x)
+A7 00 05 # goto +5            # goto <08:cond_end>
+# <07:cond_false>
+15 00    # vload 0            # x
+# <08:cond_end>
+B0       # return             # 
+
+
+#<max>
+02                # number of arguments = 2
+02                # number of local variables = 2
+00 12             # code length = 18 bytes
+15 00    # vload 0            # x
+15 01    # vload 1            # y
+A3 00 06 # if_icmpgt +6       # if (x > y) goto <00:cond_true>
+A7 00 08 # goto +8            # goto <01:cond_false>
+# <00:cond_true>
+15 00    # vload 0            # x
+A7 00 05 # goto +5            # goto <02:cond_end>
+# <01:cond_false>
+15 01    # vload 1            # y
+# <02:cond_end>
+B0       # return             # 
+
+
+#<min>
+02                # number of arguments = 2
+02                # number of local variables = 2
+00 12             # code length = 18 bytes
+15 00    # vload 0            # x
+15 01    # vload 1            # y
+A3 00 06 # if_icmpgt +6       # if (x > y) goto <03:cond_true>
+A7 00 08 # goto +8            # goto <04:cond_false>
+# <03:cond_true>
+15 01    # vload 1            # y
+A7 00 05 # goto +5            # goto <05:cond_end>
+# <04:cond_false>
+15 00    # vload 0            # x
+# <05:cond_end>
+B0       # return             # 
+
+
+#<int2hex>
+01                # number of arguments = 1
+04                # number of local variables = 4
+00 52             # code length = 82 bytes
+10 02    # bipush 2           # 2
+B8 00 01 # invokestatic 1     # int_size()
+68       # imul               # (2 * int_size())
+36 01    # vstore 1           # digits = (2 * int_size());
+15 01    # vload 1            # digits
+10 01    # bipush 1           # 1
+60       # iadd               # (digits + 1)
+BC 01    # newarray 1         # alloc_array(char, (digits + 1))
+36 02    # vstore 2           # s = alloc_array(char, (digits + 1));
+15 02    # vload 2            # s
+15 01    # vload 1            # digits
+63       # aadds              # &s[digits]
+10 00    # bipush 0           # '\000'
+55       # cmstore            # s[digits] = '\0';
+10 00    # bipush 0           # 0
+36 03    # vstore 3           # i = 0;
+# <17:loop>
+15 03    # vload 3            # i
+15 01    # vload 1            # digits
+A1 00 06 # if_icmplt +6       # if (i < digits) goto <18:body>
+A7 00 28 # goto +40           # goto <19:exit>
+# <18:body>
+15 02    # vload 2            # s
+15 01    # vload 1            # digits
+15 03    # vload 3            # i
+64       # isub               # (digits - i)
+10 01    # bipush 1           # 1
+64       # isub               # ((digits - i) - 1)
+63       # aadds              # &s[((digits - i) - 1)]
+15 00    # vload 0            # x
+10 0F    # bipush 15          # 15
+7E       # iand               # (x & 15)
+B8 00 08 # invokestatic 8     # hexdig2char((x & 15))
+55       # cmstore            # s[((digits - i) - 1)] = hexdig2char((x & 15));
+15 00    # vload 0            # x
+10 04    # bipush 4           # 4
+7A       # ishr               # (x >> 4)
+36 00    # vstore 0           # x = (x >> 4);
+15 03    # vload 3            # i
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 03    # vstore 3           # i += 1;
+A7 FF D4 # goto -44           # goto <17:loop>
+# <19:exit>
+15 02    # vload 2            # s
+B7 00 02 # invokenative 2     # string_from_chararray(s)
+B0       # return             # 
+
+
+#<hexdig2char>
+01                # number of arguments = 1
+01                # number of local variables = 1
+00 4C             # code length = 76 bytes
+10 00    # bipush 0           # 0
+15 00    # vload 0            # d
+A4 00 06 # if_icmple +6       # if (0 <= d) goto <12:and>
+A7 00 1C # goto +28           # goto <10:else>
+# <12:and>
+15 00    # vload 0            # d
+10 0A    # bipush 10          # 10
+A1 00 06 # if_icmplt +6       # if (d < 10) goto <09:then>
+A7 00 12 # goto +18           # goto <10:else>
+# <09:then>
+10 30    # bipush 48          # '0'
+B7 00 01 # invokenative 1     # char_ord('0')
+15 00    # vload 0            # d
+60       # iadd               # (char_ord('0') + d)
+B7 00 00 # invokenative 0     # char_chr((char_ord('0') + d))
+B0       # return             # 
+A7 00 2C # goto +44           # goto <11:endif>
+# <10:else>
+10 0A    # bipush 10          # 10
+15 00    # vload 0            # d
+A4 00 06 # if_icmple +6       # if (10 <= d) goto <16:and>
+A7 00 1F # goto +31           # goto <14:else>
+# <16:and>
+15 00    # vload 0            # d
+10 10    # bipush 16          # 16
+A1 00 06 # if_icmplt +6       # if (d < 16) goto <13:then>
+A7 00 15 # goto +21           # goto <14:else>
+# <13:then>
+10 41    # bipush 65          # 'A'
+B7 00 01 # invokenative 1     # char_ord('A')
+15 00    # vload 0            # d
+10 0A    # bipush 10          # 10
+64       # isub               # (d - 10)
+60       # iadd               # (char_ord('A') + (d - 10))
+B7 00 00 # invokenative 0     # char_chr((char_ord('A') + (d - 10)))
+B0       # return             # 
+A7 00 06 # goto +6            # goto <15:endif>
+# <14:else>
+10 3F    # bipush 63          # '\?'
+B0       # return             # 
+# <15:endif>
+# <11:endif>
+
+
+#<is_tbuf>
+01                # number of arguments = 1
+01                # number of local variables = 1
+00 36             # code length = 54 bytes
+15 00    # vload 0            # B
+01       # aconst_null        # NULL
+A0 00 06 # if_cmpne +6        # if (B != NULL) goto <68:and>
+A7 00 2D # goto +45           # goto <66:cond_false>
+# <68:and>
+15 00    # vload 0            # B
+62 00    # aaddf 0            # &B->start
+2F       # amload             # B->start
+15 00    # vload 0            # B
+62 10    # aaddf 16           # &B->end
+2F       # amload             # B->end
+B8 00 13 # invokestatic 19    # is_dll_segment(B->start, B->end)
+10 01    # bipush 1           # true
+9F 00 06 # if_cmpeq +6        # if (is_dll_segment(B->start, B->end) == true) goto <65:cond_true>
+A7 00 18 # goto +24           # goto <66:cond_false>
+# <65:cond_true>
+15 00    # vload 0            # B
+62 00    # aaddf 0            # &B->start
+2F       # amload             # B->start
+15 00    # vload 0            # B
+62 10    # aaddf 16           # &B->end
+2F       # amload             # B->end
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+B8 00 14 # invokestatic 20    # is_cursor_valid(B->start, B->end, B->cursor)
+A7 00 05 # goto +5            # goto <67:cond_end>
+# <66:cond_false>
+10 00    # bipush 0           # false
+# <67:cond_end>
+B0       # return             # 
+
+
+#<tbuf_at_left>
+01                # number of arguments = 1
+01                # number of local variables = 1
+00 1B             # code length = 27 bytes
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+15 00    # vload 0            # B
+62 00    # aaddf 0            # &B->start
+2F       # amload             # B->start
+62 00    # aaddf 0            # &B->start->next
+2F       # amload             # B->start->next
+9F 00 06 # if_cmpeq +6        # if (B->cursor == B->start->next) goto <69:cond_true>
+A7 00 08 # goto +8            # goto <70:cond_false>
+# <69:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <71:cond_end>
+# <70:cond_false>
+10 00    # bipush 0           # false
+# <71:cond_end>
+B0       # return             # 
+
+
+#<tbuf_at_right>
+01                # number of arguments = 1
+01                # number of local variables = 1
+00 18             # code length = 24 bytes
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+15 00    # vload 0            # B
+62 10    # aaddf 16           # &B->end
+2F       # amload             # B->end
+9F 00 06 # if_cmpeq +6        # if (B->cursor == B->end) goto <72:cond_true>
+A7 00 08 # goto +8            # goto <73:cond_false>
+# <72:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <74:cond_end>
+# <73:cond_false>
+10 00    # bipush 0           # false
+# <74:cond_end>
+B0       # return             # 
+
+
+#<tbuf_new>
+00                # number of arguments = 0
+03                # number of local variables = 3
+00 41             # code length = 65 bytes
+BB 18    # new 24             # alloc(tbuf)
+36 00    # vstore 0           # B = alloc(tbuf);
+BB 18    # new 24             # alloc(dll)
+36 01    # vstore 1           # node_start = alloc(dll);
+BB 18    # new 24             # alloc(dll)
+36 02    # vstore 2           # node_end = alloc(dll);
+15 00    # vload 0            # B
+62 00    # aaddf 0            # &B->start
+15 01    # vload 1            # node_start
+4F       # amstore            # B->start = node_start;
+15 00    # vload 0            # B
+62 10    # aaddf 16           # &B->end
+15 02    # vload 2            # node_end
+4F       # amstore            # B->end = node_end;
+15 00    # vload 0            # B
+62 00    # aaddf 0            # &B->start
+2F       # amload             # B->start
+62 00    # aaddf 0            # &B->start->next
+15 00    # vload 0            # B
+62 10    # aaddf 16           # &B->end
+2F       # amload             # B->end
+4F       # amstore            # B->start->next = B->end;
+15 00    # vload 0            # B
+62 10    # aaddf 16           # &B->end
+2F       # amload             # B->end
+62 10    # aaddf 16           # &B->end->prev
+15 00    # vload 0            # B
+62 00    # aaddf 0            # &B->start
+2F       # amload             # B->start
+4F       # amstore            # B->end->prev = B->start;
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+15 00    # vload 0            # B
+62 10    # aaddf 16           # &B->end
+2F       # amload             # B->end
+4F       # amstore            # B->cursor = B->end;
+15 00    # vload 0            # B
+B0       # return             # 
+
+
+#<tbuf_forward>
+01                # number of arguments = 1
+01                # number of local variables = 1
+00 10             # code length = 16 bytes
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+62 00    # aaddf 0            # &B->cursor->next
+2F       # amload             # B->cursor->next
+4F       # amstore            # B->cursor = B->cursor->next;
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<tbuf_backward>
+01                # number of arguments = 1
+01                # number of local variables = 1
+00 10             # code length = 16 bytes
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+62 10    # aaddf 16           # &B->cursor->prev
+2F       # amload             # B->cursor->prev
+4F       # amstore            # B->cursor = B->cursor->prev;
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<tbuf_insert>
+02                # number of arguments = 2
+04                # number of local variables = 4
+00 3A             # code length = 58 bytes
+BB 18    # new 24             # alloc(dll)
+36 02    # vstore 2           # new_node = alloc(dll);
+15 02    # vload 2            # new_node
+62 08    # aaddf 8            # &new_node->data
+15 01    # vload 1            # c
+55       # cmstore            # new_node->data = c;
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+62 10    # aaddf 16           # &B->cursor->prev
+2F       # amload             # B->cursor->prev
+36 03    # vstore 3           # prev_node = B->cursor->prev;
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+62 10    # aaddf 16           # &B->cursor->prev
+15 02    # vload 2            # new_node
+4F       # amstore            # B->cursor->prev = new_node;
+15 02    # vload 2            # new_node
+62 10    # aaddf 16           # &new_node->prev
+15 03    # vload 3            # prev_node
+4F       # amstore            # new_node->prev = prev_node;
+15 02    # vload 2            # new_node
+62 00    # aaddf 0            # &new_node->next
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+4F       # amstore            # new_node->next = B->cursor;
+15 03    # vload 3            # prev_node
+62 00    # aaddf 0            # &prev_node->next
+15 02    # vload 2            # new_node
+4F       # amstore            # prev_node->next = new_node;
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<tbuf_delete>
+01                # number of arguments = 1
+02                # number of local variables = 2
+00 2A             # code length = 42 bytes
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+62 10    # aaddf 16           # &B->cursor->prev
+2F       # amload             # B->cursor->prev
+36 01    # vstore 1           # deleted_node = B->cursor->prev;
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+62 10    # aaddf 16           # &B->cursor->prev
+15 01    # vload 1            # deleted_node
+62 10    # aaddf 16           # &deleted_node->prev
+2F       # amload             # deleted_node->prev
+4F       # amstore            # B->cursor->prev = deleted_node->prev;
+15 01    # vload 1            # deleted_node
+62 10    # aaddf 16           # &deleted_node->prev
+2F       # amload             # deleted_node->prev
+62 00    # aaddf 0            # &deleted_node->prev->next
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+4F       # amstore            # deleted_node->prev->next = B->cursor;
+15 01    # vload 1            # deleted_node
+62 08    # aaddf 8            # &deleted_node->data
+34       # cmload             # deleted_node->data
+B0       # return             # 
+
+
+#<tbuf_row>
+01                # number of arguments = 1
+03                # number of local variables = 3
+00 76             # code length = 118 bytes
+10 01    # bipush 1           # 1
+36 01    # vstore 1           # count = 1;
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+36 02    # vstore 2           # current_node = B->cursor;
+15 02    # vload 2            # current_node
+15 00    # vload 0            # B
+62 10    # aaddf 16           # &B->end
+2F       # amload             # B->end
+9F 00 13 # if_cmpeq +19       # if (current_node == B->end) goto <75:then>
+A7 00 03 # goto +3            # goto <78:or>
+# <78:or>
+15 02    # vload 2            # current_node
+62 08    # aaddf 8            # &current_node->data
+34       # cmload             # current_node->data
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (current_node->data == '\n') goto <75:then>
+A7 00 23 # goto +35           # goto <76:else>
+# <75:then>
+15 02    # vload 2            # current_node
+15 00    # vload 0            # B
+62 00    # aaddf 0            # &B->start
+2F       # amload             # B->start
+62 00    # aaddf 0            # &B->start->next
+2F       # amload             # B->start->next
+9F 00 06 # if_cmpeq +6        # if (current_node == B->start->next) goto <79:then>
+A7 00 09 # goto +9            # goto <80:else>
+# <79:then>
+15 01    # vload 1            # count
+B0       # return             # 
+A7 00 0A # goto +10           # goto <81:endif>
+# <80:else>
+15 02    # vload 2            # current_node
+62 10    # aaddf 16           # &current_node->prev
+2F       # amload             # current_node->prev
+36 02    # vstore 2           # current_node = current_node->prev;
+# <81:endif>
+A7 00 03 # goto +3            # goto <77:endif>
+# <76:else>
+# <77:endif>
+# <82:loop>
+15 02    # vload 2            # current_node
+15 00    # vload 0            # B
+62 00    # aaddf 0            # &B->start
+2F       # amload             # B->start
+A0 00 06 # if_cmpne +6        # if (current_node != B->start) goto <83:body>
+A7 00 24 # goto +36           # goto <84:exit>
+# <83:body>
+15 02    # vload 2            # current_node
+62 08    # aaddf 8            # &current_node->data
+34       # cmload             # current_node->data
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (current_node->data == '\n') goto <85:then>
+A7 00 0D # goto +13           # goto <86:else>
+# <85:then>
+15 01    # vload 1            # count
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 01    # vstore 1           # count += 1;
+A7 00 03 # goto +3            # goto <87:endif>
+# <86:else>
+# <87:endif>
+15 02    # vload 2            # current_node
+62 10    # aaddf 16           # &current_node->prev
+2F       # amload             # current_node->prev
+36 02    # vstore 2           # current_node = current_node->prev;
+A7 FF D5 # goto -43           # goto <82:loop>
+# <84:exit>
+15 01    # vload 1            # count
+B0       # return             # 
+
+
+#<tbuf_col>
+01                # number of arguments = 1
+03                # number of local variables = 3
+00 65             # code length = 101 bytes
+10 00    # bipush 0           # 0
+36 01    # vstore 1           # count = 0;
+15 00    # vload 0            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+36 02    # vstore 2           # current_node = B->cursor;
+15 02    # vload 2            # current_node
+15 00    # vload 0            # B
+62 00    # aaddf 0            # &B->start
+2F       # amload             # B->start
+62 00    # aaddf 0            # &B->start->next
+2F       # amload             # B->start->next
+9F 00 16 # if_cmpeq +22       # if (current_node == B->start->next) goto <88:then>
+A7 00 03 # goto +3            # goto <91:or>
+# <91:or>
+15 02    # vload 2            # current_node
+62 10    # aaddf 16           # &current_node->prev
+2F       # amload             # current_node->prev
+62 08    # aaddf 8            # &current_node->prev->data
+34       # cmload             # current_node->prev->data
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (current_node->prev->data == '\n') goto <88:then>
+A7 00 09 # goto +9            # goto <89:else>
+# <88:then>
+10 00    # bipush 0           # 0
+B0       # return             # 
+A7 00 03 # goto +3            # goto <90:endif>
+# <89:else>
+# <90:endif>
+# <92:loop>
+15 02    # vload 2            # current_node
+62 10    # aaddf 16           # &current_node->prev
+2F       # amload             # current_node->prev
+15 00    # vload 0            # B
+62 00    # aaddf 0            # &B->start
+2F       # amload             # B->start
+A0 00 06 # if_cmpne +6        # if (current_node->prev != B->start) goto <95:and>
+A7 00 24 # goto +36           # goto <94:exit>
+# <95:and>
+15 02    # vload 2            # current_node
+62 10    # aaddf 16           # &current_node->prev
+2F       # amload             # current_node->prev
+62 08    # aaddf 8            # &current_node->prev->data
+34       # cmload             # current_node->prev->data
+10 0A    # bipush 10          # '\n'
+A0 00 06 # if_cmpne +6        # if (current_node->prev->data != '\n') goto <93:body>
+A7 00 14 # goto +20           # goto <94:exit>
+# <93:body>
+15 01    # vload 1            # count
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 01    # vstore 1           # count += 1;
+15 02    # vload 2            # current_node
+62 10    # aaddf 16           # &current_node->prev
+2F       # amload             # current_node->prev
+36 02    # vstore 2           # current_node = current_node->prev;
+A7 FF D2 # goto -46           # goto <92:loop>
+# <94:exit>
+15 01    # vload 1            # count
+B0       # return             # 
+
+
+#<is_dll_segment>
+02                # number of arguments = 2
+03                # number of local variables = 3
+00 BB             # code length = 187 bytes
+15 00    # vload 0            # start
+15 01    # vload 1            # end
+9F 00 06 # if_cmpeq +6        # if (start == end) goto <20:then>
+A7 00 09 # goto +9            # goto <21:else>
+# <20:then>
+10 00    # bipush 0           # false
+B0       # return             # 
+A7 00 03 # goto +3            # goto <22:endif>
+# <21:else>
+# <22:endif>
+15 00    # vload 0            # start
+36 02    # vstore 2           # l = start;
+# <23:loop>
+15 02    # vload 2            # l
+01       # aconst_null        # NULL
+A0 00 06 # if_cmpne +6        # if (l != NULL) goto <24:body>
+A7 00 9E # goto +158          # goto <25:exit>
+# <24:body>
+15 02    # vload 2            # l
+15 00    # vload 0            # start
+A0 00 06 # if_cmpne +6        # if (l != start) goto <29:and>
+A7 00 42 # goto +66           # goto <27:else>
+# <29:and>
+15 02    # vload 2            # l
+15 01    # vload 1            # end
+A0 00 06 # if_cmpne +6        # if (l != end) goto <26:then>
+A7 00 38 # goto +56           # goto <27:else>
+# <26:then>
+15 02    # vload 2            # l
+62 10    # aaddf 16           # &l->prev
+2F       # amload             # l->prev
+62 00    # aaddf 0            # &l->prev->next
+2F       # amload             # l->prev->next
+15 02    # vload 2            # l
+A0 00 22 # if_cmpne +34       # if (l->prev->next != l) goto <30:then>
+A7 00 03 # goto +3            # goto <34:or>
+# <34:or>
+15 02    # vload 2            # l
+62 00    # aaddf 0            # &l->next
+2F       # amload             # l->next
+01       # aconst_null        # NULL
+9F 00 16 # if_cmpeq +22       # if (l->next == NULL) goto <30:then>
+A7 00 03 # goto +3            # goto <33:or>
+# <33:or>
+15 02    # vload 2            # l
+62 00    # aaddf 0            # &l->next
+2F       # amload             # l->next
+62 10    # aaddf 16           # &l->next->prev
+2F       # amload             # l->next->prev
+15 02    # vload 2            # l
+A0 00 06 # if_cmpne +6        # if (l->next->prev != l) goto <30:then>
+A7 00 09 # goto +9            # goto <31:else>
+# <30:then>
+10 00    # bipush 0           # false
+B0       # return             # 
+A7 00 03 # goto +3            # goto <32:endif>
+# <31:else>
+# <32:endif>
+A7 00 4B # goto +75           # goto <28:endif>
+# <27:else>
+15 02    # vload 2            # l
+15 00    # vload 0            # start
+9F 00 06 # if_cmpeq +6        # if (l == start) goto <35:then>
+A7 00 28 # goto +40           # goto <36:else>
+# <35:then>
+15 02    # vload 2            # l
+62 00    # aaddf 0            # &l->next
+2F       # amload             # l->next
+01       # aconst_null        # NULL
+9F 00 16 # if_cmpeq +22       # if (l->next == NULL) goto <38:then>
+A7 00 03 # goto +3            # goto <41:or>
+# <41:or>
+15 02    # vload 2            # l
+62 00    # aaddf 0            # &l->next
+2F       # amload             # l->next
+62 10    # aaddf 16           # &l->next->prev
+2F       # amload             # l->next->prev
+15 02    # vload 2            # l
+A0 00 06 # if_cmpne +6        # if (l->next->prev != l) goto <38:then>
+A7 00 09 # goto +9            # goto <39:else>
+# <38:then>
+10 00    # bipush 0           # false
+B0       # return             # 
+A7 00 03 # goto +3            # goto <40:endif>
+# <39:else>
+# <40:endif>
+A7 00 1C # goto +28           # goto <37:endif>
+# <36:else>
+15 02    # vload 2            # l
+62 10    # aaddf 16           # &l->prev
+2F       # amload             # l->prev
+62 00    # aaddf 0            # &l->prev->next
+2F       # amload             # l->prev->next
+15 02    # vload 2            # l
+A0 00 06 # if_cmpne +6        # if (l->prev->next != l) goto <42:then>
+A7 00 09 # goto +9            # goto <43:else>
+# <42:then>
+10 00    # bipush 0           # false
+B0       # return             # 
+A7 00 03 # goto +3            # goto <44:endif>
+# <43:else>
+# <44:endif>
+10 01    # bipush 1           # true
+B0       # return             # 
+# <37:endif>
+# <28:endif>
+15 02    # vload 2            # l
+62 00    # aaddf 0            # &l->next
+2F       # amload             # l->next
+36 02    # vstore 2           # l = l->next;
+A7 FF 5F # goto -161          # goto <23:loop>
+# <25:exit>
+10 00    # bipush 0           # false
+B0       # return             # 
+
+
+#<is_cursor_valid>
+03                # number of arguments = 3
+04                # number of local variables = 4
+00 8A             # code length = 138 bytes
+15 02    # vload 2            # cursor
+15 00    # vload 0            # start
+9F 00 0F # if_cmpeq +15       # if (cursor == start) goto <45:then>
+A7 00 03 # goto +3            # goto <48:or>
+# <48:or>
+15 00    # vload 0            # start
+01       # aconst_null        # NULL
+9F 00 06 # if_cmpeq +6        # if (start == NULL) goto <45:then>
+A7 00 09 # goto +9            # goto <46:else>
+# <45:then>
+10 00    # bipush 0           # false
+B0       # return             # 
+A7 00 03 # goto +3            # goto <47:endif>
+# <46:else>
+# <47:endif>
+15 02    # vload 2            # cursor
+15 01    # vload 1            # end
+9F 00 06 # if_cmpeq +6        # if (cursor == end) goto <49:then>
+A7 00 09 # goto +9            # goto <50:else>
+# <49:then>
+10 01    # bipush 1           # true
+B0       # return             # 
+A7 00 03 # goto +3            # goto <51:endif>
+# <50:else>
+# <51:endif>
+15 00    # vload 0            # start
+62 00    # aaddf 0            # &start->next
+2F       # amload             # start->next
+36 03    # vstore 3           # l = start->next;
+# <52:loop>
+15 03    # vload 3            # l
+01       # aconst_null        # NULL
+A0 00 06 # if_cmpne +6        # if (l != NULL) goto <55:and>
+A7 00 51 # goto +81           # goto <54:exit>
+# <55:and>
+15 03    # vload 3            # l
+15 01    # vload 1            # end
+A0 00 06 # if_cmpne +6        # if (l != end) goto <53:body>
+A7 00 47 # goto +71           # goto <54:exit>
+# <53:body>
+15 02    # vload 2            # cursor
+15 03    # vload 3            # l
+9F 00 06 # if_cmpeq +6        # if (cursor == l) goto <56:then>
+A7 00 33 # goto +51           # goto <57:else>
+# <56:then>
+15 02    # vload 2            # cursor
+62 10    # aaddf 16           # &cursor->prev
+2F       # amload             # cursor->prev
+62 00    # aaddf 0            # &cursor->prev->next
+2F       # amload             # cursor->prev->next
+15 02    # vload 2            # cursor
+9F 00 06 # if_cmpeq +6        # if (cursor->prev->next == cursor) goto <59:cond_true>
+A7 00 1D # goto +29           # goto <60:cond_false>
+# <59:cond_true>
+15 02    # vload 2            # cursor
+62 00    # aaddf 0            # &cursor->next
+2F       # amload             # cursor->next
+62 10    # aaddf 16           # &cursor->next->prev
+2F       # amload             # cursor->next->prev
+15 02    # vload 2            # cursor
+9F 00 06 # if_cmpeq +6        # if (cursor->next->prev == cursor) goto <62:cond_true>
+A7 00 08 # goto +8            # goto <63:cond_false>
+# <62:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <64:cond_end>
+# <63:cond_false>
+10 00    # bipush 0           # false
+# <64:cond_end>
+A7 00 05 # goto +5            # goto <61:cond_end>
+# <60:cond_false>
+10 00    # bipush 0           # false
+# <61:cond_end>
+B0       # return             # 
+A7 00 03 # goto +3            # goto <58:endif>
+# <57:else>
+# <58:endif>
+15 03    # vload 3            # l
+62 00    # aaddf 0            # &l->next
+2F       # amload             # l->next
+36 03    # vstore 3           # l = l->next;
+A7 FF AC # goto -84           # goto <52:loop>
+# <54:exit>
+10 00    # bipush 0           # false
+B0       # return             # 
+
+
+#<is_editor>
+01                # number of arguments = 1
+01                # number of local variables = 1
+00 4C             # code length = 76 bytes
+15 00    # vload 0            # E
+01       # aconst_null        # NULL
+A0 00 06 # if_cmpne +6        # if (E != NULL) goto <100:and>
+A7 00 43 # goto +67           # goto <97:cond_false>
+# <100:and>
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+B8 00 09 # invokestatic 9     # is_tbuf(E->buffer)
+10 01    # bipush 1           # true
+9F 00 06 # if_cmpeq +6        # if (is_tbuf(E->buffer) == true) goto <99:and>
+A7 00 33 # goto +51           # goto <97:cond_false>
+# <99:and>
+15 00    # vload 0            # E
+62 08    # aaddf 8            # &E->row
+2E       # imload             # E->row
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+B8 00 11 # invokestatic 17    # tbuf_row(E->buffer)
+9F 00 06 # if_cmpeq +6        # if (E->row == tbuf_row(E->buffer)) goto <96:cond_true>
+A7 00 20 # goto +32           # goto <97:cond_false>
+# <96:cond_true>
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+2E       # imload             # E->col
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+B8 00 12 # invokestatic 18    # tbuf_col(E->buffer)
+9F 00 06 # if_cmpeq +6        # if (E->col == tbuf_col(E->buffer)) goto <101:cond_true>
+A7 00 08 # goto +8            # goto <102:cond_false>
+# <101:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <103:cond_end>
+# <102:cond_false>
+10 00    # bipush 0           # false
+# <103:cond_end>
+A7 00 05 # goto +5            # goto <98:cond_end>
+# <97:cond_false>
+10 00    # bipush 0           # false
+# <98:cond_end>
+B0       # return             # 
+
+
+#<editor_new>
+00                # number of arguments = 0
+02                # number of local variables = 2
+00 21             # code length = 33 bytes
+BB 10    # new 16             # alloc(editor)
+36 00    # vstore 0           # E = alloc(editor);
+B8 00 0C # invokestatic 12    # tbuf_new()
+36 01    # vstore 1           # buffer = tbuf_new();
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+15 01    # vload 1            # buffer
+4F       # amstore            # E->buffer = buffer;
+15 00    # vload 0            # E
+62 08    # aaddf 8            # &E->row
+10 01    # bipush 1           # 1
+4E       # imstore            # E->row = 1;
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+10 00    # bipush 0           # 0
+4E       # imstore            # E->col = 0;
+15 00    # vload 0            # E
+B0       # return             # 
+
+
+#<editor_forward>
+01                # number of arguments = 1
+02                # number of local variables = 2
+00 58             # code length = 88 bytes
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+B8 00 0B # invokestatic 11    # tbuf_at_right(E->buffer)
+10 01    # bipush 1           # true
+9F 00 4B # if_cmpeq +75       # if (tbuf_at_right(E->buffer) == true) goto <105:else>
+A7 00 03 # goto +3            # goto <104:then>
+# <104:then>
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+36 01    # vstore 1           # current_node = E->buffer->cursor;
+15 01    # vload 1            # current_node
+62 08    # aaddf 8            # &current_node->data
+34       # cmload             # current_node->data
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (current_node->data == '\n') goto <107:then>
+A7 00 17 # goto +23           # goto <108:else>
+# <107:then>
+15 00    # vload 0            # E
+62 08    # aaddf 8            # &E->row
+59       # dup                # (save &E->row)
+2E       # imload             # E->row
+10 01    # bipush 1           # 1
+60       # iadd               # 
+4E       # imstore            # E->row += 1;
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+10 00    # bipush 0           # 0
+4E       # imstore            # E->col = 0;
+A7 00 0D # goto +13           # goto <109:endif>
+# <108:else>
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+59       # dup                # (save &E->col)
+2E       # imload             # E->col
+10 01    # bipush 1           # 1
+60       # iadd               # 
+4E       # imstore            # E->col += 1;
+# <109:endif>
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+15 01    # vload 1            # current_node
+62 00    # aaddf 0            # &current_node->next
+2F       # amload             # current_node->next
+4F       # amstore            # E->buffer->cursor = current_node->next;
+A7 00 03 # goto +3            # goto <106:endif>
+# <105:else>
+# <106:endif>
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<editor_backward>
+01                # number of arguments = 1
+02                # number of local variables = 2
+00 64             # code length = 100 bytes
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+B8 00 0A # invokestatic 10    # tbuf_at_left(E->buffer)
+10 01    # bipush 1           # true
+9F 00 57 # if_cmpeq +87       # if (tbuf_at_left(E->buffer) == true) goto <111:else>
+A7 00 03 # goto +3            # goto <110:then>
+# <110:then>
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+62 10    # aaddf 16           # &E->buffer->cursor->prev
+2F       # amload             # E->buffer->cursor->prev
+4F       # amstore            # E->buffer->cursor = E->buffer->cursor->prev;
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+36 01    # vstore 1           # current_node = E->buffer->cursor;
+15 01    # vload 1            # current_node
+62 08    # aaddf 8            # &current_node->data
+34       # cmload             # current_node->data
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (current_node->data == '\n') goto <113:then>
+A7 00 1D # goto +29           # goto <114:else>
+# <113:then>
+15 00    # vload 0            # E
+62 08    # aaddf 8            # &E->row
+59       # dup                # (save &E->row)
+2E       # imload             # E->row
+10 01    # bipush 1           # 1
+64       # isub               # 
+4E       # imstore            # E->row -= 1;
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+B8 00 12 # invokestatic 18    # tbuf_col(E->buffer)
+4E       # imstore            # E->col = tbuf_col(E->buffer);
+A7 00 0D # goto +13           # goto <115:endif>
+# <114:else>
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+59       # dup                # (save &E->col)
+2E       # imload             # E->col
+10 01    # bipush 1           # 1
+64       # isub               # 
+4E       # imstore            # E->col -= 1;
+# <115:endif>
+A7 00 03 # goto +3            # goto <112:endif>
+# <111:else>
+# <112:endif>
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<editor_insert>
+02                # number of arguments = 2
+02                # number of local variables = 2
+00 36             # code length = 54 bytes
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+15 01    # vload 1            # c
+B8 00 0F # invokestatic 15    # tbuf_insert(E->buffer, c)
+57       # pop                # (ignore result)
+15 01    # vload 1            # c
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (c == '\n') goto <116:then>
+A7 00 17 # goto +23           # goto <117:else>
+# <116:then>
+15 00    # vload 0            # E
+62 08    # aaddf 8            # &E->row
+59       # dup                # (save &E->row)
+2E       # imload             # E->row
+10 01    # bipush 1           # 1
+60       # iadd               # 
+4E       # imstore            # E->row += 1;
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+10 00    # bipush 0           # 0
+4E       # imstore            # E->col = 0;
+A7 00 0D # goto +13           # goto <118:endif>
+# <117:else>
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+59       # dup                # (save &E->col)
+2E       # imload             # E->col
+10 01    # bipush 1           # 1
+60       # iadd               # 
+4E       # imstore            # E->col += 1;
+# <118:endif>
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<editor_delete>
+01                # number of arguments = 1
+02                # number of local variables = 2
+00 74             # code length = 116 bytes
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+B8 00 0A # invokestatic 10    # tbuf_at_left(E->buffer)
+10 01    # bipush 1           # true
+9F 00 67 # if_cmpeq +103      # if (tbuf_at_left(E->buffer) == true) goto <120:else>
+A7 00 03 # goto +3            # goto <119:then>
+# <119:then>
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+62 10    # aaddf 16           # &E->buffer->cursor->prev
+2F       # amload             # E->buffer->cursor->prev
+36 01    # vstore 1           # deleted_node = E->buffer->cursor->prev;
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+62 10    # aaddf 16           # &E->buffer->cursor->prev
+15 01    # vload 1            # deleted_node
+62 10    # aaddf 16           # &deleted_node->prev
+2F       # amload             # deleted_node->prev
+4F       # amstore            # E->buffer->cursor->prev = deleted_node->prev;
+15 01    # vload 1            # deleted_node
+62 10    # aaddf 16           # &deleted_node->prev
+2F       # amload             # deleted_node->prev
+62 00    # aaddf 0            # &deleted_node->prev->next
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+4F       # amstore            # deleted_node->prev->next = E->buffer->cursor;
+15 01    # vload 1            # deleted_node
+62 08    # aaddf 8            # &deleted_node->data
+34       # cmload             # deleted_node->data
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (deleted_node->data == '\n') goto <122:then>
+A7 00 1D # goto +29           # goto <123:else>
+# <122:then>
+15 00    # vload 0            # E
+62 08    # aaddf 8            # &E->row
+59       # dup                # (save &E->row)
+2E       # imload             # E->row
+10 01    # bipush 1           # 1
+64       # isub               # 
+4E       # imstore            # E->row -= 1;
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+B8 00 12 # invokestatic 18    # tbuf_col(E->buffer)
+4E       # imstore            # E->col = tbuf_col(E->buffer);
+A7 00 0D # goto +13           # goto <124:endif>
+# <123:else>
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+59       # dup                # (save &E->col)
+2E       # imload             # E->col
+10 01    # bipush 1           # 1
+64       # isub               # 
+4E       # imstore            # E->col -= 1;
+# <124:endif>
+A7 00 03 # goto +3            # goto <121:endif>
+# <120:else>
+# <121:endif>
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<editor_up>
+01                # number of arguments = 1
+06                # number of local variables = 6
+00 DD             # code length = 221 bytes
+15 00    # vload 0            # E
+62 08    # aaddf 8            # &E->row
+2E       # imload             # E->row
+10 01    # bipush 1           # 1
+A3 00 06 # if_icmpgt +6       # if (E->row > 1) goto <125:then>
+A7 00 D0 # goto +208          # goto <126:else>
+# <125:then>
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+2E       # imload             # E->col
+36 01    # vstore 1           # col = E->col;
+15 00    # vload 0            # E
+62 08    # aaddf 8            # &E->row
+2E       # imload             # E->row
+36 02    # vstore 2           # row = E->row;
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+36 03    # vstore 3           # cur_mode = E->buffer->cursor;
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+15 03    # vload 3            # cur_mode
+9F 00 06 # if_cmpeq +6        # if (E->buffer->cursor == cur_mode) goto <128:then>
+A7 00 0C # goto +12           # goto <129:else>
+# <128:then>
+15 00    # vload 0            # E
+B8 00 18 # invokestatic 24    # editor_backward(E)
+57       # pop                # (ignore result)
+A7 00 03 # goto +3            # goto <130:endif>
+# <129:else>
+# <130:endif>
+# <131:loop>
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+62 08    # aaddf 8            # &E->buffer->cursor->data
+34       # cmload             # E->buffer->cursor->data
+10 0A    # bipush 10          # '\n'
+A0 00 06 # if_cmpne +6        # if (E->buffer->cursor->data != '\n') goto <132:body>
+A7 00 0C # goto +12           # goto <133:exit>
+# <132:body>
+15 00    # vload 0            # E
+B8 00 18 # invokestatic 24    # editor_backward(E)
+57       # pop                # (ignore result)
+A7 FF E7 # goto -25           # goto <131:loop>
+# <133:exit>
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+36 03    # vstore 3           # cur_mode = E->buffer->cursor;
+15 03    # vload 3            # cur_mode
+62 08    # aaddf 8            # &cur_mode->data
+34       # cmload             # cur_mode->data
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (cur_mode->data == '\n') goto <134:cond_true>
+A7 00 08 # goto +8            # goto <135:cond_false>
+# <134:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <136:cond_end>
+# <135:cond_false>
+10 00    # bipush 0           # false
+# <136:cond_end>
+14 00 00 # aldc 0             # s[0] = "editor.c0: 127.5-127.36: assert failed"
+CF       # assert             # assert (cur_mode->data == '\n') [failure message on stack]
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+B8 00 12 # invokestatic 18    # tbuf_col(E->buffer)
+36 04    # vstore 4           # this_line_col = tbuf_col(E->buffer);
+10 00    # bipush 0           # 0
+36 05    # vstore 5           # step = 0;
+# <137:loop>
+15 04    # vload 4            # this_line_col
+15 05    # vload 5            # step
+64       # isub               # (this_line_col - step)
+15 01    # vload 1            # col
+A3 00 06 # if_icmpgt +6       # if ((this_line_col - step) > col) goto <138:body>
+A7 00 14 # goto +20           # goto <139:exit>
+# <138:body>
+15 03    # vload 3            # cur_mode
+62 10    # aaddf 16           # &cur_mode->prev
+2F       # amload             # cur_mode->prev
+36 03    # vstore 3           # cur_mode = cur_mode->prev;
+15 05    # vload 5            # step
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 05    # vstore 5           # step += 1;
+A7 FF E5 # goto -27           # goto <137:loop>
+# <139:exit>
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+15 03    # vload 3            # cur_mode
+4F       # amstore            # E->buffer->cursor = cur_mode;
+15 04    # vload 4            # this_line_col
+15 01    # vload 1            # col
+A2 00 06 # if_icmpge +6       # if (this_line_col >= col) goto <140:then>
+A7 00 0D # goto +13           # goto <141:else>
+# <140:then>
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+15 01    # vload 1            # col
+4E       # imstore            # E->col = col;
+A7 00 0A # goto +10           # goto <142:endif>
+# <141:else>
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+15 04    # vload 4            # this_line_col
+4E       # imstore            # E->col = this_line_col;
+# <142:endif>
+15 00    # vload 0            # E
+62 08    # aaddf 8            # &E->row
+15 02    # vload 2            # row
+10 01    # bipush 1           # 1
+64       # isub               # (row - 1)
+4E       # imstore            # E->row = (row - 1);
+A7 00 03 # goto +3            # goto <127:endif>
+# <126:else>
+# <127:endif>
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<editor_down>
+01                # number of arguments = 1
+07                # number of local variables = 7
+00 F1             # code length = 241 bytes
+15 00    # vload 0            # E
+B8 00 1D # invokestatic 29    # can_go_down(E)
+10 01    # bipush 1           # true
+9F 00 06 # if_cmpeq +6        # if (can_go_down(E) == true) goto <152:then>
+A7 00 E4 # goto +228          # goto <153:else>
+# <152:then>
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+2E       # imload             # E->col
+36 01    # vstore 1           # col = E->col;
+15 00    # vload 0            # E
+62 08    # aaddf 8            # &E->row
+2E       # imload             # E->row
+36 02    # vstore 2           # row = E->row;
+10 00    # bipush 0           # 0
+36 03    # vstore 3           # line_count = 0;
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+36 04    # vstore 4           # cur_mode = E->buffer->cursor;
+15 04    # vload 4            # cur_mode
+62 08    # aaddf 8            # &cur_mode->data
+34       # cmload             # cur_mode->data
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (cur_mode->data == '\n') goto <155:then>
+A7 00 0D # goto +13           # goto <156:else>
+# <155:then>
+15 03    # vload 3            # line_count
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 03    # vstore 3           # line_count += 1;
+A7 00 03 # goto +3            # goto <157:endif>
+# <156:else>
+# <157:endif>
+# <158:loop>
+15 03    # vload 3            # line_count
+10 02    # bipush 2           # 2
+A1 00 06 # if_icmplt +6       # if (line_count < 2) goto <159:body>
+A7 00 3F # goto +63           # goto <160:exit>
+# <159:body>
+15 00    # vload 0            # E
+B8 00 17 # invokestatic 23    # editor_forward(E)
+57       # pop                # (ignore result)
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+62 08    # aaddf 8            # &E->buffer->cursor->data
+34       # cmload             # E->buffer->cursor->data
+10 0A    # bipush 10          # '\n'
+9F 00 1C # if_cmpeq +28       # if (E->buffer->cursor->data == '\n') goto <161:then>
+A7 00 03 # goto +3            # goto <164:or>
+# <164:or>
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 10    # aaddf 16           # &E->buffer->end
+2F       # amload             # E->buffer->end
+9F 00 06 # if_cmpeq +6        # if (E->buffer->cursor == E->buffer->end) goto <161:then>
+A7 00 0D # goto +13           # goto <162:else>
+# <161:then>
+15 03    # vload 3            # line_count
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 03    # vstore 3           # line_count += 1;
+A7 00 03 # goto +3            # goto <163:endif>
+# <162:else>
+# <163:endif>
+A7 FF BD # goto -67           # goto <158:loop>
+# <160:exit>
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+36 04    # vstore 4           # cur_mode = E->buffer->cursor;
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+B8 00 12 # invokestatic 18    # tbuf_col(E->buffer)
+36 05    # vstore 5           # this_line_col = tbuf_col(E->buffer);
+10 00    # bipush 0           # 0
+36 06    # vstore 6           # step = 0;
+# <165:loop>
+15 05    # vload 5            # this_line_col
+15 06    # vload 6            # step
+64       # isub               # (this_line_col - step)
+15 01    # vload 1            # col
+A3 00 06 # if_icmpgt +6       # if ((this_line_col - step) > col) goto <166:body>
+A7 00 14 # goto +20           # goto <167:exit>
+# <166:body>
+15 04    # vload 4            # cur_mode
+62 10    # aaddf 16           # &cur_mode->prev
+2F       # amload             # cur_mode->prev
+36 04    # vstore 4           # cur_mode = cur_mode->prev;
+15 06    # vload 6            # step
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 06    # vstore 6           # step += 1;
+A7 FF E5 # goto -27           # goto <165:loop>
+# <167:exit>
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+15 04    # vload 4            # cur_mode
+4F       # amstore            # E->buffer->cursor = cur_mode;
+15 05    # vload 5            # this_line_col
+15 01    # vload 1            # col
+A2 00 06 # if_icmpge +6       # if (this_line_col >= col) goto <168:then>
+A7 00 0D # goto +13           # goto <169:else>
+# <168:then>
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+15 01    # vload 1            # col
+4E       # imstore            # E->col = col;
+A7 00 0A # goto +10           # goto <170:endif>
+# <169:else>
+15 00    # vload 0            # E
+62 0C    # aaddf 12           # &E->col
+15 05    # vload 5            # this_line_col
+4E       # imstore            # E->col = this_line_col;
+# <170:endif>
+15 00    # vload 0            # E
+62 08    # aaddf 8            # &E->row
+15 02    # vload 2            # row
+10 01    # bipush 1           # 1
+60       # iadd               # (row + 1)
+4E       # imstore            # E->row = (row + 1);
+A7 00 03 # goto +3            # goto <154:endif>
+# <153:else>
+# <154:endif>
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<can_go_down>
+01                # number of arguments = 1
+05                # number of local variables = 5
+00 87             # code length = 135 bytes
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 00    # aaddf 0            # &E->buffer->start
+2F       # amload             # E->buffer->start
+62 00    # aaddf 0            # &E->buffer->start->next
+2F       # amload             # E->buffer->start->next
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 10    # aaddf 16           # &E->buffer->end
+2F       # amload             # E->buffer->end
+9F 00 06 # if_cmpeq +6        # if (E->buffer->start->next == E->buffer->end) goto <143:then>
+A7 00 09 # goto +9            # goto <144:else>
+# <143:then>
+10 00    # bipush 0           # false
+B0       # return             # 
+A7 00 03 # goto +3            # goto <145:endif>
+# <144:else>
+# <145:endif>
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+2F       # amload             # E->buffer->cursor
+36 01    # vstore 1           # cur_mode = E->buffer->cursor;
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+B8 00 11 # invokestatic 17    # tbuf_row(E->buffer)
+36 02    # vstore 2           # cur_row = tbuf_row(E->buffer);
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 10    # aaddf 16           # &E->buffer->end
+2F       # amload             # E->buffer->end
+62 10    # aaddf 16           # &E->buffer->end->prev
+2F       # amload             # E->buffer->end->prev
+36 03    # vstore 3           # last_node = E->buffer->end->prev;
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+15 03    # vload 3            # last_node
+4F       # amstore            # E->buffer->cursor = last_node;
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+B8 00 11 # invokestatic 17    # tbuf_row(E->buffer)
+36 04    # vstore 4           # max_row = tbuf_row(E->buffer);
+15 03    # vload 3            # last_node
+62 08    # aaddf 8            # &last_node->data
+34       # cmload             # last_node->data
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (last_node->data == '\n') goto <146:then>
+A7 00 0D # goto +13           # goto <147:else>
+# <146:then>
+15 04    # vload 4            # max_row
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 04    # vstore 4           # max_row += 1;
+A7 00 03 # goto +3            # goto <148:endif>
+# <147:else>
+# <148:endif>
+15 00    # vload 0            # E
+62 00    # aaddf 0            # &E->buffer
+2F       # amload             # E->buffer
+62 08    # aaddf 8            # &E->buffer->cursor
+15 01    # vload 1            # cur_mode
+4F       # amstore            # E->buffer->cursor = cur_mode;
+15 02    # vload 2            # cur_row
+15 04    # vload 4            # max_row
+A1 00 06 # if_icmplt +6       # if (cur_row < max_row) goto <149:cond_true>
+A7 00 08 # goto +8            # goto <150:cond_false>
+# <149:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <151:cond_end>
+# <150:cond_false>
+10 00    # bipush 0           # false
+# <151:cond_end>
+B0       # return             # 
+
+
+#<render_topbar>
+01                # number of arguments = 1
+02                # number of local variables = 2
+00 54             # code length = 84 bytes
+15 00    # vload 0            # W
+B7 00 03 # invokenative 3     # c_werase(W)
+57       # pop                # (ignore result)
+15 00    # vload 0            # W
+B7 00 04 # invokenative 4     # cc_getbegx(W)
+36 01    # vstore 1           # i = cc_getbegx(W);
+# <171:loop>
+15 01    # vload 1            # i
+15 00    # vload 0            # W
+B7 00 05 # invokenative 5     # cc_getmaxx(W)
+A1 00 06 # if_icmplt +6       # if (i < cc_getmaxx(W)) goto <172:body>
+A7 00 1B # goto +27           # goto <173:exit>
+# <172:body>
+15 00    # vload 0            # W
+10 20    # bipush 32          # ' '
+B7 00 01 # invokenative 1     # char_ord(' ')
+B7 00 07 # invokenative 7     # cc_highlight(char_ord(' '))
+B7 00 06 # invokenative 6     # c_waddch(W, cc_highlight(char_ord(' ')))
+57       # pop                # (ignore result)
+15 01    # vload 1            # i
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 01    # vstore 1           # i += 1;
+A7 FF DE # goto -34           # goto <171:loop>
+# <173:exit>
+15 00    # vload 0            # W
+10 00    # bipush 0           # 0
+10 01    # bipush 1           # 1
+B7 00 08 # invokenative 8     # c_wmove(W, 0, 1)
+57       # pop                # (ignore result)
+15 00    # vload 0            # W
+B7 00 09 # invokenative 9     # cc_wreverseon(W)
+57       # pop                # (ignore result)
+15 00    # vload 0            # W
+14 00 27 # aldc 39            # s[39] = "E0, the minimalist editor -- ^X to exit, ^L to refresh"
+B7 00 0A # invokenative 10    # c_waddstr(W, "E0, the minimalist editor -- ^X to exit, ^L to refresh")
+57       # pop                # (ignore result)
+15 00    # vload 0            # W
+B7 00 0B # invokenative 11    # cc_wreverseoff(W)
+57       # pop                # (ignore result)
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<render_botbar>
+02                # number of arguments = 2
+03                # number of local variables = 3
+00 8A             # code length = 138 bytes
+15 00    # vload 0            # W
+B7 00 03 # invokenative 3     # c_werase(W)
+57       # pop                # (ignore result)
+15 00    # vload 0            # W
+B7 00 04 # invokenative 4     # cc_getbegx(W)
+36 02    # vstore 2           # i = cc_getbegx(W);
+# <174:loop>
+15 02    # vload 2            # i
+15 00    # vload 0            # W
+B7 00 05 # invokenative 5     # cc_getmaxx(W)
+A1 00 06 # if_icmplt +6       # if (i < cc_getmaxx(W)) goto <175:body>
+A7 00 1B # goto +27           # goto <176:exit>
+# <175:body>
+15 00    # vload 0            # W
+10 20    # bipush 32          # ' '
+B7 00 01 # invokenative 1     # char_ord(' ')
+B7 00 07 # invokenative 7     # cc_highlight(char_ord(' '))
+B7 00 06 # invokenative 6     # c_waddch(W, cc_highlight(char_ord(' ')))
+57       # pop                # (ignore result)
+15 02    # vload 2            # i
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 02    # vstore 2           # i += 1;
+A7 FF DE # goto -34           # goto <174:loop>
+# <176:exit>
+15 00    # vload 0            # W
+10 00    # bipush 0           # 0
+10 01    # bipush 1           # 1
+B7 00 08 # invokenative 8     # c_wmove(W, 0, 1)
+57       # pop                # (ignore result)
+15 00    # vload 0            # W
+B7 00 09 # invokenative 9     # cc_wreverseon(W)
+57       # pop                # (ignore result)
+14 00 5E # aldc 94            # s[94] = "Position ("
+36 02    # vstore 2           # msg = "Position (";
+15 02    # vload 2            # msg
+15 01    # vload 1            # E
+62 08    # aaddf 8            # &E->row
+2E       # imload             # E->row
+B7 00 0D # invokenative 13    # string_fromint(E->row)
+B7 00 0C # invokenative 12    # string_join(msg, string_fromint(E->row))
+36 02    # vstore 2           # msg = string_join(msg, string_fromint(E->row));
+15 02    # vload 2            # msg
+14 00 69 # aldc 105           # s[105] = ","
+B7 00 0C # invokenative 12    # string_join(msg, ",")
+36 02    # vstore 2           # msg = string_join(msg, ",");
+15 02    # vload 2            # msg
+15 01    # vload 1            # E
+62 0C    # aaddf 12           # &E->col
+2E       # imload             # E->col
+B7 00 0D # invokenative 13    # string_fromint(E->col)
+B7 00 0C # invokenative 12    # string_join(msg, string_fromint(E->col))
+36 02    # vstore 2           # msg = string_join(msg, string_fromint(E->col));
+15 02    # vload 2            # msg
+14 00 6B # aldc 107           # s[107] = ")"
+B7 00 0C # invokenative 12    # string_join(msg, ")")
+36 02    # vstore 2           # msg = string_join(msg, ")");
+15 00    # vload 0            # W
+15 02    # vload 2            # msg
+B7 00 0A # invokenative 10    # c_waddstr(W, msg)
+57       # pop                # (ignore result)
+15 00    # vload 0            # W
+B7 00 0B # invokenative 11    # cc_wreverseoff(W)
+57       # pop                # (ignore result)
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<render_buf>
+02                # number of arguments = 2
+05                # number of local variables = 5
+01 91             # code length = 401 bytes
+15 00    # vload 0            # W
+10 00    # bipush 0           # 0
+10 00    # bipush 0           # 0
+B7 00 08 # invokenative 8     # c_wmove(W, 0, 0)
+57       # pop                # (ignore result)
+15 00    # vload 0            # W
+B7 00 03 # invokenative 3     # c_werase(W)
+57       # pop                # (ignore result)
+15 01    # vload 1            # B
+62 00    # aaddf 0            # &B->start
+2F       # amload             # B->start
+62 00    # aaddf 0            # &B->start->next
+2F       # amload             # B->start->next
+36 02    # vstore 2           # p = B->start->next;
+# <177:loop>
+15 02    # vload 2            # p
+15 01    # vload 1            # B
+62 10    # aaddf 16           # &B->end
+2F       # amload             # B->end
+A0 00 06 # if_cmpne +6        # if (p != B->end) goto <178:body>
+A7 01 49 # goto +329          # goto <179:exit>
+# <178:body>
+15 02    # vload 2            # p
+62 08    # aaddf 8            # &p->data
+34       # cmload             # p->data
+36 03    # vstore 3           # c = p->data;
+15 03    # vload 3            # c
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (c == '\n') goto <180:cond_true>
+A7 00 0B # goto +11           # goto <181:cond_false>
+# <180:cond_true>
+10 20    # bipush 32          # ' '
+B7 00 01 # invokenative 1     # char_ord(' ')
+A7 00 08 # goto +8            # goto <182:cond_end>
+# <181:cond_false>
+15 03    # vload 3            # c
+B7 00 01 # invokenative 1     # char_ord(c)
+# <182:cond_end>
+36 04    # vstore 4           # display = ((c == '\n') ? char_ord(' ') : char_ord(c));
+15 02    # vload 2            # p
+15 01    # vload 1            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+9F 00 06 # if_cmpeq +6        # if (p == B->cursor) goto <183:then>
+A7 00 0D # goto +13           # goto <184:else>
+# <183:then>
+15 04    # vload 4            # display
+B7 00 07 # invokenative 7     # cc_highlight(display)
+36 04    # vstore 4           # display = cc_highlight(display);
+A7 00 03 # goto +3            # goto <185:endif>
+# <184:else>
+# <185:endif>
+15 00    # vload 0            # W
+B7 00 0E # invokenative 14    # cc_gety(W)
+15 00    # vload 0            # W
+B7 00 0F # invokenative 15    # cc_getmaxy(W)
+10 01    # bipush 1           # 1
+64       # isub               # (cc_getmaxy(W) - 1)
+9F 00 06 # if_cmpeq +6        # if (cc_gety(W) == (cc_getmaxy(W) - 1)) goto <186:then>
+A7 00 72 # goto +114          # goto <187:else>
+# <186:then>
+15 03    # vload 3            # c
+10 0A    # bipush 10          # '\n'
+A0 00 06 # if_cmpne +6        # if (c != '\n') goto <192:and>
+A7 00 21 # goto +33           # goto <190:else>
+# <192:and>
+15 00    # vload 0            # W
+B7 00 10 # invokenative 16    # cc_getx(W)
+15 00    # vload 0            # W
+B7 00 05 # invokenative 5     # cc_getmaxx(W)
+10 01    # bipush 1           # 1
+64       # isub               # (cc_getmaxx(W) - 1)
+A1 00 06 # if_icmplt +6       # if (cc_getx(W) < (cc_getmaxx(W) - 1)) goto <189:then>
+A7 00 0E # goto +14           # goto <190:else>
+# <189:then>
+15 00    # vload 0            # W
+15 04    # vload 4            # display
+B7 00 06 # invokenative 6     # c_waddch(W, display)
+57       # pop                # (ignore result)
+A7 00 47 # goto +71           # goto <191:endif>
+# <190:else>
+15 03    # vload 3            # c
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (c == '\n') goto <193:then>
+A7 00 0E # goto +14           # goto <194:else>
+# <193:then>
+15 00    # vload 0            # W
+15 04    # vload 4            # display
+B7 00 06 # invokenative 6     # c_waddch(W, display)
+57       # pop                # (ignore result)
+A7 00 03 # goto +3            # goto <195:endif>
+# <194:else>
+# <195:endif>
+# <196:loop>
+15 00    # vload 0            # W
+B7 00 10 # invokenative 16    # cc_getx(W)
+15 00    # vload 0            # W
+B7 00 05 # invokenative 5     # cc_getmaxx(W)
+10 01    # bipush 1           # 1
+64       # isub               # (cc_getmaxx(W) - 1)
+A0 00 06 # if_cmpne +6        # if (cc_getx(W) != (cc_getmaxx(W) - 1)) goto <197:body>
+A7 00 11 # goto +17           # goto <198:exit>
+# <197:body>
+15 00    # vload 0            # W
+10 20    # bipush 32          # ' '
+B7 00 01 # invokenative 1     # char_ord(' ')
+B7 00 06 # invokenative 6     # c_waddch(W, char_ord(' '))
+57       # pop                # (ignore result)
+A7 FF E2 # goto -30           # goto <196:loop>
+# <198:exit>
+15 00    # vload 0            # W
+10 3E    # bipush 62          # '>'
+B7 00 01 # invokenative 1     # char_ord('>')
+B7 00 06 # invokenative 6     # c_waddch(W, char_ord('>'))
+57       # pop                # (ignore result)
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+# <191:endif>
+A7 00 86 # goto +134          # goto <188:endif>
+# <187:else>
+15 03    # vload 3            # c
+10 0A    # bipush 10          # '\n'
+A0 00 06 # if_cmpne +6        # if (c != '\n') goto <202:and>
+A7 00 21 # goto +33           # goto <200:else>
+# <202:and>
+15 00    # vload 0            # W
+B7 00 10 # invokenative 16    # cc_getx(W)
+15 00    # vload 0            # W
+B7 00 05 # invokenative 5     # cc_getmaxx(W)
+10 01    # bipush 1           # 1
+64       # isub               # (cc_getmaxx(W) - 1)
+A1 00 06 # if_icmplt +6       # if (cc_getx(W) < (cc_getmaxx(W) - 1)) goto <199:then>
+A7 00 0E # goto +14           # goto <200:else>
+# <199:then>
+15 00    # vload 0            # W
+15 04    # vload 4            # display
+B7 00 06 # invokenative 6     # c_waddch(W, display)
+57       # pop                # (ignore result)
+A7 00 5E # goto +94           # goto <201:endif>
+# <200:else>
+15 03    # vload 3            # c
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (c == '\n') goto <206:and>
+A7 00 2C # goto +44           # goto <204:else>
+# <206:and>
+15 00    # vload 0            # W
+B7 00 10 # invokenative 16    # cc_getx(W)
+15 00    # vload 0            # W
+B7 00 05 # invokenative 5     # cc_getmaxx(W)
+10 01    # bipush 1           # 1
+64       # isub               # (cc_getmaxx(W) - 1)
+A1 00 06 # if_icmplt +6       # if (cc_getx(W) < (cc_getmaxx(W) - 1)) goto <203:then>
+A7 00 19 # goto +25           # goto <204:else>
+# <203:then>
+15 00    # vload 0            # W
+15 04    # vload 4            # display
+B7 00 06 # invokenative 6     # c_waddch(W, display)
+57       # pop                # (ignore result)
+15 00    # vload 0            # W
+10 0A    # bipush 10          # '\n'
+B7 00 01 # invokenative 1     # char_ord('\n')
+B7 00 06 # invokenative 6     # c_waddch(W, char_ord('\n'))
+57       # pop                # (ignore result)
+A7 00 2B # goto +43           # goto <205:endif>
+# <204:else>
+15 03    # vload 3            # c
+10 0A    # bipush 10          # '\n'
+9F 00 06 # if_cmpeq +6        # if (c == '\n') goto <207:then>
+A7 00 0E # goto +14           # goto <208:else>
+# <207:then>
+15 00    # vload 0            # W
+15 04    # vload 4            # display
+B7 00 06 # invokenative 6     # c_waddch(W, display)
+57       # pop                # (ignore result)
+A7 00 16 # goto +22           # goto <209:endif>
+# <208:else>
+15 00    # vload 0            # W
+10 5C    # bipush 92          # '\\'
+B7 00 01 # invokenative 1     # char_ord('\\')
+B7 00 06 # invokenative 6     # c_waddch(W, char_ord('\\'))
+57       # pop                # (ignore result)
+15 00    # vload 0            # W
+15 04    # vload 4            # display
+B7 00 06 # invokenative 6     # c_waddch(W, display)
+57       # pop                # (ignore result)
+# <209:endif>
+# <205:endif>
+# <201:endif>
+# <188:endif>
+15 02    # vload 2            # p
+62 00    # aaddf 0            # &p->next
+2F       # amload             # p->next
+36 02    # vstore 2           # p = p->next;
+A7 FE B0 # goto -336          # goto <177:loop>
+# <179:exit>
+15 01    # vload 1            # B
+62 08    # aaddf 8            # &B->cursor
+2F       # amload             # B->cursor
+15 01    # vload 1            # B
+62 10    # aaddf 16           # &B->end
+2F       # amload             # B->end
+9F 00 06 # if_cmpeq +6        # if (B->cursor == B->end) goto <210:then>
+A7 00 14 # goto +20           # goto <211:else>
+# <210:then>
+15 00    # vload 0            # W
+10 20    # bipush 32          # ' '
+B7 00 01 # invokenative 1     # char_ord(' ')
+B7 00 07 # invokenative 7     # cc_highlight(char_ord(' '))
+B7 00 06 # invokenative 6     # c_waddch(W, cc_highlight(char_ord(' ')))
+57       # pop                # (ignore result)
+A7 00 03 # goto +3            # goto <212:endif>
+# <211:else>
+# <212:endif>
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+00 23             # native count
+# native pool
+00 01 00 5B       # char_chr
+00 01 00 5C       # char_ord
+00 01 00 60       # string_from_chararray
+00 01 00 1C       # c_werase
+00 01 00 21       # cc_getbegx
+00 01 00 23       # cc_getmaxx
+00 02 00 19       # c_waddch
+00 01 00 27       # cc_highlight
+00 03 00 1D       # c_wmove
+00 01 00 33       # cc_wreverseon
+00 02 00 1A       # c_waddstr
+00 01 00 32       # cc_wreverseoff
+00 02 00 64       # string_join
+00 01 00 63       # string_fromint
+00 01 00 26       # cc_gety
+00 01 00 24       # cc_getmaxy
+00 01 00 25       # cc_getx
+00 00 00 13       # c_initscr
+00 00 00 0D       # c_cbreak
+00 00 00 16       # c_noecho
+00 02 00 14       # c_keypad
+00 01 00 0E       # c_curs_set
+00 01 00 22       # cc_getbegy
+00 05 00 18       # c_subwin
+00 01 00 1E       # c_wrefresh
+00 00 00 12       # c_getch
+00 01 00 1B       # c_wclear
+00 01 00 28       # cc_key_is_backspace
+00 01 00 2B       # cc_key_is_left
+00 01 00 2C       # cc_key_is_right
+00 01 00 2D       # cc_key_is_up
+00 01 00 29       # cc_key_is_down
+00 01 00 2A       # cc_key_is_enter
+00 00 00 10       # c_endwin
+00 01 00 06       # print
+

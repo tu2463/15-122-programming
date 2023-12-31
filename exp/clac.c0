@@ -1,0 +1,87 @@
+#use <util>
+#use <string>
+
+bool ielements_enough(istack_t S)
+//@requires S != NULL;
+{
+  istack_t S2 = istack_new();
+  int count = 0;
+  while (!istack_empty(S)){
+    ipush(S2, ipop(S));
+    count++;
+  }
+  while(!istack_empty(S2)){
+    int element = ipop(S2);
+    ipush(S, element);
+  }
+  return count >= 2;
+}
+
+//Citation: the POW and power function are from 15-122 website lecture 1 code
+int POW(int b, int e)
+//@requires e >= 0;
+{
+  if (e == 0) return 1;
+  return POW(b, e-1) * b;
+}
+
+int power (int x, int y)
+//@requires y >= 0;
+//@ensures POW(x, y) == \result;
+{
+  int b = x; /* Line 19 */
+  int e = y; /* Line 20 */
+  int r = 1; /* Line 21 */
+  while (e > 0) /* Line 22 */
+  //@loop_invariant e >= 0; /* Line 23 */
+  //@loop_invariant POW(b, e) * r == POW(x, y);
+  {
+    if (e % 2 == 1) { /* Line 26 */
+      r = b * r;      /* Line 27 */
+    }
+    b = b * b;        /* Line 29 */
+    e = e / 2;        /* Line 30 */
+  }
+  return r;
+}
+
+int calculation(istack_t S, string sign, int first_int, int second_int)
+//@requires S != NULL;
+{
+  int result = -1;
+  if (string_equal(sign, "+")) result = first_int + second_int;
+  else if (string_equal(sign, "-")) result = first_int - second_int;
+  else if (string_equal(sign, "*")) result = first_int * second_int;
+  else if (string_equal(sign, "/")) {
+    if (second_int == 0 || first_int == int_min() && second_int == -1) {
+      error("Invalid integers for integer division.");}
+    else result = first_int / second_int;}
+  else if (string_equal(sign, "**")){
+    if (second_int < 0) {
+      error("The exponential can't be smaller than 0.");}
+    else result = power(first_int, second_int);}
+  else error("Invalid token.");
+  return result;
+}
+
+void eval(istack_t S, queue_t Q)
+//@requires S != NULL && Q != NULL;
+//@ensures queue_empty(Q);
+{
+  while (!queue_empty(Q)){
+    string tok = deq(Q);
+    int* next_input = parse_int(tok, 10);
+    if (next_input != NULL) {
+        ipush(S,*next_input);
+    }
+    else {
+      if (!ielements_enough(S)) {
+        error("There aren't enough integers to perform calculations");}
+
+      int second_int = ipop(S);
+      int first_int = ipop(S);
+      int result = calculation(S, tok, first_int, second_int);
+      ipush(S, result);
+    }
+  }
+}

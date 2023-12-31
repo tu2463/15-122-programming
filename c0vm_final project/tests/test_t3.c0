@@ -1,0 +1,37 @@
+// int main () {
+//     int i; 
+//     int sum = 0;
+//     for (i = 15; i <= 122; i++)
+//         sum += i;
+//     return sum;
+// }
+
+// int main () {
+//     int i; 
+//     int sum = 0;
+//     for (i = 15; i <= 20; i++){
+//         // sum = ((((sum*1234+2341-4321/2341)<<(1+2-3*4/5))>>(5+4-3*2+1))&(1234554321+1-1*1/1))|(1234554321+1-1*1/1);
+//         sum = 1+sum+sum+sum+sum+sum+sum+sum+sum+sum+2+sum+sum+sum+sum+sum+sum+sum+sum+sum;
+//         sum = 1+sum+sum+sum+sum+sum+sum+sum+sum+sum+2+sum+sum+sum+sum+sum+sum+sum+sum+sum;
+//         sum = 1+sum+sum+sum+sum+sum+sum+sum+sum+sum+2+sum+sum+sum+sum+sum+sum+sum+sum+sum;
+//         sum = 1+sum+sum+sum+sum+sum+sum+sum+sum+2+sum+sum+sum+sum+sum+sum+sum+sum+sum;
+//         sum;
+//     }
+//     return sum;
+// }
+
+typedef struct gap_buffer gapbuf;
+struct gap_buffer {
+char[] buffer; /* \length(buffer) == limit */
+int limit; /* limit > 0 */
+int gap_start; /* 0 <= gap_start */
+int gap_end; /* gap_start <= gap_end <= limit */
+};
+int main() {
+gapbuf* gb = alloc(gapbuf);
+gb->buffer = alloc_array(char, 65536);
+gb->limit = 65536;
+gb->gap_start = 48112;
+gb->gap_end = gb->gap_start;
+return 1;
+}

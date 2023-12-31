@@ -1,0 +1,85 @@
+// int f(int x){
+//     return 2;
+// }
+
+// int main(){
+//     f(1);
+//     return 0;
+// }
+//###
+// int f3(int x){
+//     return x/2;
+// }
+
+// int main(){
+//     int y = f3(1);
+//     return y;
+// }
+// ###
+// int f4(int x){
+//     return x/2;
+// }
+
+// int main(){
+//     int y = f4(1);
+//     int z = f4(3);
+//     return y + z;
+// }
+// ###
+// int f2(int x){
+//     int w = x/2;
+//     return x * 16 + w<<5;
+// }
+
+// int main(){
+//     int y = f2(1);
+//     int z = f2(y) * 3;
+//     return y + z;
+// }
+//###
+// int f5(int x){
+//     int w = x/2;
+//     return x * 16 + w<<5;
+// }
+
+// int f6(int x, int y){
+//     return x + y;
+// }
+
+// int main(){
+//     int y = f5(1);
+//     int z = f5(y) * 3;
+//     return f5(f6(y, z));
+// }
+
+// ########## invokesnative ##########
+#use <conio>
+#use <util>
+
+// ###
+// int f(int x){
+//     return 2;
+// }
+
+// int main(){
+//     f(1);
+//     printf("%d\n",f(3));
+//     return 0;
+// }
+// ###
+int f5(int x){
+    int w = x/2;
+    return x * 16 + (w<<5) + int_min();
+}
+
+int f6(int x, int y){
+    return x + y + int_max();
+}
+
+int main(){
+    int y = f5(1);
+    printint(y - f6(0,-int_max()));
+    print("\n");
+    int z = f5(y) * 3;
+    return f5(f6(y, z));
+}

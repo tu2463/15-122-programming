@@ -1,0 +1,46 @@
+pixel_t[] rotate(pixel_t[] originalPixels, int width, int height)
+/*@requires width == height && is_valid_imagesize(width, height);@*/
+/*@requires is_valid_imagesize(width + height, width + height);@*/
+// citation: the following three lines of code are adapted from remove_green.c0
+/*@requires \length(originalPixels) == width * height;@*/
+/*@ensures \result != originalPixels;@*/
+/*@ensures \length(\result) == (width + height) * (width + height);@*/
+{
+  pixel_t[] rotatedPixels = alloc_array(pixel_t, 
+       (width + height) * (width + height));
+  int newSideLength = width + height; // the rotated pixels' width and height
+
+  // default values of variables that will be modified in the loop
+  int newRow = -1;
+  int newCol = -1;
+  int newIndex = -1;
+  for (int oldIndex = 0; oldIndex < (width * height); oldIndex++)
+  /*@loop_invariant 0 <= oldIndex && oldIndex <= (width * height);@*/
+  {
+    // copy&rotate the original image to the up left part of the new image
+    newRow = height - get_column(oldIndex, width, height) - 1;
+    newCol = get_row(oldIndex, width, height);
+    newIndex = get_index(newRow, newCol, newSideLength, newSideLength);
+    rotatedPixels[newIndex] = originalPixels[oldIndex];
+
+    // copy&rotate the original image to the up right part of the new image
+    newRow = get_row(oldIndex, width, height);
+    newCol = get_column(oldIndex, width, height) + width;
+    newIndex = get_index(newRow, newCol, newSideLength, newSideLength);
+    rotatedPixels[newIndex] = originalPixels[oldIndex];
+
+    // copy&rotate the original image to the down left part of the new image
+    newRow = newSideLength - get_row(oldIndex, width, height) - 1;
+    newCol = width - get_column(oldIndex, width, height) - 1;
+    newIndex = get_index(newRow, newCol, newSideLength, newSideLength);
+    rotatedPixels[newIndex] = originalPixels[oldIndex];
+
+    // copy&rotate the original image to the down right part of the new image
+    newRow = get_column(oldIndex, width, height) + height;
+    newCol = newSideLength - get_row(oldIndex, width, height) - 1;
+    newIndex = get_index(newRow, newCol, newSideLength, newSideLength);
+    rotatedPixels[newIndex] = originalPixels[oldIndex];
+  }
+
+  return rotatedPixels;
+}

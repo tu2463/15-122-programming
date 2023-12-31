@@ -1,0 +1,1403 @@
+C0 C0 FF EE       # magic number
+00 17             # version 11, arch = 1 (64 bits)
+
+00 03             # int pool count
+# int pool
+00 00 E6 81
+00 00 E6 81
+00 00 E6 81
+
+11 C5             # string pool total size
+# string pool
+72 65 61 64 6C 69 6E 65 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 63 6F 6E 69 6F 2E 68 30 3A 20 31 34 2E 31 36 2D 31 34 2E 32 31 29 00  # "readline__1 (/afs/andrew/course/15/122/lib/conio.h0: 14.16-14.21)"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 63 6F 6E 69 6F 2E 68 30 3A 20 31 34 2E 36 2D 31 34 2E 32 32 3A 20 40 72 65 71 75 69 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 0A 00  # "/afs/andrew/course/15/122/lib/conio.h0: 14.6-14.22: @requires annotation failed\n"
+3A 20 63 61 6C 6C 65 72 20 6C 6F 63 61 74 69 6F 6E 00  # ": caller location"
+73 74 72 69 6E 67 5F 63 68 61 72 61 74 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 31 39 2E 33 33 2D 31 39 2E 34 39 29 00  # "string_charat__1 (/afs/andrew/course/15/122/lib/string.h0: 19.33-19.49)"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 31 39 2E 36 2D 31 39 2E 35 30 3A 20 40 72 65 71 75 69 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 0A 00  # "/afs/andrew/course/15/122/lib/string.h0: 19.6-19.50: @requires annotation failed\n"
+3A 20 63 61 6C 6C 65 72 20 6C 6F 63 61 74 69 6F 6E 00  # ": caller location"
+73 74 72 69 6E 67 5F 6A 6F 69 6E 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 32 33 2E 31 34 2D 32 33 2E 33 36 29 00  # "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 23.14-23.36)"
+73 74 72 69 6E 67 5F 6A 6F 69 6E 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 32 34 2E 31 39 2D 32 34 2E 33 35 29 00  # "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 24.19-24.35)"
+73 74 72 69 6E 67 5F 6A 6F 69 6E 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 32 34 2E 33 38 2D 32 34 2E 35 34 29 00  # "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 24.38-24.54)"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 32 33 2E 36 2D 32 34 2E 35 35 3A 20 40 65 6E 73 75 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 00  # "/afs/andrew/course/15/122/lib/string.h0: 23.6-24.55: @ensures annotation failed"
+73 74 72 69 6E 67 5F 73 75 62 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 33 31 2E 35 32 2D 33 31 2E 36 38 29 00  # "string_sub__1 (/afs/andrew/course/15/122/lib/string.h0: 31.52-31.68)"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 33 31 2E 36 2D 33 31 2E 36 39 3A 20 40 72 65 71 75 69 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 0A 00  # "/afs/andrew/course/15/122/lib/string.h0: 31.6-31.69: @requires annotation failed\n"
+3A 20 63 61 6C 6C 65 72 20 6C 6F 63 61 74 69 6F 6E 00  # ": caller location"
+73 74 72 69 6E 67 5F 73 75 62 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 33 32 2E 31 34 2D 33 32 2E 33 36 29 00  # "string_sub__1 (/afs/andrew/course/15/122/lib/string.h0: 32.14-32.36)"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 33 32 2E 36 2D 33 32 2E 35 32 3A 20 40 65 6E 73 75 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 00  # "/afs/andrew/course/15/122/lib/string.h0: 32.6-32.52: @ensures annotation failed"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 33 37 2E 36 2D 33 37 2E 34 34 3A 20 40 65 6E 73 75 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 00  # "/afs/andrew/course/15/122/lib/string.h0: 37.6-37.44: @ensures annotation failed"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 34 33 2E 36 2D 34 33 2E 32 35 3A 20 40 72 65 71 75 69 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 0A 00  # "/afs/andrew/course/15/122/lib/string.h0: 43.6-43.25: @requires annotation failed\n"
+3A 20 63 61 6C 6C 65 72 20 6C 6F 63 61 74 69 6F 6E 00  # ": caller location"
+73 74 72 69 6E 67 5F 66 72 6F 6D 63 68 61 72 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 34 34 2E 31 34 2D 34 34 2E 33 36 29 00  # "string_fromchar__1 (/afs/andrew/course/15/122/lib/string.h0: 44.14-44.36)"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 34 34 2E 36 2D 34 34 2E 34 32 3A 20 40 65 6E 73 75 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 00  # "/afs/andrew/course/15/122/lib/string.h0: 44.6-44.42: @ensures annotation failed"
+73 74 72 69 6E 67 5F 66 72 6F 6D 63 68 61 72 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 34 35 2E 31 34 2D 34 35 2E 33 39 29 00  # "string_fromchar__1 (/afs/andrew/course/15/122/lib/string.h0: 45.14-45.39)"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 34 35 2E 36 2D 34 35 2E 34 35 3A 20 40 65 6E 73 75 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 00  # "/afs/andrew/course/15/122/lib/string.h0: 45.6-45.45: @ensures annotation failed"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 35 32 2E 36 2D 35 32 2E 34 31 3A 20 40 72 65 71 75 69 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 0A 00  # "/afs/andrew/course/15/122/lib/string.h0: 52.6-52.41: @requires annotation failed\n"
+3A 20 63 61 6C 6C 65 72 20 6C 6F 63 61 74 69 6F 6E 00  # ": caller location"
+73 74 72 69 6E 67 5F 74 6F 5F 63 68 61 72 61 72 72 61 79 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 35 36 2E 33 34 2D 35 36 2E 35 30 29 00  # "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 56.34-56.50)"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 35 36 2E 36 2D 35 36 2E 35 35 3A 20 40 65 6E 73 75 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 00  # "/afs/andrew/course/15/122/lib/string.h0: 56.6-56.55: @ensures annotation failed"
+73 74 72 69 6E 67 5F 74 6F 5F 63 68 61 72 61 72 72 61 79 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 35 37 2E 34 31 2D 35 37 2E 35 37 29 00  # "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 57.41-57.57)"
+73 74 72 69 6E 67 5F 74 6F 5F 63 68 61 72 61 72 72 61 79 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 35 37 2E 31 34 2D 35 37 2E 36 32 29 00  # "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 57.14-57.62)"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 35 37 2E 36 2D 35 37 2E 36 33 3A 20 40 65 6E 73 75 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 00  # "/afs/andrew/course/15/122/lib/string.h0: 57.6-57.63: @ensures annotation failed"
+73 74 72 69 6E 67 5F 66 72 6F 6D 5F 63 68 61 72 61 72 72 61 79 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 36 32 2E 31 35 2D 36 32 2E 34 37 29 00  # "string_from_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 62.15-62.47)"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 36 32 2E 36 2D 36 32 2E 34 38 3A 20 40 72 65 71 75 69 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 0A 00  # "/afs/andrew/course/15/122/lib/string.h0: 62.6-62.48: @requires annotation failed\n"
+3A 20 63 61 6C 6C 65 72 20 6C 6F 63 61 74 69 6F 6E 00  # ": caller location"
+73 74 72 69 6E 67 5F 66 72 6F 6D 5F 63 68 61 72 61 72 72 61 79 5F 5F 31 20 28 2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 36 33 2E 31 34 2D 36 33 2E 33 36 29 00  # "string_from_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 63.14-63.36)"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 36 33 2E 36 2D 36 33 2E 35 35 3A 20 40 65 6E 73 75 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 00  # "/afs/andrew/course/15/122/lib/string.h0: 63.6-63.55: @ensures annotation failed"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 36 37 2E 36 2D 36 37 2E 34 35 3A 20 40 65 6E 73 75 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 00  # "/afs/andrew/course/15/122/lib/string.h0: 67.6-67.45: @ensures annotation failed"
+2F 61 66 73 2F 61 6E 64 72 65 77 2F 63 6F 75 72 73 65 2F 31 35 2F 31 32 32 2F 6C 69 62 2F 73 74 72 69 6E 67 2E 68 30 3A 20 36 39 2E 36 2D 36 39 2E 33 34 3A 20 40 72 65 71 75 69 72 65 73 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 0A 00  # "/afs/andrew/course/15/122/lib/string.h0: 69.6-69.34: @requires annotation failed\n"
+3A 20 63 61 6C 6C 65 72 20 6C 6F 63 61 74 69 6F 6E 00  # ": caller location"
+28 70 72 6F 67 72 61 6D 20 73 74 61 72 74 29 00  # "(program start)"
+6D 61 69 6E 20 28 74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 31 37 2E 35 2D 31 37 2E 31 37 29 00  # "main (tests/test_t5_2.c0: 17.5-17.17)"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 31 38 2E 35 2D 31 38 2E 31 39 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 18.5-18.19: assert failed"
+00  # ""
+6D 61 69 6E 20 28 74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 31 39 2E 35 2D 31 39 2E 31 36 29 00  # "main (tests/test_t5_2.c0: 19.5-19.16)"
+6D 61 69 6E 20 28 74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 32 31 2E 35 2D 32 31 2E 31 37 29 00  # "main (tests/test_t5_2.c0: 21.5-21.17)"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 32 32 2E 35 2D 32 32 2E 32 30 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 22.5-22.20: assert failed"
+00  # ""
+6D 61 69 6E 20 28 74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 32 33 2E 35 2D 32 33 2E 31 36 29 00  # "main (tests/test_t5_2.c0: 23.5-23.16)"
+6D 61 69 6E 20 28 74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 32 37 2E 35 2D 32 37 2E 31 38 29 00  # "main (tests/test_t5_2.c0: 27.5-27.18)"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 32 38 2E 35 2D 32 38 2E 32 31 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 28.5-28.21: assert failed"
+00  # ""
+6D 61 69 6E 20 28 74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 32 39 2E 35 2D 32 39 2E 31 36 29 00  # "main (tests/test_t5_2.c0: 29.5-29.16)"
+6D 61 69 6E 20 28 74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 33 33 2E 35 2D 33 33 2E 31 38 29 00  # "main (tests/test_t5_2.c0: 33.5-33.18)"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 33 34 2E 35 2D 33 34 2E 32 31 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 34.5-34.21: assert failed"
+00  # ""
+6D 61 69 6E 20 28 74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 33 35 2E 35 2D 33 35 2E 31 36 29 00  # "main (tests/test_t5_2.c0: 35.5-35.16)"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 34 35 2E 38 2D 34 35 2E 33 32 3A 20 40 61 73 73 65 72 74 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 45.8-45.32: @assert annotation failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 34 37 2E 35 2D 34 37 2E 32 36 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 47.5-47.26: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 34 38 2E 35 2D 34 38 2E 32 36 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 48.5-48.26: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 34 39 2E 35 2D 34 39 2E 32 36 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 49.5-49.26: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 35 30 2E 35 2D 35 30 2E 32 36 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 50.5-50.26: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 35 31 2E 35 2D 35 31 2E 32 36 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 51.5-51.26: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 35 32 2E 35 2D 35 32 2E 32 37 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 52.5-52.27: assert failed"
+42 61 73 69 63 20 74 65 73 74 73 20 70 61 73 73 65 64 21 20 4D 6F 76 69 6E 67 20 6F 6E 00  # "Basic tests passed! Moving on"
+6D 61 69 6E 20 28 74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 35 34 2E 35 2D 35 34 2E 34 35 29 00  # "main (tests/test_t5_2.c0: 54.5-54.45)"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 35 37 2E 35 2D 35 37 2E 32 37 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 57.5-57.27: assert failed"
+00  # ""
+6D 61 69 6E 20 28 74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 35 38 2E 31 32 2D 35 38 2E 34 32 29 00  # "main (tests/test_t5_2.c0: 58.12-58.42)"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 35 38 2E 35 2D 35 38 2E 34 34 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 58.5-58.44: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 35 39 2E 35 2D 35 39 2E 33 30 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 59.5-59.30: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 36 31 2E 35 2D 36 31 2E 32 39 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 61.5-61.29: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 36 32 2E 35 2D 36 32 2E 32 39 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 62.5-62.29: assert failed"
+73 6F 20 73 69 6C 6C 79 20 4C 4D 41 4F 00  # "so silly LMAO"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 37 34 2E 38 2D 37 34 2E 33 32 3A 20 40 61 73 73 65 72 74 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 74.8-74.32: @assert annotation failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 37 36 2E 35 2D 37 36 2E 32 37 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 76.5-76.27: assert failed"
+73 6F 20 73 69 6C 6C 79 20 4C 4D 41 4F 00  # "so silly LMAO"
+6D 61 69 6E 20 28 74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 37 37 2E 31 32 2D 37 37 2E 35 35 29 00  # "main (tests/test_t5_2.c0: 77.12-77.55)"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 37 37 2E 35 2D 37 37 2E 35 37 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 77.5-77.57: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 37 38 2E 35 2D 37 38 2E 33 34 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 78.5-78.34: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 38 30 2E 39 2D 38 30 2E 33 35 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 80.9-80.35: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 38 32 2E 35 2D 38 32 2E 32 39 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 82.5-82.29: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 38 33 2E 35 2D 38 33 2E 32 39 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 83.5-83.29: assert failed"
+73 6F 20 73 69 6C 6C 79 20 4C 4D 41 4F 00  # "so silly LMAO"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 39 37 2E 38 2D 39 37 2E 33 31 3A 20 40 61 73 73 65 72 74 20 61 6E 6E 6F 74 61 74 69 6F 6E 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 97.8-97.31: @assert annotation failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 31 30 30 2E 35 2D 31 30 30 2E 34 30 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 100.5-100.40: assert failed"
+73 6F 20 73 69 6C 6C 79 20 4C 4D 41 4F 00  # "so silly LMAO"
+6D 61 69 6E 20 28 74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 31 30 31 2E 31 32 2D 31 30 31 2E 35 36 29 00  # "main (tests/test_t5_2.c0: 101.12-101.56)"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 31 30 31 2E 35 2D 31 30 31 2E 35 38 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 101.5-101.58: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 31 30 32 2E 35 2D 31 30 32 2E 34 36 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 102.5-102.46: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 31 30 34 2E 39 2D 31 30 34 2E 33 35 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 104.9-104.35: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 31 30 35 2E 39 2D 31 30 35 2E 34 33 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 105.9-105.43: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 31 30 37 2E 35 2D 31 30 37 2E 32 39 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 107.5-107.29: assert failed"
+74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 31 30 38 2E 35 2D 31 30 38 2E 32 37 3A 20 61 73 73 65 72 74 20 66 61 69 6C 65 64 00  # "tests/test_t5_2.c0: 108.5-108.27: assert failed"
+41 6C 6C 20 74 65 73 74 73 20 70 61 73 73 65 64 21 00  # "All tests passed!"
+6D 61 69 6E 20 28 74 65 73 74 73 2F 74 65 73 74 5F 74 35 5F 32 2E 63 30 3A 20 31 31 31 2E 35 2D 31 31 31 2E 33 33 29 00  # "main (tests/test_t5_2.c0: 111.5-111.33)"
+
+00 18             # function count
+# function_pool
+
+#<main>
+00                # number of arguments = 0
+0D                # number of local variables = 13
+04 BC             # code length = 1212 bytes
+14 09 8F # aldc 2447          # s[2447] = "(program start)"
+36 00    # vstore 0           # _caller = "(program start)";
+BB 04    # new 4              # alloc(int)
+36 02    # vstore 2           # x = alloc(int);
+15 02    # vload 2            # x
+10 05    # bipush 5           # 5
+4E       # imstore            # *(x) = 5;
+15 02    # vload 2            # x
+2E       # imload             # *(x)
+14 09 9F # aldc 2463          # s[2463] = "main (tests/test_t5_2.c0: 17.5-17.17)"
+B8 00 03 # invokestatic 3     # printint__1(*(x), "main (tests/test_t5_2.c0: 17.5-17.17)")
+57       # pop                # (ignore result)
+15 02    # vload 2            # x
+2E       # imload             # *(x)
+10 05    # bipush 5           # 5
+9F 00 06 # if_cmpeq +6        # if (*(x) == 5) goto <58:cond_true>
+A7 00 08 # goto +8            # goto <59:cond_false>
+# <58:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <60:cond_end>
+# <59:cond_false>
+10 00    # bipush 0           # false
+# <60:cond_end>
+14 09 C5 # aldc 2501          # s[2501] = "tests/test_t5_2.c0: 18.5-18.19: assert failed"
+CF       # assert             # assert (*(x) == 5) [failure message on stack]
+14 09 F3 # aldc 2547          # s[2547] = ""
+14 09 F4 # aldc 2548          # s[2548] = "main (tests/test_t5_2.c0: 19.5-19.16)"
+B8 00 02 # invokestatic 2     # println__1("", "main (tests/test_t5_2.c0: 19.5-19.16)")
+57       # pop                # (ignore result)
+15 02    # vload 2            # x
+10 0C    # bipush 12          # 12
+4E       # imstore            # *(x) = 12;
+15 02    # vload 2            # x
+2E       # imload             # *(x)
+14 0A 1A # aldc 2586          # s[2586] = "main (tests/test_t5_2.c0: 21.5-21.17)"
+B8 00 03 # invokestatic 3     # printint__1(*(x), "main (tests/test_t5_2.c0: 21.5-21.17)")
+57       # pop                # (ignore result)
+15 02    # vload 2            # x
+2E       # imload             # *(x)
+10 0C    # bipush 12          # 12
+9F 00 06 # if_cmpeq +6        # if (*(x) == 12) goto <61:cond_true>
+A7 00 08 # goto +8            # goto <62:cond_false>
+# <61:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <63:cond_end>
+# <62:cond_false>
+10 00    # bipush 0           # false
+# <63:cond_end>
+14 0A 40 # aldc 2624          # s[2624] = "tests/test_t5_2.c0: 22.5-22.20: assert failed"
+CF       # assert             # assert (*(x) == 12) [failure message on stack]
+14 0A 6E # aldc 2670          # s[2670] = ""
+14 0A 6F # aldc 2671          # s[2671] = "main (tests/test_t5_2.c0: 23.5-23.16)"
+B8 00 02 # invokestatic 2     # println__1("", "main (tests/test_t5_2.c0: 23.5-23.16)")
+57       # pop                # (ignore result)
+BB 08    # new 8              # alloc(int*)
+36 03    # vstore 3           # y = alloc(int*);
+15 03    # vload 3            # y
+15 02    # vload 2            # x
+4F       # amstore            # *(y) = x;
+15 03    # vload 3            # y
+2F       # amload             # *(y)
+2E       # imload             # *(*(y))
+14 0A 95 # aldc 2709          # s[2709] = "main (tests/test_t5_2.c0: 27.5-27.18)"
+B8 00 03 # invokestatic 3     # printint__1(*(*(y)), "main (tests/test_t5_2.c0: 27.5-27.18)")
+57       # pop                # (ignore result)
+15 03    # vload 3            # y
+2F       # amload             # *(y)
+2E       # imload             # *(*(y))
+10 0C    # bipush 12          # 12
+9F 00 06 # if_cmpeq +6        # if (*(*(y)) == 12) goto <64:cond_true>
+A7 00 08 # goto +8            # goto <65:cond_false>
+# <64:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <66:cond_end>
+# <65:cond_false>
+10 00    # bipush 0           # false
+# <66:cond_end>
+14 0A BB # aldc 2747          # s[2747] = "tests/test_t5_2.c0: 28.5-28.21: assert failed"
+CF       # assert             # assert (*(*(y)) == 12) [failure message on stack]
+14 0A E9 # aldc 2793          # s[2793] = ""
+14 0A EA # aldc 2794          # s[2794] = "main (tests/test_t5_2.c0: 29.5-29.16)"
+B8 00 02 # invokestatic 2     # println__1("", "main (tests/test_t5_2.c0: 29.5-29.16)")
+57       # pop                # (ignore result)
+BB 01    # new 1              # alloc(char)
+36 04    # vstore 4           # c = alloc(char);
+15 04    # vload 4            # c
+10 61    # bipush 97          # 'a'
+55       # cmstore            # *(c) = 'a';
+15 04    # vload 4            # c
+34       # cmload             # *(c)
+14 0B 10 # aldc 2832          # s[2832] = "main (tests/test_t5_2.c0: 33.5-33.18)"
+B8 00 05 # invokestatic 5     # printchar__1(*(c), "main (tests/test_t5_2.c0: 33.5-33.18)")
+57       # pop                # (ignore result)
+15 04    # vload 4            # c
+34       # cmload             # *(c)
+10 61    # bipush 97          # 'a'
+9F 00 06 # if_cmpeq +6        # if (*(c) == 'a') goto <67:cond_true>
+A7 00 08 # goto +8            # goto <68:cond_false>
+# <67:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <69:cond_end>
+# <68:cond_false>
+10 00    # bipush 0           # false
+# <69:cond_end>
+14 0B 36 # aldc 2870          # s[2870] = "tests/test_t5_2.c0: 34.5-34.21: assert failed"
+CF       # assert             # assert (*(c) == 'a') [failure message on stack]
+14 0B 64 # aldc 2916          # s[2916] = ""
+14 0B 65 # aldc 2917          # s[2917] = "main (tests/test_t5_2.c0: 35.5-35.16)"
+B8 00 02 # invokestatic 2     # println__1("", "main (tests/test_t5_2.c0: 35.5-35.16)")
+57       # pop                # (ignore result)
+10 06    # bipush 6           # 6
+BC 01    # newarray 1         # alloc_array(char, 6)
+36 05    # vstore 5           # cstr = alloc_array(char, 6);
+15 05    # vload 5            # cstr
+10 00    # bipush 0           # 0
+63       # aadds              # &cstr[0]
+10 68    # bipush 104         # 'h'
+55       # cmstore            # cstr[0] = 'h';
+15 05    # vload 5            # cstr
+10 01    # bipush 1           # 1
+63       # aadds              # &cstr[1]
+10 65    # bipush 101         # 'e'
+55       # cmstore            # cstr[1] = 'e';
+15 05    # vload 5            # cstr
+10 02    # bipush 2           # 2
+63       # aadds              # &cstr[2]
+10 6C    # bipush 108         # 'l'
+55       # cmstore            # cstr[2] = 'l';
+15 05    # vload 5            # cstr
+10 03    # bipush 3           # 3
+63       # aadds              # &cstr[3]
+10 6C    # bipush 108         # 'l'
+55       # cmstore            # cstr[3] = 'l';
+15 05    # vload 5            # cstr
+10 04    # bipush 4           # 4
+63       # aadds              # &cstr[4]
+10 6F    # bipush 111         # 'o'
+55       # cmstore            # cstr[4] = 'o';
+15 05    # vload 5            # cstr
+10 05    # bipush 5           # 5
+63       # aadds              # &cstr[5]
+10 00    # bipush 0           # '\000'
+55       # cmstore            # cstr[5] = '\0';
+15 05    # vload 5            # cstr
+BE       # arraylength        # \length(cstr)
+10 06    # bipush 6           # 6
+9F 00 06 # if_cmpeq +6        # if (\length(cstr) == 6) goto <70:cond_true>
+A7 00 08 # goto +8            # goto <71:cond_false>
+# <70:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <72:cond_end>
+# <71:cond_false>
+10 00    # bipush 0           # false
+# <72:cond_end>
+14 0B 8B # aldc 2955          # s[2955] = "tests/test_t5_2.c0: 45.8-45.32: @assert annotation failed"
+CF       # assert             # assert (\length(cstr) == 6) [failure message on stack]
+15 05    # vload 5            # cstr
+10 00    # bipush 0           # 0
+63       # aadds              # &cstr[0]
+34       # cmload             # cstr[0]
+10 68    # bipush 104         # 'h'
+9F 00 06 # if_cmpeq +6        # if (cstr[0] == 'h') goto <73:cond_true>
+A7 00 08 # goto +8            # goto <74:cond_false>
+# <73:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <75:cond_end>
+# <74:cond_false>
+10 00    # bipush 0           # false
+# <75:cond_end>
+14 0B C5 # aldc 3013          # s[3013] = "tests/test_t5_2.c0: 47.5-47.26: assert failed"
+CF       # assert             # assert (cstr[0] == 'h') [failure message on stack]
+15 05    # vload 5            # cstr
+10 01    # bipush 1           # 1
+63       # aadds              # &cstr[1]
+34       # cmload             # cstr[1]
+10 65    # bipush 101         # 'e'
+9F 00 06 # if_cmpeq +6        # if (cstr[1] == 'e') goto <76:cond_true>
+A7 00 08 # goto +8            # goto <77:cond_false>
+# <76:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <78:cond_end>
+# <77:cond_false>
+10 00    # bipush 0           # false
+# <78:cond_end>
+14 0B F3 # aldc 3059          # s[3059] = "tests/test_t5_2.c0: 48.5-48.26: assert failed"
+CF       # assert             # assert (cstr[1] == 'e') [failure message on stack]
+15 05    # vload 5            # cstr
+10 02    # bipush 2           # 2
+63       # aadds              # &cstr[2]
+34       # cmload             # cstr[2]
+10 6C    # bipush 108         # 'l'
+9F 00 06 # if_cmpeq +6        # if (cstr[2] == 'l') goto <79:cond_true>
+A7 00 08 # goto +8            # goto <80:cond_false>
+# <79:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <81:cond_end>
+# <80:cond_false>
+10 00    # bipush 0           # false
+# <81:cond_end>
+14 0C 21 # aldc 3105          # s[3105] = "tests/test_t5_2.c0: 49.5-49.26: assert failed"
+CF       # assert             # assert (cstr[2] == 'l') [failure message on stack]
+15 05    # vload 5            # cstr
+10 03    # bipush 3           # 3
+63       # aadds              # &cstr[3]
+34       # cmload             # cstr[3]
+10 6C    # bipush 108         # 'l'
+9F 00 06 # if_cmpeq +6        # if (cstr[3] == 'l') goto <82:cond_true>
+A7 00 08 # goto +8            # goto <83:cond_false>
+# <82:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <84:cond_end>
+# <83:cond_false>
+10 00    # bipush 0           # false
+# <84:cond_end>
+14 0C 4F # aldc 3151          # s[3151] = "tests/test_t5_2.c0: 50.5-50.26: assert failed"
+CF       # assert             # assert (cstr[3] == 'l') [failure message on stack]
+15 05    # vload 5            # cstr
+10 04    # bipush 4           # 4
+63       # aadds              # &cstr[4]
+34       # cmload             # cstr[4]
+10 6F    # bipush 111         # 'o'
+9F 00 06 # if_cmpeq +6        # if (cstr[4] == 'o') goto <85:cond_true>
+A7 00 08 # goto +8            # goto <86:cond_false>
+# <85:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <87:cond_end>
+# <86:cond_false>
+10 00    # bipush 0           # false
+# <87:cond_end>
+14 0C 7D # aldc 3197          # s[3197] = "tests/test_t5_2.c0: 51.5-51.26: assert failed"
+CF       # assert             # assert (cstr[4] == 'o') [failure message on stack]
+15 05    # vload 5            # cstr
+10 05    # bipush 5           # 5
+63       # aadds              # &cstr[5]
+34       # cmload             # cstr[5]
+10 00    # bipush 0           # '\000'
+9F 00 06 # if_cmpeq +6        # if (cstr[5] == '\0') goto <88:cond_true>
+A7 00 08 # goto +8            # goto <89:cond_false>
+# <88:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <90:cond_end>
+# <89:cond_false>
+10 00    # bipush 0           # false
+# <90:cond_end>
+14 0C AB # aldc 3243          # s[3243] = "tests/test_t5_2.c0: 52.5-52.27: assert failed"
+CF       # assert             # assert (cstr[5] == '\0') [failure message on stack]
+14 0C D9 # aldc 3289          # s[3289] = "Basic tests passed! Moving on"
+14 0C F7 # aldc 3319          # s[3319] = "main (tests/test_t5_2.c0: 54.5-54.45)"
+B8 00 02 # invokestatic 2     # println__1("Basic tests passed! Moving on", "main (tests/test_t5_2.c0: 54.5-54.45)")
+57       # pop                # (ignore result)
+BB 30    # new 48             # alloc(goose)
+36 06    # vstore 6           # g = alloc(goose);
+15 06    # vload 6            # g
+62 00    # aaddf 0            # &g->count
+2E       # imload             # g->count
+10 00    # bipush 0           # 0
+9F 00 06 # if_cmpeq +6        # if (g->count == 0) goto <91:cond_true>
+A7 00 08 # goto +8            # goto <92:cond_false>
+# <91:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <93:cond_end>
+# <92:cond_false>
+10 00    # bipush 0           # false
+# <93:cond_end>
+14 0D 1D # aldc 3357          # s[3357] = "tests/test_t5_2.c0: 57.5-57.27: assert failed"
+CF       # assert             # assert (g->count == 0) [failure message on stack]
+14 0D 4B # aldc 3403          # s[3403] = ""
+15 06    # vload 6            # g
+62 08    # aaddf 8            # &g->adjective
+2F       # amload             # g->adjective
+14 0D 4C # aldc 3404          # s[3404] = "main (tests/test_t5_2.c0: 58.12-58.42)"
+B8 00 0D # invokestatic 13    # string_equal__1("", g->adjective, "main (tests/test_t5_2.c0: 58.12-58.42)")
+14 0D 73 # aldc 3443          # s[3443] = "tests/test_t5_2.c0: 58.5-58.44: assert failed"
+CF       # assert             # assert string_equal__1("", g->adjective, "main (tests/test_t5_2.c0: 58.12-58.42)") [failure message on stack]
+15 06    # vload 6            # g
+62 10    # aaddf 16           # &g->magic
+2F       # amload             # g->magic
+01       # aconst_null        # NULL
+9F 00 06 # if_cmpeq +6        # if (g->magic == NULL) goto <94:cond_true>
+A7 00 08 # goto +8            # goto <95:cond_false>
+# <94:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <96:cond_end>
+# <95:cond_false>
+10 00    # bipush 0           # false
+# <96:cond_end>
+14 0D A1 # aldc 3489          # s[3489] = "tests/test_t5_2.c0: 59.5-59.30: assert failed"
+CF       # assert             # assert (g->magic == NULL) [failure message on stack]
+15 06    # vload 6            # g
+62 28    # aaddf 40           # &g->prev
+2F       # amload             # g->prev
+01       # aconst_null        # NULL
+9F 00 06 # if_cmpeq +6        # if (g->prev == NULL) goto <97:cond_true>
+A7 00 08 # goto +8            # goto <98:cond_false>
+# <97:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <99:cond_end>
+# <98:cond_false>
+10 00    # bipush 0           # false
+# <99:cond_end>
+14 0D CF # aldc 3535          # s[3535] = "tests/test_t5_2.c0: 61.5-61.29: assert failed"
+CF       # assert             # assert (g->prev == NULL) [failure message on stack]
+15 06    # vload 6            # g
+62 20    # aaddf 32           # &g->next
+2F       # amload             # g->next
+01       # aconst_null        # NULL
+9F 00 06 # if_cmpeq +6        # if (g->next == NULL) goto <100:cond_true>
+A7 00 08 # goto +8            # goto <101:cond_false>
+# <100:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <102:cond_end>
+# <101:cond_false>
+10 00    # bipush 0           # false
+# <102:cond_end>
+14 0D FD # aldc 3581          # s[3581] = "tests/test_t5_2.c0: 62.5-62.29: assert failed"
+CF       # assert             # assert (g->next == NULL) [failure message on stack]
+15 06    # vload 6            # g
+62 00    # aaddf 0            # &g->count
+10 01    # bipush 1           # 1
+4E       # imstore            # g->count = 1;
+15 06    # vload 6            # g
+62 08    # aaddf 8            # &g->adjective
+14 0E 2B # aldc 3627          # s[3627] = "so silly LMAO"
+4F       # amstore            # g->adjective = "so silly LMAO";
+BB 04    # new 4              # alloc(int)
+36 07    # vstore 7           # temp = alloc(int);
+15 07    # vload 7            # temp
+13 00 00 # ildc 0             # c[0] = 59009
+4E       # imstore            # *(temp) = 59009;
+15 06    # vload 6            # g
+62 10    # aaddf 16           # &g->magic
+15 07    # vload 7            # temp
+4F       # amstore            # g->magic = temp;
+10 15    # bipush 21          # 21
+BC 04    # newarray 4         # alloc_array(int, 21)
+36 08    # vstore 8           # num = alloc_array(int, 21);
+10 00    # bipush 0           # 0
+36 09    # vstore 9           # i = 0;
+# <103:loop>
+A7 00 03 # goto +3            # goto <104:body>
+# <104:body>
+15 09    # vload 9            # i
+10 15    # bipush 21          # 21
+A1 00 06 # if_icmplt +6       # if (i < 21) goto <106:then>
+A7 00 18 # goto +24           # goto <107:else>
+# <106:then>
+15 08    # vload 8            # num
+15 09    # vload 9            # i
+63       # aadds              # &num[i]
+15 09    # vload 9            # i
+15 09    # vload 9            # i
+68       # imul               # (i * i)
+4E       # imstore            # num[i] = (i * i);
+15 09    # vload 9            # i
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 09    # vstore 9           # i += 1;
+A7 00 06 # goto +6            # goto <108:endif>
+# <107:else>
+A7 00 06 # goto +6            # break
+# <108:endif>
+A7 FF DB # goto -37           # goto <103:loop>
+# <105:exit>
+15 06    # vload 6            # g
+62 18    # aaddf 24           # &g->nums
+15 08    # vload 8            # num
+4F       # amstore            # g->nums = num;
+15 08    # vload 8            # num
+BE       # arraylength        # \length(num)
+10 15    # bipush 21          # 21
+9F 00 06 # if_cmpeq +6        # if (\length(num) == 21) goto <109:cond_true>
+A7 00 08 # goto +8            # goto <110:cond_false>
+# <109:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <111:cond_end>
+# <110:cond_false>
+10 00    # bipush 0           # false
+# <111:cond_end>
+14 0E 39 # aldc 3641          # s[3641] = "tests/test_t5_2.c0: 74.8-74.32: @assert annotation failed"
+CF       # assert             # assert (\length(num) == 21) [failure message on stack]
+15 06    # vload 6            # g
+62 00    # aaddf 0            # &g->count
+2E       # imload             # g->count
+10 01    # bipush 1           # 1
+9F 00 06 # if_cmpeq +6        # if (g->count == 1) goto <112:cond_true>
+A7 00 08 # goto +8            # goto <113:cond_false>
+# <112:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <114:cond_end>
+# <113:cond_false>
+10 00    # bipush 0           # false
+# <114:cond_end>
+14 0E 73 # aldc 3699          # s[3699] = "tests/test_t5_2.c0: 76.5-76.27: assert failed"
+CF       # assert             # assert (g->count == 1) [failure message on stack]
+14 0E A1 # aldc 3745          # s[3745] = "so silly LMAO"
+15 06    # vload 6            # g
+62 08    # aaddf 8            # &g->adjective
+2F       # amload             # g->adjective
+14 0E AF # aldc 3759          # s[3759] = "main (tests/test_t5_2.c0: 77.12-77.55)"
+B8 00 0D # invokestatic 13    # string_equal__1("so silly LMAO", g->adjective, "main (tests/test_t5_2.c0: 77.12-77.55)")
+14 0E D6 # aldc 3798          # s[3798] = "tests/test_t5_2.c0: 77.5-77.57: assert failed"
+CF       # assert             # assert string_equal__1("so silly LMAO", g->adjective, "main (tests/test_t5_2.c0: 77.12-77.55)") [failure message on stack]
+15 06    # vload 6            # g
+62 10    # aaddf 16           # &g->magic
+2F       # amload             # g->magic
+2E       # imload             # *(g->magic)
+13 00 01 # ildc 1             # c[1] = 59009
+9F 00 06 # if_cmpeq +6        # if (*(g->magic) == 59009) goto <115:cond_true>
+A7 00 08 # goto +8            # goto <116:cond_false>
+# <115:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <117:cond_end>
+# <116:cond_false>
+10 00    # bipush 0           # false
+# <117:cond_end>
+14 0F 04 # aldc 3844          # s[3844] = "tests/test_t5_2.c0: 78.5-78.34: assert failed"
+CF       # assert             # assert (*(g->magic) == 59009) [failure message on stack]
+10 00    # bipush 0           # 0
+36 09    # vstore 9           # i = 0;
+# <118:loop>
+A7 00 03 # goto +3            # goto <119:body>
+# <119:body>
+15 09    # vload 9            # i
+10 15    # bipush 21          # 21
+A1 00 06 # if_icmplt +6       # if (i < 21) goto <121:then>
+A7 00 2C # goto +44           # goto <122:else>
+# <121:then>
+15 06    # vload 6            # g
+62 18    # aaddf 24           # &g->nums
+2F       # amload             # g->nums
+15 09    # vload 9            # i
+63       # aadds              # &g->nums[i]
+2E       # imload             # g->nums[i]
+15 09    # vload 9            # i
+15 09    # vload 9            # i
+68       # imul               # (i * i)
+9F 00 06 # if_cmpeq +6        # if (g->nums[i] == (i * i)) goto <124:cond_true>
+A7 00 08 # goto +8            # goto <125:cond_false>
+# <124:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <126:cond_end>
+# <125:cond_false>
+10 00    # bipush 0           # false
+# <126:cond_end>
+14 0F 32 # aldc 3890          # s[3890] = "tests/test_t5_2.c0: 80.9-80.35: assert failed"
+CF       # assert             # assert (g->nums[i] == (i * i)) [failure message on stack]
+15 09    # vload 9            # i
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 09    # vstore 9           # i += 1;
+A7 00 06 # goto +6            # goto <123:endif>
+# <122:else>
+A7 00 06 # goto +6            # break
+# <123:endif>
+A7 FF C7 # goto -57           # goto <118:loop>
+# <120:exit>
+15 06    # vload 6            # g
+62 28    # aaddf 40           # &g->prev
+2F       # amload             # g->prev
+01       # aconst_null        # NULL
+9F 00 06 # if_cmpeq +6        # if (g->prev == NULL) goto <127:cond_true>
+A7 00 08 # goto +8            # goto <128:cond_false>
+# <127:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <129:cond_end>
+# <128:cond_false>
+10 00    # bipush 0           # false
+# <129:cond_end>
+14 0F 60 # aldc 3936          # s[3936] = "tests/test_t5_2.c0: 82.5-82.29: assert failed"
+CF       # assert             # assert (g->prev == NULL) [failure message on stack]
+15 06    # vload 6            # g
+62 20    # aaddf 32           # &g->next
+2F       # amload             # g->next
+01       # aconst_null        # NULL
+9F 00 06 # if_cmpeq +6        # if (g->next == NULL) goto <130:cond_true>
+A7 00 08 # goto +8            # goto <131:cond_false>
+# <130:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <132:cond_end>
+# <131:cond_false>
+10 00    # bipush 0           # false
+# <132:cond_end>
+14 0F 8E # aldc 3982          # s[3982] = "tests/test_t5_2.c0: 83.5-83.29: assert failed"
+CF       # assert             # assert (g->next == NULL) [failure message on stack]
+BB 30    # new 48             # alloc(goose)
+36 09    # vstore 9           # ng = alloc(goose);
+15 09    # vload 9            # ng
+62 00    # aaddf 0            # &ng->count
+10 01    # bipush 1           # 1
+4E       # imstore            # ng->count = 1;
+15 09    # vload 9            # ng
+62 08    # aaddf 8            # &ng->adjective
+14 0F BC # aldc 4028          # s[4028] = "so silly LMAO"
+4F       # amstore            # ng->adjective = "so silly LMAO";
+BB 04    # new 4              # alloc(int)
+36 0A    # vstore 10          # t = alloc(int);
+15 0A    # vload 10           # t
+13 00 02 # ildc 2             # c[2] = 59009
+4E       # imstore            # *(t) = 59009;
+15 09    # vload 9            # ng
+62 10    # aaddf 16           # &ng->magic
+15 0A    # vload 10           # t
+4F       # amstore            # ng->magic = t;
+10 15    # bipush 21          # 21
+BC 04    # newarray 4         # alloc_array(int, 21)
+36 0B    # vstore 11          # nu = alloc_array(int, 21);
+10 00    # bipush 0           # 0
+36 0C    # vstore 12          # i = 0;
+# <133:loop>
+A7 00 03 # goto +3            # goto <134:body>
+# <134:body>
+15 0C    # vload 12           # i
+10 15    # bipush 21          # 21
+A1 00 06 # if_icmplt +6       # if (i < 21) goto <136:then>
+A7 00 18 # goto +24           # goto <137:else>
+# <136:then>
+15 0B    # vload 11           # nu
+15 0C    # vload 12           # i
+63       # aadds              # &nu[i]
+15 0C    # vload 12           # i
+15 0C    # vload 12           # i
+68       # imul               # (i * i)
+4E       # imstore            # nu[i] = (i * i);
+15 0C    # vload 12           # i
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 0C    # vstore 12          # i += 1;
+A7 00 06 # goto +6            # goto <138:endif>
+# <137:else>
+A7 00 06 # goto +6            # break
+# <138:endif>
+A7 FF DB # goto -37           # goto <133:loop>
+# <135:exit>
+15 09    # vload 9            # ng
+62 18    # aaddf 24           # &ng->nums
+15 0B    # vload 11           # nu
+4F       # amstore            # ng->nums = nu;
+15 06    # vload 6            # g
+62 20    # aaddf 32           # &g->next
+15 09    # vload 9            # ng
+4F       # amstore            # g->next = ng;
+15 0B    # vload 11           # nu
+BE       # arraylength        # \length(nu)
+10 15    # bipush 21          # 21
+9F 00 06 # if_cmpeq +6        # if (\length(nu) == 21) goto <139:cond_true>
+A7 00 08 # goto +8            # goto <140:cond_false>
+# <139:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <141:cond_end>
+# <140:cond_false>
+10 00    # bipush 0           # false
+# <141:cond_end>
+14 0F CA # aldc 4042          # s[4042] = "tests/test_t5_2.c0: 97.8-97.31: @assert annotation failed"
+CF       # assert             # assert (\length(nu) == 21) [failure message on stack]
+15 06    # vload 6            # g
+62 00    # aaddf 0            # &g->count
+2E       # imload             # g->count
+15 06    # vload 6            # g
+62 20    # aaddf 32           # &g->next
+2F       # amload             # g->next
+62 00    # aaddf 0            # &g->next->count
+2E       # imload             # g->next->count
+9F 00 06 # if_cmpeq +6        # if (g->count == g->next->count) goto <142:cond_true>
+A7 00 08 # goto +8            # goto <143:cond_false>
+# <142:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <144:cond_end>
+# <143:cond_false>
+10 00    # bipush 0           # false
+# <144:cond_end>
+14 10 04 # aldc 4100          # s[4100] = "tests/test_t5_2.c0: 100.5-100.40: assert failed"
+CF       # assert             # assert (g->count == g->next->count) [failure message on stack]
+14 10 34 # aldc 4148          # s[4148] = "so silly LMAO"
+15 09    # vload 9            # ng
+62 08    # aaddf 8            # &ng->adjective
+2F       # amload             # ng->adjective
+14 10 42 # aldc 4162          # s[4162] = "main (tests/test_t5_2.c0: 101.12-101.56)"
+B8 00 0D # invokestatic 13    # string_equal__1("so silly LMAO", ng->adjective, "main (tests/test_t5_2.c0: 101.12-101.56)")
+14 10 6B # aldc 4203          # s[4203] = "tests/test_t5_2.c0: 101.5-101.58: assert failed"
+CF       # assert             # assert string_equal__1("so silly LMAO", ng->adjective, "main (tests/test_t5_2.c0: 101.12-101.56)") [failure message on stack]
+15 06    # vload 6            # g
+62 10    # aaddf 16           # &g->magic
+2F       # amload             # g->magic
+2E       # imload             # *(g->magic)
+15 06    # vload 6            # g
+62 20    # aaddf 32           # &g->next
+2F       # amload             # g->next
+62 10    # aaddf 16           # &g->next->magic
+2F       # amload             # g->next->magic
+2E       # imload             # *(g->next->magic)
+9F 00 06 # if_cmpeq +6        # if (*(g->magic) == *(g->next->magic)) goto <145:cond_true>
+A7 00 08 # goto +8            # goto <146:cond_false>
+# <145:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <147:cond_end>
+# <146:cond_false>
+10 00    # bipush 0           # false
+# <147:cond_end>
+14 10 9B # aldc 4251          # s[4251] = "tests/test_t5_2.c0: 102.5-102.46: assert failed"
+CF       # assert             # assert (*(g->magic) == *(g->next->magic)) [failure message on stack]
+10 00    # bipush 0           # 0
+36 0C    # vstore 12          # i = 0;
+# <148:loop>
+A7 00 03 # goto +3            # goto <149:body>
+# <149:body>
+15 0C    # vload 12           # i
+10 15    # bipush 21          # 21
+A1 00 06 # if_icmplt +6       # if (i < 21) goto <151:then>
+A7 00 4F # goto +79           # goto <152:else>
+# <151:then>
+15 06    # vload 6            # g
+62 18    # aaddf 24           # &g->nums
+2F       # amload             # g->nums
+15 0C    # vload 12           # i
+63       # aadds              # &g->nums[i]
+2E       # imload             # g->nums[i]
+15 0C    # vload 12           # i
+15 0C    # vload 12           # i
+68       # imul               # (i * i)
+9F 00 06 # if_cmpeq +6        # if (g->nums[i] == (i * i)) goto <154:cond_true>
+A7 00 08 # goto +8            # goto <155:cond_false>
+# <154:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <156:cond_end>
+# <155:cond_false>
+10 00    # bipush 0           # false
+# <156:cond_end>
+14 10 CB # aldc 4299          # s[4299] = "tests/test_t5_2.c0: 104.9-104.35: assert failed"
+CF       # assert             # assert (g->nums[i] == (i * i)) [failure message on stack]
+15 06    # vload 6            # g
+62 18    # aaddf 24           # &g->nums
+2F       # amload             # g->nums
+15 0C    # vload 12           # i
+63       # aadds              # &g->nums[i]
+2E       # imload             # g->nums[i]
+15 09    # vload 9            # ng
+62 18    # aaddf 24           # &ng->nums
+2F       # amload             # ng->nums
+15 0C    # vload 12           # i
+63       # aadds              # &ng->nums[i]
+2E       # imload             # ng->nums[i]
+9F 00 06 # if_cmpeq +6        # if (g->nums[i] == ng->nums[i]) goto <157:cond_true>
+A7 00 08 # goto +8            # goto <158:cond_false>
+# <157:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <159:cond_end>
+# <158:cond_false>
+10 00    # bipush 0           # false
+# <159:cond_end>
+14 10 FB # aldc 4347          # s[4347] = "tests/test_t5_2.c0: 105.9-105.43: assert failed"
+CF       # assert             # assert (g->nums[i] == ng->nums[i]) [failure message on stack]
+15 0C    # vload 12           # i
+10 01    # bipush 1           # 1
+60       # iadd               # 
+36 0C    # vstore 12          # i += 1;
+A7 00 06 # goto +6            # goto <153:endif>
+# <152:else>
+A7 00 06 # goto +6            # break
+# <153:endif>
+A7 FF A4 # goto -92           # goto <148:loop>
+# <150:exit>
+15 06    # vload 6            # g
+62 28    # aaddf 40           # &g->prev
+2F       # amload             # g->prev
+01       # aconst_null        # NULL
+9F 00 06 # if_cmpeq +6        # if (g->prev == NULL) goto <160:cond_true>
+A7 00 08 # goto +8            # goto <161:cond_false>
+# <160:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <162:cond_end>
+# <161:cond_false>
+10 00    # bipush 0           # false
+# <162:cond_end>
+14 11 2B # aldc 4395          # s[4395] = "tests/test_t5_2.c0: 107.5-107.29: assert failed"
+CF       # assert             # assert (g->prev == NULL) [failure message on stack]
+15 06    # vload 6            # g
+62 20    # aaddf 32           # &g->next
+2F       # amload             # g->next
+15 09    # vload 9            # ng
+9F 00 06 # if_cmpeq +6        # if (g->next == ng) goto <163:cond_true>
+A7 00 08 # goto +8            # goto <164:cond_false>
+# <163:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <165:cond_end>
+# <164:cond_false>
+10 00    # bipush 0           # false
+# <165:cond_end>
+14 11 5B # aldc 4443          # s[4443] = "tests/test_t5_2.c0: 108.5-108.27: assert failed"
+CF       # assert             # assert (g->next == ng) [failure message on stack]
+14 11 8B # aldc 4491          # s[4491] = "All tests passed!"
+14 11 9D # aldc 4509          # s[4509] = "main (tests/test_t5_2.c0: 111.5-111.33)"
+B8 00 02 # invokestatic 2     # println__1("All tests passed!", "main (tests/test_t5_2.c0: 111.5-111.33)")
+57       # pop                # (ignore result)
+10 00    # bipush 0           # 0
+36 01    # vstore 1           # _result = 0;
+15 01    # vload 1            # _result
+B0       # return             # 
+
+
+#<print__1>
+02                # number of arguments = 2
+02                # number of local variables = 2
+00 0C             # code length = 12 bytes
+15 00    # vload 0            # s
+B7 00 00 # invokenative 0     # print(s)
+57       # pop                # (ignore result)
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<println__1>
+02                # number of arguments = 2
+02                # number of local variables = 2
+00 0C             # code length = 12 bytes
+15 00    # vload 0            # s
+B7 00 01 # invokenative 1     # println(s)
+57       # pop                # (ignore result)
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<printint__1>
+02                # number of arguments = 2
+02                # number of local variables = 2
+00 0C             # code length = 12 bytes
+15 00    # vload 0            # i
+B7 00 02 # invokenative 2     # printint(i)
+57       # pop                # (ignore result)
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<printbool__1>
+02                # number of arguments = 2
+02                # number of local variables = 2
+00 0C             # code length = 12 bytes
+15 00    # vload 0            # b
+B7 00 03 # invokenative 3     # printbool(b)
+57       # pop                # (ignore result)
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<printchar__1>
+02                # number of arguments = 2
+02                # number of local variables = 2
+00 0C             # code length = 12 bytes
+15 00    # vload 0            # c
+B7 00 04 # invokenative 4     # printchar(c)
+57       # pop                # (ignore result)
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<flush__1>
+01                # number of arguments = 1
+01                # number of local variables = 1
+00 0A             # code length = 10 bytes
+B7 00 05 # invokenative 5     # flush()
+57       # pop                # (ignore result)
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+10 00    # bipush 0           # dummy return value
+B0       # return             # 
+
+
+#<eof__1>
+01                # number of arguments = 1
+02                # number of local variables = 2
+00 08             # code length = 8 bytes
+B7 00 06 # invokenative 6     # eof()
+36 01    # vstore 1           # _result = eof();
+15 01    # vload 1            # _result
+B0       # return             # 
+
+
+#<readline__1>
+01                # number of arguments = 1
+02                # number of local variables = 2
+00 20             # code length = 32 bytes
+14 00 00 # aldc 0             # s[0] = "readline__1 (/afs/andrew/course/15/122/lib/conio.h0: 14.16-14.21)"
+B8 00 07 # invokestatic 7     # eof__1("readline__1 (/afs/andrew/course/15/122/lib/conio.h0: 14.16-14.21)")
+10 01    # bipush 1           # 
+82       # ixor               # !(eof__1("readline__1 (/afs/andrew/course/15/122/lib/conio.h0: 14.16-14.21)"))
+14 00 42 # aldc 66            # s[66] = "/afs/andrew/course/15/122/lib/conio.h0: 14.6-14.22: @requires annotation failed\n"
+15 00    # vload 0            # _caller
+14 00 93 # aldc 147           # s[147] = ": caller location"
+B7 00 07 # invokenative 7     # string_join(_caller, ": caller location")
+B7 00 07 # invokenative 7     # string_join("/afs/andrew/course/15/122/lib/conio.h0: 14.6-14.22: @requires annotation failed\n", string_join(_caller, ": caller location"))
+CF       # assert             # assert !(eof__1("readline__1 (/afs/andrew/course/15/122/lib/conio.h0: 14.16-14.21)")) [failure message on stack]
+B7 00 08 # invokenative 8     # readline()
+36 01    # vstore 1           # _result = readline();
+15 01    # vload 1            # _result
+B0       # return             # 
+
+
+#<string_length__1>
+02                # number of arguments = 2
+03                # number of local variables = 3
+00 0A             # code length = 10 bytes
+15 00    # vload 0            # s
+B7 00 09 # invokenative 9     # string_length(s)
+36 02    # vstore 2           # _result = string_length(s);
+15 02    # vload 2            # _result
+B0       # return             # 
+
+
+#<string_charat__1>
+03                # number of arguments = 3
+04                # number of local variables = 4
+00 41             # code length = 65 bytes
+10 00    # bipush 0           # 0
+15 01    # vload 1            # idx
+A4 00 06 # if_icmple +6       # if (0 <= idx) goto <00:cond_true>
+A7 00 1D # goto +29           # goto <01:cond_false>
+# <00:cond_true>
+15 01    # vload 1            # idx
+15 00    # vload 0            # s
+14 00 A5 # aldc 165           # s[165] = "string_charat__1 (/afs/andrew/course/15/122/lib/string.h0: 19.33-19.49)"
+B8 00 09 # invokestatic 9     # string_length__1(s, "string_charat__1 (/afs/andrew/course/15/122/lib/string.h0: 19.33-19.49)")
+A1 00 06 # if_icmplt +6       # if (idx < string_length__1(s, "string_charat__1 (/afs/andrew/course/15/122/lib/string.h0: 19.33-19.49)")) goto <03:cond_true>
+A7 00 08 # goto +8            # goto <04:cond_false>
+# <03:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <05:cond_end>
+# <04:cond_false>
+10 00    # bipush 0           # false
+# <05:cond_end>
+A7 00 05 # goto +5            # goto <02:cond_end>
+# <01:cond_false>
+10 00    # bipush 0           # false
+# <02:cond_end>
+14 00 ED # aldc 237           # s[237] = "/afs/andrew/course/15/122/lib/string.h0: 19.6-19.50: @requires annotation failed\n"
+15 02    # vload 2            # _caller
+14 01 3F # aldc 319           # s[319] = ": caller location"
+B7 00 07 # invokenative 7     # string_join(_caller, ": caller location")
+B7 00 07 # invokenative 7     # string_join("/afs/andrew/course/15/122/lib/string.h0: 19.6-19.50: @requires annotation failed\n", string_join(_caller, ": caller location"))
+CF       # assert             # assert ((0 <= idx) && (idx < string_length__1(s, "string_charat__1 (/afs/andrew/course/15/122/lib/string.h0: 19.33-19.49)"))) [failure message on stack]
+15 00    # vload 0            # s
+15 01    # vload 1            # idx
+B7 00 0A # invokenative 10    # string_charat(s, idx)
+36 03    # vstore 3           # _result = string_charat(s, idx);
+15 03    # vload 3            # _result
+B0       # return             # 
+
+
+#<string_join__1>
+03                # number of arguments = 3
+04                # number of local variables = 4
+00 36             # code length = 54 bytes
+15 00    # vload 0            # a
+15 01    # vload 1            # b
+B7 00 07 # invokenative 7     # string_join(a, b)
+36 03    # vstore 3           # _result = string_join(a, b);
+15 03    # vload 3            # _result
+14 01 51 # aldc 337           # s[337] = "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 23.14-23.36)"
+B8 00 09 # invokestatic 9     # string_length__1(_result, "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 23.14-23.36)")
+15 00    # vload 0            # a
+14 01 97 # aldc 407           # s[407] = "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 24.19-24.35)"
+B8 00 09 # invokestatic 9     # string_length__1(a, "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 24.19-24.35)")
+15 01    # vload 1            # b
+14 01 DD # aldc 477           # s[477] = "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 24.38-24.54)"
+B8 00 09 # invokestatic 9     # string_length__1(b, "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 24.38-24.54)")
+60       # iadd               # (string_length__1(a, "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 24.19-24.35)") + string_length__1(b, "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 24.38-24.54)"))
+9F 00 06 # if_cmpeq +6        # if (string_length__1(_result, "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 23.14-23.36)") == (string_length__1(a, "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 24.19-24.35)") + string_length__1(b, "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 24.38-24.54)"))) goto <06:cond_true>
+A7 00 08 # goto +8            # goto <07:cond_false>
+# <06:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <08:cond_end>
+# <07:cond_false>
+10 00    # bipush 0           # false
+# <08:cond_end>
+14 02 23 # aldc 547           # s[547] = "/afs/andrew/course/15/122/lib/string.h0: 23.6-24.55: @ensures annotation failed"
+CF       # assert             # assert (string_length__1(_result, "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 23.14-23.36)") == (string_length__1(a, "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 24.19-24.35)") + string_length__1(b, "string_join__1 (/afs/andrew/course/15/122/lib/string.h0: 24.38-24.54)"))) [failure message on stack]
+15 03    # vload 3            # _result
+B0       # return             # 
+
+
+#<string_sub__1>
+04                # number of arguments = 4
+05                # number of local variables = 5
+00 6B             # code length = 107 bytes
+10 00    # bipush 0           # 0
+15 01    # vload 1            # start
+A4 00 06 # if_icmple +6       # if (0 <= start) goto <12:and>
+A7 00 27 # goto +39           # goto <10:cond_false>
+# <12:and>
+15 01    # vload 1            # start
+15 02    # vload 2            # end
+A4 00 06 # if_icmple +6       # if (start <= end) goto <09:cond_true>
+A7 00 1D # goto +29           # goto <10:cond_false>
+# <09:cond_true>
+15 02    # vload 2            # end
+15 00    # vload 0            # a
+14 02 73 # aldc 627           # s[627] = "string_sub__1 (/afs/andrew/course/15/122/lib/string.h0: 31.52-31.68)"
+B8 00 09 # invokestatic 9     # string_length__1(a, "string_sub__1 (/afs/andrew/course/15/122/lib/string.h0: 31.52-31.68)")
+A4 00 06 # if_icmple +6       # if (end <= string_length__1(a, "string_sub__1 (/afs/andrew/course/15/122/lib/string.h0: 31.52-31.68)")) goto <13:cond_true>
+A7 00 08 # goto +8            # goto <14:cond_false>
+# <13:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <15:cond_end>
+# <14:cond_false>
+10 00    # bipush 0           # false
+# <15:cond_end>
+A7 00 05 # goto +5            # goto <11:cond_end>
+# <10:cond_false>
+10 00    # bipush 0           # false
+# <11:cond_end>
+14 02 B8 # aldc 696           # s[696] = "/afs/andrew/course/15/122/lib/string.h0: 31.6-31.69: @requires annotation failed\n"
+15 03    # vload 3            # _caller
+14 03 0A # aldc 778           # s[778] = ": caller location"
+B7 00 07 # invokenative 7     # string_join(_caller, ": caller location")
+B7 00 07 # invokenative 7     # string_join("/afs/andrew/course/15/122/lib/string.h0: 31.6-31.69: @requires annotation failed\n", string_join(_caller, ": caller location"))
+CF       # assert             # assert (((0 <= start) && (start <= end)) && (end <= string_length__1(a, "string_sub__1 (/afs/andrew/course/15/122/lib/string.h0: 31.52-31.68)"))) [failure message on stack]
+15 00    # vload 0            # a
+15 01    # vload 1            # start
+15 02    # vload 2            # end
+B7 00 0B # invokenative 11    # string_sub(a, start, end)
+36 04    # vstore 4           # _result = string_sub(a, start, end);
+15 04    # vload 4            # _result
+14 03 1C # aldc 796           # s[796] = "string_sub__1 (/afs/andrew/course/15/122/lib/string.h0: 32.14-32.36)"
+B8 00 09 # invokestatic 9     # string_length__1(_result, "string_sub__1 (/afs/andrew/course/15/122/lib/string.h0: 32.14-32.36)")
+15 02    # vload 2            # end
+15 01    # vload 1            # start
+64       # isub               # (end - start)
+9F 00 06 # if_cmpeq +6        # if (string_length__1(_result, "string_sub__1 (/afs/andrew/course/15/122/lib/string.h0: 32.14-32.36)") == (end - start)) goto <16:cond_true>
+A7 00 08 # goto +8            # goto <17:cond_false>
+# <16:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <18:cond_end>
+# <17:cond_false>
+10 00    # bipush 0           # false
+# <18:cond_end>
+14 03 61 # aldc 865           # s[865] = "/afs/andrew/course/15/122/lib/string.h0: 32.6-32.52: @ensures annotation failed"
+CF       # assert             # assert (string_length__1(_result, "string_sub__1 (/afs/andrew/course/15/122/lib/string.h0: 32.14-32.36)") == (end - start)) [failure message on stack]
+15 04    # vload 4            # _result
+B0       # return             # 
+
+
+#<string_equal__1>
+03                # number of arguments = 3
+04                # number of local variables = 4
+00 0C             # code length = 12 bytes
+15 00    # vload 0            # a
+15 01    # vload 1            # b
+B7 00 0C # invokenative 12    # string_equal(a, b)
+36 03    # vstore 3           # _result = string_equal(a, b);
+15 03    # vload 3            # _result
+B0       # return             # 
+
+
+#<string_compare__1>
+03                # number of arguments = 3
+04                # number of local variables = 4
+00 30             # code length = 48 bytes
+15 00    # vload 0            # a
+15 01    # vload 1            # b
+B7 00 0D # invokenative 13    # string_compare(a, b)
+36 03    # vstore 3           # _result = string_compare(a, b);
+10 FF    # bipush -1          # -1
+15 03    # vload 3            # _result
+A4 00 06 # if_icmple +6       # if (-(1) <= _result) goto <19:cond_true>
+A7 00 17 # goto +23           # goto <20:cond_false>
+# <19:cond_true>
+15 03    # vload 3            # _result
+10 01    # bipush 1           # 1
+A4 00 06 # if_icmple +6       # if (_result <= 1) goto <22:cond_true>
+A7 00 08 # goto +8            # goto <23:cond_false>
+# <22:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <24:cond_end>
+# <23:cond_false>
+10 00    # bipush 0           # false
+# <24:cond_end>
+A7 00 05 # goto +5            # goto <21:cond_end>
+# <20:cond_false>
+10 00    # bipush 0           # false
+# <21:cond_end>
+14 03 B1 # aldc 945           # s[945] = "/afs/andrew/course/15/122/lib/string.h0: 37.6-37.44: @ensures annotation failed"
+CF       # assert             # assert ((-(1) <= _result) && (_result <= 1)) [failure message on stack]
+15 03    # vload 3            # _result
+B0       # return             # 
+
+
+#<string_fromint__1>
+02                # number of arguments = 2
+03                # number of local variables = 3
+00 0A             # code length = 10 bytes
+15 00    # vload 0            # i
+B7 00 0E # invokenative 14    # string_fromint(i)
+36 02    # vstore 2           # _result = string_fromint(i);
+15 02    # vload 2            # _result
+B0       # return             # 
+
+
+#<string_frombool__1>
+02                # number of arguments = 2
+03                # number of local variables = 3
+00 0A             # code length = 10 bytes
+15 00    # vload 0            # b
+B7 00 0F # invokenative 15    # string_frombool(b)
+36 02    # vstore 2           # _result = string_frombool(b);
+15 02    # vload 2            # _result
+B0       # return             # 
+
+
+#<string_fromchar__1>
+02                # number of arguments = 2
+03                # number of local variables = 3
+00 62             # code length = 98 bytes
+15 00    # vload 0            # c
+10 00    # bipush 0           # '\000'
+A0 00 06 # if_cmpne +6        # if (c != '\0') goto <25:cond_true>
+A7 00 08 # goto +8            # goto <26:cond_false>
+# <25:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <27:cond_end>
+# <26:cond_false>
+10 00    # bipush 0           # false
+# <27:cond_end>
+14 04 01 # aldc 1025          # s[1025] = "/afs/andrew/course/15/122/lib/string.h0: 43.6-43.25: @requires annotation failed\n"
+15 01    # vload 1            # _caller
+14 04 53 # aldc 1107          # s[1107] = ": caller location"
+B7 00 07 # invokenative 7     # string_join(_caller, ": caller location")
+B7 00 07 # invokenative 7     # string_join("/afs/andrew/course/15/122/lib/string.h0: 43.6-43.25: @requires annotation failed\n", string_join(_caller, ": caller location"))
+CF       # assert             # assert (c != '\0') [failure message on stack]
+15 00    # vload 0            # c
+B7 00 10 # invokenative 16    # string_fromchar(c)
+36 02    # vstore 2           # _result = string_fromchar(c);
+15 02    # vload 2            # _result
+14 04 65 # aldc 1125          # s[1125] = "string_fromchar__1 (/afs/andrew/course/15/122/lib/string.h0: 44.14-44.36)"
+B8 00 09 # invokestatic 9     # string_length__1(_result, "string_fromchar__1 (/afs/andrew/course/15/122/lib/string.h0: 44.14-44.36)")
+10 01    # bipush 1           # 1
+9F 00 06 # if_cmpeq +6        # if (string_length__1(_result, "string_fromchar__1 (/afs/andrew/course/15/122/lib/string.h0: 44.14-44.36)") == 1) goto <28:cond_true>
+A7 00 08 # goto +8            # goto <29:cond_false>
+# <28:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <30:cond_end>
+# <29:cond_false>
+10 00    # bipush 0           # false
+# <30:cond_end>
+14 04 AF # aldc 1199          # s[1199] = "/afs/andrew/course/15/122/lib/string.h0: 44.6-44.42: @ensures annotation failed"
+CF       # assert             # assert (string_length__1(_result, "string_fromchar__1 (/afs/andrew/course/15/122/lib/string.h0: 44.14-44.36)") == 1) [failure message on stack]
+15 02    # vload 2            # _result
+10 00    # bipush 0           # 0
+14 04 FF # aldc 1279          # s[1279] = "string_fromchar__1 (/afs/andrew/course/15/122/lib/string.h0: 45.14-45.39)"
+B8 00 0A # invokestatic 10    # string_charat__1(_result, 0, "string_fromchar__1 (/afs/andrew/course/15/122/lib/string.h0: 45.14-45.39)")
+15 00    # vload 0            # c
+9F 00 06 # if_cmpeq +6        # if (string_charat__1(_result, 0, "string_fromchar__1 (/afs/andrew/course/15/122/lib/string.h0: 45.14-45.39)") == c) goto <31:cond_true>
+A7 00 08 # goto +8            # goto <32:cond_false>
+# <31:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <33:cond_end>
+# <32:cond_false>
+10 00    # bipush 0           # false
+# <33:cond_end>
+14 05 49 # aldc 1353          # s[1353] = "/afs/andrew/course/15/122/lib/string.h0: 45.6-45.45: @ensures annotation failed"
+CF       # assert             # assert (string_charat__1(_result, 0, "string_fromchar__1 (/afs/andrew/course/15/122/lib/string.h0: 45.14-45.39)") == c) [failure message on stack]
+15 02    # vload 2            # _result
+B0       # return             # 
+
+
+#<string_tolower__1>
+02                # number of arguments = 2
+03                # number of local variables = 3
+00 0A             # code length = 10 bytes
+15 00    # vload 0            # s
+B7 00 11 # invokenative 17    # string_tolower(s)
+36 02    # vstore 2           # _result = string_tolower(s);
+15 02    # vload 2            # _result
+B0       # return             # 
+
+
+#<string_terminated__1>
+03                # number of arguments = 3
+04                # number of local variables = 4
+00 3C             # code length = 60 bytes
+10 00    # bipush 0           # 0
+15 01    # vload 1            # n
+A4 00 06 # if_icmple +6       # if (0 <= n) goto <34:cond_true>
+A7 00 18 # goto +24           # goto <35:cond_false>
+# <34:cond_true>
+15 01    # vload 1            # n
+15 00    # vload 0            # A
+BE       # arraylength        # \length(A)
+A4 00 06 # if_icmple +6       # if (n <= \length(A)) goto <37:cond_true>
+A7 00 08 # goto +8            # goto <38:cond_false>
+# <37:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <39:cond_end>
+# <38:cond_false>
+10 00    # bipush 0           # false
+# <39:cond_end>
+A7 00 05 # goto +5            # goto <36:cond_end>
+# <35:cond_false>
+10 00    # bipush 0           # false
+# <36:cond_end>
+14 05 99 # aldc 1433          # s[1433] = "/afs/andrew/course/15/122/lib/string.h0: 52.6-52.41: @requires annotation failed\n"
+15 02    # vload 2            # _caller
+14 05 EB # aldc 1515          # s[1515] = ": caller location"
+B7 00 07 # invokenative 7     # string_join(_caller, ": caller location")
+B7 00 07 # invokenative 7     # string_join("/afs/andrew/course/15/122/lib/string.h0: 52.6-52.41: @requires annotation failed\n", string_join(_caller, ": caller location"))
+CF       # assert             # assert ((0 <= n) && (n <= \length(A))) [failure message on stack]
+15 00    # vload 0            # A
+15 01    # vload 1            # n
+B7 00 12 # invokenative 18    # string_terminated(A, n)
+36 03    # vstore 3           # _result = string_terminated(A, n);
+15 03    # vload 3            # _result
+B0       # return             # 
+
+
+#<string_to_chararray__1>
+02                # number of arguments = 2
+03                # number of local variables = 3
+00 40             # code length = 64 bytes
+15 00    # vload 0            # s
+B7 00 13 # invokenative 19    # string_to_chararray(s)
+36 02    # vstore 2           # _result = string_to_chararray(s);
+15 02    # vload 2            # _result
+BE       # arraylength        # \length(_result)
+15 00    # vload 0            # s
+14 05 FD # aldc 1533          # s[1533] = "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 56.34-56.50)"
+B8 00 09 # invokestatic 9     # string_length__1(s, "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 56.34-56.50)")
+10 01    # bipush 1           # 1
+60       # iadd               # (string_length__1(s, "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 56.34-56.50)") + 1)
+A2 00 06 # if_icmpge +6       # if (\length(_result) >= (string_length__1(s, "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 56.34-56.50)") + 1)) goto <40:cond_true>
+A7 00 08 # goto +8            # goto <41:cond_false>
+# <40:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <42:cond_end>
+# <41:cond_false>
+10 00    # bipush 0           # false
+# <42:cond_end>
+14 06 4B # aldc 1611          # s[1611] = "/afs/andrew/course/15/122/lib/string.h0: 56.6-56.55: @ensures annotation failed"
+CF       # assert             # assert (\length(_result) >= (string_length__1(s, "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 56.34-56.50)") + 1)) [failure message on stack]
+15 02    # vload 2            # _result
+15 00    # vload 0            # s
+14 06 9B # aldc 1691          # s[1691] = "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 57.41-57.57)"
+B8 00 09 # invokestatic 9     # string_length__1(s, "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 57.41-57.57)")
+10 01    # bipush 1           # 1
+60       # iadd               # (string_length__1(s, "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 57.41-57.57)") + 1)
+14 06 E9 # aldc 1769          # s[1769] = "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 57.14-57.62)"
+B8 00 13 # invokestatic 19    # string_terminated__1(_result, (string_length__1(s, "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 57.41-57.57)") + 1), "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 57.14-57.62)")
+14 07 37 # aldc 1847          # s[1847] = "/afs/andrew/course/15/122/lib/string.h0: 57.6-57.63: @ensures annotation failed"
+CF       # assert             # assert string_terminated__1(_result, (string_length__1(s, "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 57.41-57.57)") + 1), "string_to_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 57.14-57.62)") [failure message on stack]
+15 02    # vload 2            # _result
+B0       # return             # 
+
+
+#<string_from_chararray__1>
+02                # number of arguments = 2
+03                # number of local variables = 3
+00 43             # code length = 67 bytes
+15 00    # vload 0            # A
+15 00    # vload 0            # A
+BE       # arraylength        # \length(A)
+14 07 87 # aldc 1927          # s[1927] = "string_from_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 62.15-62.47)"
+B8 00 13 # invokestatic 19    # string_terminated__1(A, \length(A), "string_from_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 62.15-62.47)")
+14 07 D7 # aldc 2007          # s[2007] = "/afs/andrew/course/15/122/lib/string.h0: 62.6-62.48: @requires annotation failed\n"
+15 01    # vload 1            # _caller
+14 08 29 # aldc 2089          # s[2089] = ": caller location"
+B7 00 07 # invokenative 7     # string_join(_caller, ": caller location")
+B7 00 07 # invokenative 7     # string_join("/afs/andrew/course/15/122/lib/string.h0: 62.6-62.48: @requires annotation failed\n", string_join(_caller, ": caller location"))
+CF       # assert             # assert string_terminated__1(A, \length(A), "string_from_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 62.15-62.47)") [failure message on stack]
+15 00    # vload 0            # A
+B7 00 14 # invokenative 20    # string_from_chararray(A)
+36 02    # vstore 2           # _result = string_from_chararray(A);
+15 02    # vload 2            # _result
+14 08 3B # aldc 2107          # s[2107] = "string_from_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 63.14-63.36)"
+B8 00 09 # invokestatic 9     # string_length__1(_result, "string_from_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 63.14-63.36)")
+10 01    # bipush 1           # 1
+60       # iadd               # (string_length__1(_result, "string_from_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 63.14-63.36)") + 1)
+15 00    # vload 0            # A
+BE       # arraylength        # \length(A)
+A4 00 06 # if_icmple +6       # if ((string_length__1(_result, "string_from_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 63.14-63.36)") + 1) <= \length(A)) goto <43:cond_true>
+A7 00 08 # goto +8            # goto <44:cond_false>
+# <43:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <45:cond_end>
+# <44:cond_false>
+10 00    # bipush 0           # false
+# <45:cond_end>
+14 08 8B # aldc 2187          # s[2187] = "/afs/andrew/course/15/122/lib/string.h0: 63.6-63.55: @ensures annotation failed"
+CF       # assert             # assert ((string_length__1(_result, "string_from_chararray__1 (/afs/andrew/course/15/122/lib/string.h0: 63.14-63.36)") + 1) <= \length(A)) [failure message on stack]
+15 02    # vload 2            # _result
+B0       # return             # 
+
+
+#<char_ord__1>
+02                # number of arguments = 2
+03                # number of local variables = 3
+00 2E             # code length = 46 bytes
+15 00    # vload 0            # c
+B7 00 15 # invokenative 21    # char_ord(c)
+36 02    # vstore 2           # _result = char_ord(c);
+10 00    # bipush 0           # 0
+15 02    # vload 2            # _result
+A4 00 06 # if_icmple +6       # if (0 <= _result) goto <46:cond_true>
+A7 00 17 # goto +23           # goto <47:cond_false>
+# <46:cond_true>
+15 02    # vload 2            # _result
+10 7F    # bipush 127         # 127
+A4 00 06 # if_icmple +6       # if (_result <= 127) goto <49:cond_true>
+A7 00 08 # goto +8            # goto <50:cond_false>
+# <49:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <51:cond_end>
+# <50:cond_false>
+10 00    # bipush 0           # false
+# <51:cond_end>
+A7 00 05 # goto +5            # goto <48:cond_end>
+# <47:cond_false>
+10 00    # bipush 0           # false
+# <48:cond_end>
+14 08 DB # aldc 2267          # s[2267] = "/afs/andrew/course/15/122/lib/string.h0: 67.6-67.45: @ensures annotation failed"
+CF       # assert             # assert ((0 <= _result) && (_result <= 127)) [failure message on stack]
+15 02    # vload 2            # _result
+B0       # return             # 
+
+
+#<char_chr__1>
+02                # number of arguments = 2
+03                # number of local variables = 3
+00 39             # code length = 57 bytes
+10 00    # bipush 0           # 0
+15 00    # vload 0            # n
+A4 00 06 # if_icmple +6       # if (0 <= n) goto <52:cond_true>
+A7 00 17 # goto +23           # goto <53:cond_false>
+# <52:cond_true>
+15 00    # vload 0            # n
+10 7F    # bipush 127         # 127
+A4 00 06 # if_icmple +6       # if (n <= 127) goto <55:cond_true>
+A7 00 08 # goto +8            # goto <56:cond_false>
+# <55:cond_true>
+10 01    # bipush 1           # true
+A7 00 05 # goto +5            # goto <57:cond_end>
+# <56:cond_false>
+10 00    # bipush 0           # false
+# <57:cond_end>
+A7 00 05 # goto +5            # goto <54:cond_end>
+# <53:cond_false>
+10 00    # bipush 0           # false
+# <54:cond_end>
+14 09 2B # aldc 2347          # s[2347] = "/afs/andrew/course/15/122/lib/string.h0: 69.6-69.34: @requires annotation failed\n"
+15 01    # vload 1            # _caller
+14 09 7D # aldc 2429          # s[2429] = ": caller location"
+B7 00 07 # invokenative 7     # string_join(_caller, ": caller location")
+B7 00 07 # invokenative 7     # string_join("/afs/andrew/course/15/122/lib/string.h0: 69.6-69.34: @requires annotation failed\n", string_join(_caller, ": caller location"))
+CF       # assert             # assert ((0 <= n) && (n <= 127)) [failure message on stack]
+15 00    # vload 0            # n
+B7 00 16 # invokenative 22    # char_chr(n)
+36 02    # vstore 2           # _result = char_chr(n);
+15 02    # vload 2            # _result
+B0       # return             # 
+
+00 17             # native count
+# native pool
+00 01 00 06       # print
+00 01 00 0A       # println
+00 01 00 09       # printint
+00 01 00 07       # printbool
+00 01 00 08       # printchar
+00 00 00 05       # flush
+00 00 00 04       # eof
+00 02 00 64       # string_join
+00 00 00 0B       # readline
+00 01 00 65       # string_length
+00 02 00 5D       # string_charat
+00 03 00 66       # string_sub
+00 02 00 5F       # string_equal
+00 02 00 5E       # string_compare
+00 01 00 63       # string_fromint
+00 01 00 61       # string_frombool
+00 01 00 62       # string_fromchar
+00 01 00 69       # string_tolower
+00 02 00 67       # string_terminated
+00 01 00 68       # string_to_chararray
+00 01 00 60       # string_from_chararray
+00 01 00 5C       # char_ord
+00 01 00 5B       # char_chr
+

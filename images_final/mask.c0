@@ -1,0 +1,116 @@
+#use <conio>
+
+int calculate_mask(pixel_t[] pixels, int width, int height,
+  int[] mask, int maskwidth, int i)
+/*@requires is_valid_imagesize(width, height);@*/
+/*@requires \length(pixels) == width * height;@*/
+/*@requires is_valid_imagesize(maskwidth, maskwidth);@*/
+/*@requires  0 < maskwidth && \length(mask) == maskwidth * maskwidth;@*/
+/*@requires 0 <= i && i < width * height;@*/
+{
+    int maskwidth_half = maskwidth / 2;
+
+    // the row and col of the pixel that the mask is centered at
+    int center_row = get_row(i, width, height);
+    int center_col = get_column(i, width, height); 
+
+    // rows and cols of the leftmost and rightmost pixels
+    // that are covered by the mask and included in calculation
+    int left_row = max(center_row - maskwidth_half, 0);
+    int right_row = min(center_row + maskwidth_half, height - 1);
+    assert(0 <= left_row && left_row <= right_row && right_row < height);
+    int up_col = max(center_col - maskwidth_half, 0);
+    int down_col = min(center_col + maskwidth_half, width - 1);
+    assert(0 <= up_col && up_col <= down_col && down_col < width);
+
+    // default values of variables that will be modified in the loop
+    int this_index = -1;
+    int red = -1;
+    int green = -1;
+    int blue = -1;
+    int average = -1;
+    int mask_row = -1;
+    int mask_col = -1;
+    int mask_index = -1;
+    int weight = -1;
+    int result = 0;
+
+    // loop through all pixels that are covered by mask, then do calculations
+    for (int row = left_row; row <= right_row; row++)
+        /*@loop_invariant 0 <= left_row 
+            && left_row <= row 
+            && row <= right_row + 1;@*/{
+        for (int col = up_col; col <= down_col; col++)
+            /*@loop_invariant 0 <= up_col
+                && up_col <= col
+                && col <= down_col + 1;@*/{
+
+            this_index = get_index(row, col, width, height);
+
+            // calculate the average of the color channels
+            red = get_red(pixels[this_index]);
+            green = get_green(pixels[this_index]);
+            blue = get_blue(pixels[this_index]);
+            average = (red + green + blue) / 3;
+
+            // calculate and store the weighted sum
+            mask_row = maskwidth_half - (center_row - row);
+            mask_col = maskwidth_half - (center_col - col);
+            assert(0 <= mask_row && mask_row < maskwidth);
+            assert(0 <= mask_col && mask_col < maskwidth);
+            mask_index = get_index(mask_row, mask_col, maskwidth, maskwidth);
+            weight = mask[mask_index];
+            result += average * weight;
+        }
+    }
+    return result;    
+}
+
+// int[] apply_mask(pixel_t[] pixels, int width, int height,
+//   int[] mask, int maskwidth)
+// /*@requires is_valid_imagesize(width, height);@*/
+// /*@requires \length(pixels) == width * height;@*/
+// /*@requires 0 < maskwidth && \length(mask) == maskwidth * maskwidth;@*/
+// /*@ensures \length(\result) == width * height;@*/
+// // Additionally, since this function takes in an array of pixels but return 
+// // an array of integers, the returned result must be different from the 
+// // original pixel.
+
+// {
+//     int[] masked_pixels = alloc_array(int, width * height);
+//     int result = -1;
+//     for (int i = 0; i < width * height; i++)// center the mask on each pixel
+//     /*@loop_invariant 0 <= i && i <= width * height;@*/
+//     {
+//         printf("i=%d, limit=%d, calling calculate\n",i,width * height);
+//         result = calculate_mask(pixels, width, height, mask, maskwidth, i);
+//         masked_pixels[i] =  result;
+//     }
+//     return masked_pixels;
+// }
+
+int[] apply_mask(pixel_t[] pixels, int width, int height,
+  int[] mask, int maskwidth)
+/*@requires is_valid_imagesize(width, height);@*/
+/*@requires \length(pixels) == width * height;@*/
+/*@requires 0 < maskwidth && \length(mask) == maskwidth * maskwidth;@*/
+/*@ensures \length(\result) == width * height;@*/
+// Additionally, since this function takes in an array of pixels but return 
+// an array of integers, the returned result must be different from the 
+// original pixel.
+
+{
+    int[] masked_pixels = alloc_array(int, width * height);
+    int result = -1;
+    int limit = width * height;
+    for (int i = 0; i < limit;i++)// center the mask on each pixel
+    /*@loop_invariant 0 <= i && i <= width * height;@*/
+    {
+        printf("i=%d, limit=%d, calling calculate\n",i,limit);
+        result = calculate_mask(pixels, width, height, mask, maskwidth, i);
+        masked_pixels[i] =  result;
+    }
+    return masked_pixels;
+}
+
+

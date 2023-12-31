@@ -1,0 +1,190 @@
+/**************************************************************************/
+/*              COPYRIGHT Carnegie Mellon University 2023                 */
+/* Do not post this file or any derivative on a public site or repository */
+/**************************************************************************/
+/*
+ * Augment doubly linked lists with row and column information.
+ *
+ * 15-122 Principles of Imperative Computation */
+
+/*** Interface ***/
+
+typedef struct editor_header editor;
+struct editor_header {
+  tbuf* buffer;
+  int row;
+  int col;
+};
+
+bool is_editor(editor* E);
+
+editor* editor_new();                  /* Creates a new, empty text buffer */
+void editor_forward(editor* E);        /* Moves the cursor forward (right) */
+void editor_backward(editor* E);       /* Moves the cursor backward (left) */
+void editor_insert(editor* E, char c); /* Insert a character before cursor */
+void editor_delete(editor* E);         /* Remove character before cursor   */
+void editor_up(editor* E);             /* Moves the cursor up              */
+void editor_down(editor* E);           /* Moves the cursor down            */
+
+/*** Implementation ***/
+bool is_editor(editor* E)
+{
+  return E != NULL
+        && is_tbuf(E->buffer)
+        && E->row == tbuf_row(E->buffer)
+        && E->col == tbuf_col(E->buffer);
+}
+
+editor* editor_new()
+//@ensures is_editor(\result);
+{
+  editor* E = alloc(editor);
+  tbuf* buffer = tbuf_new();
+  E->buffer = buffer;
+  E->row = 1;
+  E->col = 0;
+  return E;
+}
+
+void editor_forward(editor* E)
+//@requires is_editor(E);
+//@ensures is_editor(E);
+{
+  if (!tbuf_at_right(E->buffer)){
+    dll* current_node = E->buffer->cursor;
+    if (current_node->data == '\n'){
+      E->row ++;
+      E->col = 0;
+    }
+    else{
+      E->col ++;
+    }
+    E->buffer->cursor = current_node->next;
+  }
+}
+
+void editor_backward(editor* E)
+//@requires is_editor(E);
+//@ensures is_editor(E);
+{
+  if (!tbuf_at_left(E->buffer)){
+    E->buffer->cursor = E->buffer->cursor->prev;
+    dll* current_node = E->buffer->cursor;
+    if (current_node->data == '\n'){
+      E->row --;
+      E->col = tbuf_col(E->buffer);
+    }
+    else E->col --;
+  }
+}
+
+void editor_insert(editor* E, char c)
+//@requires is_editor(E);
+//@ensures is_editor(E);
+{
+  tbuf_insert(E->buffer, c);
+  if (c == '\n'){
+    E->row ++;
+    E->col = 0;
+  }
+  else{
+    E->col ++;
+  }
+}
+
+void editor_delete(editor* E)
+//@requires is_editor(E);
+//@ensures is_editor(E);
+{
+  if (!tbuf_at_left(E->buffer)){
+    dll* deleted_node = E->buffer->cursor->prev;
+    E->buffer->cursor->prev = deleted_node->prev;
+    deleted_node->prev->next = E->buffer->cursor;
+    if (deleted_node->data == '\n'){
+      E->row --;
+      E->col = tbuf_col(E->buffer);
+    }
+    else E->col --;
+  }
+}
+
+
+
+// Bonus: Implement these function is you do the bonus task
+void editor_up(editor* E)
+//@requires is_editor(E);
+//@ensures is_editor(E);
+{
+  if (E->row > 1){
+    int col = E->col;
+    int row = E->row;
+    dll* cur_mode = E->buffer->cursor;
+    if (E->buffer->cursor == cur_mode) editor_backward(E);
+    while (E->buffer->cursor->data != '\n'){
+      editor_backward(E);
+    }
+    cur_mode = E->buffer->cursor;
+    assert(cur_mode->data == '\n');
+    int this_line_col = tbuf_col(E->buffer);
+    for (int step = 0; this_line_col - step > col; step++){
+      cur_mode = cur_mode->prev;
+    }
+    E->buffer->cursor = cur_mode;
+    if (this_line_col >= col) {
+      E->col = col;}
+    else {E->col = this_line_col;}
+    E->row = row - 1;
+  }
+}
+
+bool can_go_down(editor* E)
+//@requires is_editor(E);
+{
+  if (E->buffer->start->next == E->buffer->end) return false;
+  dll* cur_mode = E->buffer->cursor;
+  int cur_row = tbuf_row(E->buffer);
+  dll* last_node = E->buffer->end->prev;
+  E->buffer->cursor = last_node;
+  int max_row = tbuf_row(E->buffer);
+  if (last_node->data == '\n') max_row ++;
+  E->buffer->cursor = cur_mode; // return to the orignal position
+  return cur_row < max_row;
+}
+
+void editor_down(editor* E)
+//@requires is_editor(E);
+//@ensures is_editor(E);
+{
+  if (can_go_down(E)){
+    int col = E->col;
+    int row = E->row;
+
+    // we need to get to the last node of the new line, 
+    // which means we must encounter two '\n' or one \n and the end node
+    int line_count = 0; 
+    dll* cur_mode = E->buffer->cursor;
+    if (cur_mode->data == '\n') line_count ++;
+    while (line_count < 2){
+      editor_forward(E);
+      if (E->buffer->cursor->data == '\n' 
+          || E->buffer->cursor == E->buffer->end) {
+            line_count ++;
+      }
+    }
+
+    cur_mode = E->buffer->cursor;
+
+    // how many nodes are there in this line
+    int this_line_col = tbuf_col(E->buffer); 
+    for (int step = 0; this_line_col - step > col; step++){
+      cur_mode = cur_mode->prev;
+    }
+    E->buffer->cursor = cur_mode;
+    if (this_line_col >= col) {
+      E->col = col;}
+    else {E->col = this_line_col;}
+    E->row = row + 1;
+  }
+}
+
+

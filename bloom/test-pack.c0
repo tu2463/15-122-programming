@@ -1,0 +1,23 @@
+/**************************************************************************/
+/*              COPYRIGHT Carnegie Mellon University 2023                 */
+/* Do not post this file or any derivative on a public site or repository */
+/**************************************************************************/
+#use <conio>
+#use <parse>
+
+int main() {
+  // Create a few arrays of integers
+  int[] A = parse_ints("0 0", 10);
+  // assert(!get_bit(A, 1));
+  // Using them, test the functions test get_bit and set_bit
+  for (int integer = 27;integer<37;integer++) assert(!get_bit(A, integer));
+
+  A[0]=0xFFFFFFFF; // int=28: 00000000 00000000 00000000 0000*000
+  for (int integer=28;integer<32;integer++) assert(get_bit(A, integer));
+    // printf("%s%d%s","main-- i>",i," bit>");
+    // printbool(get_bit(A,i));
+    // print("\n");
+  for (int integer=32;integer<36;integer++) assert(!get_bit(A, integer));
+  printf("All tests passed!\n");
+  return 0;
+}

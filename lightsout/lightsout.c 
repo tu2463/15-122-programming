@@ -1,0 +1,8 @@
+int main(int argc, char **argv) {
+if (argc != 2) {
+fprintf(stderr, "Usage: lightsout <board name>\n");
+return EXIT_FAILURE; // see below for what this means
+}
+char *board_filename = argv[1];
+...
+}

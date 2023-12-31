@@ -1,0 +1,113 @@
+bool is_precstack(dict_t D, stack_t S)
+//@requires D != NULL && S != NULL;
+{
+  bool is_increasing = true;
+  stack_t temp = stack_new();
+  int cur_prec = -1;
+  int prev_prec = -1;
+  while (!stack_empty(S) && is_increasing){
+    string tok = pop(S);
+    if (cur_prec == -1) {
+      cur_prec = dict_lookup(D, tok);}
+    else {
+      prev_prec = cur_prec;
+      cur_prec = dict_lookup(D, tok);
+
+      // if an non-increasing precedence is identified
+      if (cur_prec >= prev_prec) is_increasing = false;} 
+    push(temp, tok);
+  }
+  while (!stack_empty(temp)){
+    push(S, pop(temp));
+  }
+  return is_increasing;
+}
+    
+
+queue_t parse(dict_t D, queue_t input)
+//@requires D != NULL && input != NULL;
+//@ensures \result == NULL || queue_empty(input);
+{
+  // empty queue means the first element must not be integer. Invalid queue.
+  if (queue_empty(input)) return NULL; 
+
+  queue_t result_queue = queue_new(); 
+  stack_t operator = stack_new(); // operator stack
+  bool operator_phase = false; // indicates we're in integer or operator phase
+
+  while (!queue_empty(input)){
+    string tok = deq(input);
+    
+    if (queue_empty(input)){ // if this is the last token in input queue
+      if (parse_int(tok, 10) == NULL){ // and it's an oper
+        return NULL; // then the input queue is not well-formed
+      }
+    }
+    if (!operator_phase) {// if in integer phase
+      if (parse_int(tok, 10) == NULL) {
+      // the next input must an integer (not NULL), 
+      // otherwise it's not a well-formed EXP program 
+        return NULL;} 
+      enq(result_queue, tok); // enq the integer into result_queue
+      operator_phase = true;} // enter oper phase
+
+    else { // we're  in oper phase
+      if (parse_int(tok, 10) != NULL) {
+      // the next input must an operator (return NULL), 
+      // otherwise it's not a well-formed EXP program 
+        return NULL;} 
+
+      int cur_prec = dict_lookup(D, tok); // prec of the current operator
+      if (cur_prec == -1) return NULL; // dictionary doesn't contain this oper
+      if (stack_empty(operator)){ // if the operator stack is empty
+        push(operator, tok); // push the token into the operator stack
+        operator_phase = false;} // and enter integer phase
+
+      else{ // if the operator stack is not empty
+        // temporarily pop out an operator to compare its prec with the token
+        string temp_oper = pop(operator); 
+        int temp_oper_prec = dict_lookup(D, temp_oper);
+
+        // if the top operator's prec is already smaller than the token's prec
+        if (temp_oper_prec < cur_prec){ 
+          push(operator, temp_oper);  // push this top operator back to slack
+          push(operator, tok); // enter the token into operator stack
+          operator_phase = false; // enter integer phase
+        }
+        else {
+          push(operator, temp_oper);  // push this top operator back to slack
+          while (operator_phase){
+            // temporarily pop out an operator to 
+            // compare its prec with the token
+            temp_oper = pop(operator); 
+            temp_oper_prec = dict_lookup(D, temp_oper);
+
+            // if the top operator's prec is  
+            // smaller than the token's prec this time,
+            if (temp_oper_prec < cur_prec){ 
+
+              // push this top operator back to slack
+              push(operator, temp_oper);  
+              push(operator, tok); // enter the token into operator stack
+              operator_phase = false; // enter integer phase
+            }
+            else if (stack_empty(operator)){ // if stack is already empty
+              enq(result_queue, temp_oper);
+              push(operator, tok);
+              operator_phase = false;
+            }
+            else { // the top operator's prec is greater than the token's prec
+              enq(result_queue, temp_oper); // enq the top operator to result
+            } 
+          }
+        }
+      }
+    }
+  }
+  
+  while (!stack_empty(operator)){
+    enq(result_queue, pop(operator));
+  }
+  return result_queue;
+}
+

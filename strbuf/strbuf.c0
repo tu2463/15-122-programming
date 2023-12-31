@@ -1,0 +1,139 @@
+/**************************************************************************/
+/*              COPYRIGHT Carnegie Mellon University 2023                 */
+/* Do not post this file or any derivative on a public site or repository */
+/**************************************************************************/
+/*
+ * String Buffer Library
+ *
+ * 15-122 Principles of Imperative Computation
+ * This version exposes the externals, requires
+ * discipline from client! */
+
+#use <conio>
+#use <string>
+
+/*** Interface ***/
+
+struct strbuf_header {
+  int limit;
+  int len;
+  char[] buf;
+};
+typedef struct strbuf_header strbuf;
+
+bool is_strbuf(strbuf* sb);
+
+strbuf* strbuf_new(int init_limit);
+char[] strbuf_str(strbuf* sb);
+void strbuf_add(strbuf* sb, char[] str, int len);
+void strbuf_addstr(strbuf* sb, char[] str);
+
+
+/*** Implementation ***/
+void print_strbuf(strbuf* sb)
+//@requires is_strbuf(sb);
+{
+  // return;
+  for (int i = 0; i < sb->len; i++){
+    printf("buf[%d] = %c | ",i,sb->buf[i]);
+  }
+  print("\n");
+}
+
+bool is_strbuf(strbuf* sb)
+{
+  if (sb == NULL || sb->limit < 1 || sb->len < 0 
+      || sb->len >= sb->limit) return false;
+  //@assert \length(sb->buf) == sb->limit;
+  for (int i = 0; i < sb->len; i++){
+    // @assert 0 <= i && i <= \length(sb->buf);
+    if (sb->buf[i] == '\0') return false;
+  }
+  // strlen(sb->buf, 0) != sb->len
+  return sb->buf[sb->len] == '\0';
+}
+
+strbuf* strbuf_new(int init_limit)
+//@requires init_limit > 0;
+//@ensures is_strbuf(\result);
+{
+  strbuf* new = alloc(strbuf);
+  new->limit = init_limit;
+  new->buf = alloc_array(char, new->limit);
+  new->len = 0;
+  new->buf[new->len] = '\0';
+  return new;
+}
+
+char[] strbuf_str(strbuf* sb)
+//@requires is_strbuf(sb);
+//@ensures \length(\result) == sb->len + 1;
+//@ensures strlen(\result, 0) == sb->len;
+//@ensures string_terminated(\result, \length(\result));
+//@ensures is_cstring(\result, 0, \length(\result));
+//@ensures \result[strlen(\result, 0)] == '\0'; 
+{
+  char[] result = alloc_array(char, sb->len + 1);
+  for (int i = 0; i < sb->len + 1; i++){
+    result[i] = sb->buf[i];
+  }
+  return result;
+
+  // result = strncpy(result, 0, sb->buf, 0, sb->len);
+  // for (int i = 0; i < sb->len; i ++){
+  //   printf("copy[%d] = %c | ",i,result[i]);
+  // }
+  // print("\n");
+
+  // return strncpy(result, 0, sb->buf, 0, sb->len);
+}
+
+void strbuf_add_resize(strbuf* sb, int len)
+//@requires is_strbuf(sb);
+//@ensures is_strbuf(sb);
+{
+  while (sb->len + len >= sb->limit){
+    sb->limit = sb->limit * 2;
+  }
+  char[] new_buf = alloc_array(char, sb->limit);
+  for (int i = 0; i < sb->len; i++){
+    assert(sb->buf[i] != '\0');
+    new_buf[i] = sb->buf[i];
+  }
+  // char[] new_buf = strbuf_str(sb);
+  sb->buf = new_buf;
+}
+
+void strbuf_add(strbuf* sb, char[] str, int len)
+//@requires is_strbuf(sb);
+//@requires is_cstring(str, 0, \length(str));
+//@requires len == strlen(str, 0);
+//@requires len < \length(str);
+//@ensures is_strbuf(sb);
+{
+  if (sb->len + len >= sb->limit){
+    // printf("--add resize\n");
+    strbuf_add_resize(sb, len);
+  }
+  //@assert(sb->len + len < sb->limit);
+  //@assert len < \length(str);
+  // printf("%s%d%s%d\n","--add now sb->len>",sb->len," sb->limit>",sb->limit);
+  
+  // sb->buf[(sb->len) + len] = sb->buf[sb->len];
+  sb->buf[(sb->len) + len] = '\0';
+  for (int i = 0; i < len; i ++){
+    // printf("%s%c\n","--add str[i]>",str[i]);
+    assert(str[i] != '\0');
+    assert(sb->len <= i + sb->len && i + sb->len < sb->limit);
+    sb->buf[i + sb->len] = str[i];
+  }
+  sb->len += len;
+  //@assert sb->len == strlen(sb->buf, 0);
+  // print_strbuf(sb);
+}
+void strbuf_addstr(strbuf* sb, char[] str)
+//@requires is_strbuf(sb);
+//@ensures is_strbuf(sb);
+{
+  strbuf_add(sb, str, strlen(str, 0));
+}

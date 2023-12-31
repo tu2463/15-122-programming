@@ -1,0 +1,84 @@
+/**************************************************************************/
+/*              COPYRIGHT Carnegie Mellon University 2023                 */
+/* Do not post this file or any derivative on a public site or repository */
+/**************************************************************************/
+#use <util>
+#use <conio>
+
+// You are welcome to define helper functions for your tests
+
+int main() {
+  // Test some regular cases
+  //  make_pixel(0xFF, 0xEE, 0x&F, 0x2D)
+  int alpha = 0xAA;
+  int red = 0xCC;
+  int green = 0xDD;
+  int blue = 0xBB;
+  pixel p = 0xAACCDDBB;
+  assert(make_pixel(alpha, red, green, blue)==p);
+  assert(get_alpha(p)==alpha);
+  assert(get_red(p)==red);
+  assert(get_green(p)==green);
+  assert(get_blue(p)==blue);
+
+  alpha = 0x05;
+  red = 0x6D;
+  green = 0x28;
+  blue = 0x99;
+  p = 0x056D2899;
+  assert(make_pixel(alpha, red, green, blue)==p);
+  assert(get_alpha(p)==alpha);
+  assert(get_red(p)==red);
+  assert(get_green(p)==green);
+  assert(get_blue(p)==blue);
+
+  // Run some edge cases
+
+  alpha = 0x00;
+  red = 0xA0;
+  green = 0x0B;
+  blue = 0x00;
+  p = 0x00A00B00;
+  assert(make_pixel(alpha, red, green, blue)==p);
+  assert(get_alpha(p)==alpha);
+  assert(get_red(p)==red);
+  assert(get_green(p)==green);
+  assert(get_blue(p)==blue);
+
+  alpha = 0xFF;
+  red = 0xF8;
+  green = 0xEF;
+  blue = 0xFF;
+  p = 0xFFF8EFFF;
+  assert(make_pixel(alpha, red, green, blue)==p);
+  assert(get_alpha(p)==alpha);
+  assert(get_red(p)==red);
+  assert(get_green(p)==green);
+  assert(get_blue(p)==blue);
+
+  alpha = 0xF1;
+  red = 0x00;
+  green = 0x1F;
+  blue = 0x00;
+  p = 0xF1001F00;
+  assert(make_pixel(alpha, red, green, blue)==p);
+  assert(get_alpha(p)==alpha);
+  assert(get_red(p)==red);
+  assert(get_green(p)==green);
+  assert(get_blue(p)==blue);
+
+  alpha = 0x00;
+  red = 0xFC;
+  green = 0x00;
+  blue = 0xDF;
+  p = 0x00FC00DF;
+  assert(make_pixel(alpha, red, green, blue)==p);
+  assert(get_alpha(p)==alpha);
+  assert(get_red(p)==red);
+  assert(get_green(p)==green);
+  assert(get_blue(p)==blue);
+
+
+  printf("All tests passed!\n");
+  return 0;
+}

@@ -1,0 +1,138 @@
+/**************************************************************************/
+/*              COPYRIGHT Carnegie Mellon University 2023                 */
+/* Do not post this file or any derivative on a public site or repository */
+/**************************************************************************/
+/*
+ * Interface for dictionaries
+ *
+ * 15-122 Principles of Imperative Computation
+ */
+
+#use <string>
+#use <conio>
+#use <parse>
+
+/************************************************************************/
+/************************* BEGIN IMPLEMENTATION *************************/
+
+typedef struct dict_header dict;
+
+/************ insert your implementation code between HERE ************/
+
+struct dict_header {
+  string[] array;
+  int len;
+};
+
+//Citation: this function is adapted from arrayutil.c0 on 15-122 website 
+bool is_in_string(string x, string[] A, int lo, int hi)
+/*@requires 0 <= lo
+         && lo <= hi
+         && hi <= \length(A); @*/
+{
+  if (lo == hi) return false;
+  return string_equal(A[lo], x) || is_in_string(x,A,lo+1,hi);
+}
+
+//Citation: this function is adapted from lecture 4 code on 15-122 website
+int linsearch_string(string x, string[] A, int n)
+//@requires n == \length(A);
+/*@ensures (-1 == \result && !is_in_string(x, A, 0, n))
+        || ((0 <= \result && \result < n));
+  @*/
+{
+  for (int i = 0; i < n; i++)
+  //@loop_invariant 0 <= i && i <= n;
+  //@loop_invariant !is_in_string(x,A,0,i);
+  {
+    string[] elements = parse_tokens(A[i]);
+    int num_of_elements = num_tokens(A[i]);
+    for (int j = 0; j < num_of_elements; j ++){
+      if (string_equal(elements[j], x)) {
+        return i;}
+    }
+  }
+  //@assert !is_in_string(x,A,0,n);
+  return -1;
+}
+
+bool is_dict(dict* D){
+  if (D == NULL) return false;
+  //@assert (\length(D->array) == D->len);
+  return true;
+}
+
+bool tokens_not_repeated(string[] A, int n)
+//@requires \length(A)==n;
+{
+  stack_t appeared = stack_new();
+  stack_t temp = stack_new();
+
+  for (int i = 0; i < n; i++)
+  //@loop_invariant 0 <= i && i <= n;
+  {
+    string[] elements = parse_tokens(A[i]);
+    int num_of_elements = num_tokens(A[i]);
+    for (int j = 0; j < num_of_elements; j++){
+      string element = elements[j];
+      while (!stack_empty(appeared)){
+        string stack_element = pop(appeared);
+        if (string_equal(element, stack_element)) {
+          return false;}
+        push(temp, stack_element);
+      }
+      push(temp, element);
+      while(!stack_empty(temp)){
+        string temp_element = pop(temp);
+        push(appeared, temp_element);
+      }
+    }
+  }
+  return true;
+}
+dict* dict_new(string[] A, int n)
+//@requires \length(A) == n;
+//@requires is_infix_array(A, n);
+//@ensures \result == NULL || is_dict(\result);
+{
+  // Implement me!
+  if (!tokens_not_repeated(A, n)) return NULL;
+  dict* D = alloc(dict);
+  D->array = A;
+  D->len = n;
+  return D;
+}
+
+int dict_lookup(dict* D, string oper)
+// What are my contracts?
+//@requires is_dict(D);
+//@ensures \result >= -1;
+{
+  // Implement me!
+  return linsearch_string(oper, D->array, D->len);
+}
+
+// Advice: implementing a dict_print function may help you debug
+
+/****************************** and HERE ******************************/
+typedef dict* dict_t;
+
+/************************** END IMPLEMENTATION **************************/
+/************************************************************************/
+
+/* Interface of dictionaries (leave this alone) */
+
+/************************************************************************/
+/******************************* Interface ******************************/
+
+// typedef ______* dict_t;
+
+// Returns NULL if the input array has the same operator twice
+dict_t dict_new(string[] A, int n)
+  /*@requires \length(A) == n; @*/
+  /*@requires is_infix_array(A, n); @*/ ;
+
+// Returns -1 if no definition is found
+int dict_lookup(dict_t D, string oper)
+  /*@requires D != NULL; @*/
+  /*@ensures \result >= -1; @*/ ;

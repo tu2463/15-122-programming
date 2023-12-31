@@ -1,0 +1,113 @@
+#use <conio>
+#use <string>
+
+typedef struct silly_goose goose;
+struct silly_goose{
+    int count;
+    string adjective;
+    int* magic;
+    int[] nums;
+    goose* next;
+    goose* prev;
+};
+
+int main () {
+    int *x = alloc(int);
+    *x = 5;
+    printint(*x);
+    assert(*x==5);
+    println("");
+    *x = 12;
+    printint(*x);
+    assert(*x==12);
+    println("");
+
+    int **y = alloc(int*);
+    *y = x;
+    printint(**y);
+    assert(**y==12);
+    println("");
+
+    char *c = alloc(char);
+    *c = 'a';
+    printchar(*c);
+    assert(*c=='a');
+    println("");
+
+//add LENGTH STUFF
+    char[] cstr = alloc_array(char, 6);
+    cstr[0]='h';
+    cstr[1]='e';
+    cstr[2]='l';
+    cstr[3]='l';
+    cstr[4]='o';
+    cstr[5]='\0';
+    //@assert \length(cstr)==6;
+
+    assert(cstr[0]=='h');
+    assert(cstr[1]=='e');
+    assert(cstr[2]=='l');
+    assert(cstr[3]=='l');
+    assert(cstr[4]=='o');
+    assert(cstr[5]=='\0');
+
+    println("Basic tests passed! Moving on");
+
+    goose* g = alloc(goose);
+    assert(g->count == 0);
+    assert(string_equal("", g->adjective));
+    assert(g->magic == NULL);
+    //assert(g->nums == NULL);
+    assert(g->prev == NULL);
+    assert(g->next == NULL);
+
+    g->count = 1;
+    g->adjective = "so silly LMAO";
+    int* temp = alloc(int);
+    *temp = 59009;
+    g->magic = temp;
+    int[] num = alloc_array(int, 21);
+    for(int i = 0; i<21; i++){
+        num[i] = i*i;
+    }
+    g->nums = num;
+    //@assert \length(num)==21;
+
+    assert(g->count == 1);
+    assert(string_equal("so silly LMAO", g->adjective));
+    assert(*(g->magic) == 59009);
+    for(int i = 0; i<21; i++){
+        assert(g->nums[i] == i*i);
+    }
+    assert(g->prev == NULL);
+    assert(g->next == NULL);
+
+    goose* ng = alloc(goose);
+    ng->count = 1;
+    ng->adjective = "so silly LMAO";
+    int* t = alloc(int);
+    *t = 59009;
+    ng->magic = t;
+    int[] nu = alloc_array(int, 21);
+    for(int i = 0; i<21; i++){
+        nu[i] = i*i;
+    }
+    ng->nums = nu;
+    g->next = ng;
+    //@assert \length(nu)==21;
+
+    //check that they are both equal to each other
+    assert(g->count == g->next->count);
+    assert(string_equal("so silly LMAO", ng->adjective));
+    assert(*(g->magic) == *(g->next->magic));
+    for(int i = 0; i<21; i++){
+        assert(g->nums[i] == i*i);
+        assert(g->nums[i] == ng->nums[i]);
+    }
+    assert(g->prev == NULL);
+    assert(g->next == ng);
+
+
+    println("All tests passed!");  
+    return 0;
+}

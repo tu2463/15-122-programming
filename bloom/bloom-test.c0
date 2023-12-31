@@ -1,0 +1,218 @@
+/**************************************************************************/
+/*              COPYRIGHT Carnegie Mellon University 2023                 */
+/* Do not post this file or any derivative on a public site or repository */
+/**************************************************************************/
+#use <rand>
+#use <util>
+#use <string>
+#use <conio>
+#use <parse>
+
+// You are welcome to define helper functions for your tests
+
+int main() {
+  // Create a few bloom filters to test CORRECTNESS: here, focus on raising
+  //      assertion errors on any incorrect implementation of the interface
+  bloom_t B = bloom_new(42); //m
+  bloom_add(B,"a");
+  assert(bloom_contains(B,"a"));
+  bloom_add(B,"bb");
+  assert(bloom_contains(B,"bb"));
+  bloom_add(B,"ccc");
+  assert(bloom_contains(B,"ccc"));
+  bloom_add(B,"dabd");
+  assert(bloom_contains(B,"dabd"));
+  bloom_add(B,"e ");
+  assert(bloom_contains(B,"e "));
+  bloom_add(B,"  ");
+  assert(bloom_contains(B,"ccc"));
+  assert(bloom_contains(B,"dabd"));
+  assert(bloom_contains(B,"e "));
+  assert(bloom_contains(B,"  "));
+  bloom_add(B,"AFDSH*sfssg*&^%^&*)(&^)AKU  H8y59284720LKSJD");
+  assert(bloom_contains(B, "AFDSH*sfssg*&^%^&*)(&^)AKU  H8y59284720LKSJD"));
+  bloom_add(B, "18434871");
+  assert(bloom_contains(B, "18434871"));
+  bloom_add(B, "?");
+  assert(bloom_contains(B,"?"));
+  bloom_add(B, "G");
+  assert(bloom_contains(B,"G"));
+  assert(bloom_contains(B,"  "));
+  assert(bloom_contains(B, "AFDSH*sfssg*&^%^&*)(&^)AKU  H8y59284720LKSJD"));
+  assert(bloom_contains(B, "18434871"));
+  assert(bloom_contains(B,"?"));
+  bloom_add(B, "dabd");
+  assert(bloom_contains(B,"dabd"));
+  bloom_add(B, "a");
+  assert(bloom_contains(B,"a"));
+  bloom_add(B, "aaa");
+  assert(bloom_contains(B,"aaa"));
+  assert(bloom_contains(B,"a"));
+  assert(bloom_contains(B,"bb"));
+  int score = 100;
+  if (bloom_contains(B, string_sub("aaa",1,1))) score --;
+  bloom_add(B, string_sub("aaa",1,1));
+  assert(bloom_contains(B,"  "));
+  assert(bloom_contains(B,string_sub("aaa",1,1)));
+  assert(bloom_contains(B,"  "));
+  assert(bloom_contains(B,"ccc"));
+  assert(bloom_contains(B,"dabd"));
+
+  // adding more!
+  bloom_add(B, "un");
+  bloom_add(B, "deux");
+  bloom_add(B, "trois");
+  bloom_add(B, "quatre");
+  bloom_add(B, "cinq");
+  bloom_add(B, "six");
+  bloom_add(B, "sept");
+  bloom_add(B, "huit");
+  bloom_add(B, "neuf");
+  bloom_add(B, "dix");
+  
+  assert(bloom_contains(B, "un"));
+  assert(bloom_contains(B, "deux"));
+  assert(bloom_contains(B, "trois"));
+  assert(bloom_contains(B, "quatre"));
+  assert(bloom_contains(B, "cinq"));
+  assert(bloom_contains(B, "six"));
+  assert(bloom_contains(B, "sept"));
+  assert(bloom_contains(B, "huit"));
+  assert(bloom_contains(B, "neuf"));
+  assert(bloom_contains(B, "dix"));
+
+  assert(bloom_contains(B,"aaa"));
+  assert(bloom_contains(B,"a"));
+  assert(bloom_contains(B,"bb"));
+  assert(bloom_contains(B,"ccc"));
+  assert(bloom_contains(B,"dabd"));
+
+  bloom_add(B, "eleven");
+  bloom_add(B, "twelve");
+  bloom_add(B, "thirteen");
+  bloom_add(B, "fourteen");
+  bloom_add(B, "fifteen");
+  bloom_add(B, "sixteen");
+  bloom_add(B, "eighteen");
+  bloom_add(B, "nineteen");
+  bloom_add(B, "twenty");
+
+  assert(bloom_contains(B,"G"));
+  assert(bloom_contains(B,"  "));
+  assert(bloom_contains(B, "AFDSH*sfssg*&^%^&*)(&^)AKU  H8y59284720LKSJD"));
+  assert(bloom_contains(B, "18434871"));
+  
+  bloom_add(B, "ershiyi");
+  bloom_add(B, "ershier");
+  bloom_add(B, "ershisan");
+  bloom_add(B, "ershisi");
+  bloom_add(B, "ershiwu");
+
+  bloom_add(B, "ershiliu");
+  bloom_add(B, "ershiqi");
+  bloom_add(B, "ershiba");
+  bloom_add(B, "ershijiu");
+  bloom_add(B, "sanshi");
+
+  assert(bloom_contains(B,"e "));
+  assert(bloom_contains(B,"  "));
+  assert(bloom_contains(B, "AFDSH*sfssg*&^%^&*)(&^)AKU  H8y59284720LKSJD"));
+  assert(bloom_contains(B, "18434871"));
+  assert(bloom_contains(B,"?"));
+
+  assert(bloom_contains(B,"G"));
+
+  //###
+  bloom_t B2 = bloom_new(int_max()/16);
+  bloom_t B3 = bloom_new(1);
+  //test = 10*5=50
+  for (int num = 33; num < 83; num = num + 5)
+  {
+    string str1 = string_fromchar(char_chr(num));
+    string str2 = string_fromchar(char_chr(num+2));
+    string str = string_join(str1, str2);
+    bloom_add(B2, str);
+    assert(bloom_contains(B2,str));
+    bloom_add(B3, str);
+    assert(bloom_contains(B3,str));
+    if (bloom_contains(B2, string_join(str2, str1))) score --;
+    if (bloom_contains(B2, str1)) score --;
+    if (bloom_contains(B2, string_join(str, " "))) score --;
+    if (bloom_contains(B3, string_join(str2, str1))) score --;
+    if (bloom_contains(B3, str1)) score --;
+  }
+  printf("All correctness tests passed!\n\n");
+  printf("%s%d\n","--1 ",score);
+
+  int i = 0;
+  
+  // print_bloom(B);
+  //test #1, 2, 3*6=18 tests
+  for (int num = 102; num <= 104; num ++){ //f to ~
+    if (i%5==0) printf("%s%d\n","--1.5 ",score);
+    string str1 = string_fromchar(char_chr(num));
+    if (bloom_contains(B, str1)) {score --;}
+    if (bloom_contains(B2, str1)) {score --;}
+    if (bloom_contains(B3, str1)) {score --;}
+    string str2 = string_fromchar(char_chr(96 - i));
+    if (bloom_contains(B, string_join(str1, str2))) score --;
+    if (bloom_contains(B, string_join(str2, str1))) score --;
+    if (bloom_contains(B2, string_join(str1, str2))) score --;
+    i ++;
+  }
+
+  printf("%s%d\n","--2 ",score);
+  
+  //30
+  if (bloom_contains(B, " a")) score --;
+  if (bloom_contains(B, "a ")) score --;
+  if (bloom_contains(B, "aa")) score --;
+  if (bloom_contains(B, "ba")) score --;
+  if (bloom_contains(B, "      a")) score --;
+  printf("%s%d\n","--2.1 ",score);
+  if (bloom_contains(B, "b")) score --;
+  if (bloom_contains(B, " b")) score --;
+  if (bloom_contains(B, "b ")) score --;
+  if (bloom_contains(B, "bbb")) score --;
+  if (bloom_contains(B, "b b")) score --;
+  printf("%s%d\n","--2.2 ",score);
+  if (bloom_contains(B, "c c")) score --;
+  if (bloom_contains(B, "cc")) score --;
+  if (bloom_contains(B, "c")) score --;
+  if (bloom_contains(B, "ccc ")) score --;
+  if (bloom_contains(B, "cdc")) score --;
+  printf("%s%d\n","--2.3 ",score);
+  if (bloom_contains(B, "d")) score --;
+  if (bloom_contains(B, "da")) score --;
+  if (bloom_contains(B, "ab")) score --;
+  if (bloom_contains(B, "d bd")) score --;
+  if (bloom_contains(B, "dab")) score --;
+  printf("%s%d\n","--2.4 ",score);
+  if (bloom_contains(B,  " e")) score --;
+  if (bloom_contains(B, " ")) score --;
+  if (bloom_contains(B, "   ")) score --;
+  // if (bloom_contains(B, "    ")) score --;
+  if (bloom_contains(B, "~ ")) score --;
+  if (bloom_contains(B, "^%#$^187561&TG26BF SAOUFsfDTA*")) score --;
+  printf("%s%d\n","--2.5 ",score);
+  if (bloom_contains(B, "87456041")) score --;
+  // if (bloom_contains(B, "28434871")) score --;
+  // if (bloom_contains(B, "(*Bv68t&c070$%C^D&*FO)")) score --;
+  if (bloom_contains(B, "!?")) score --;
+  if (bloom_contains(B2, string_sub("aaa",1,1))) score --;
+  if (bloom_contains(B3, string_sub("aaa",1,1))) score --;
+  if (bloom_contains(B2, " ")) score --;
+  if (bloom_contains(B3, " ")) score --;
+  // printf("%s%d\n","--2.6 ",score);
+  // if (bloom_contains(B, "18434871 ")) score --;
+
+  if (score<0) score = 0;
+  printf("%s%d\n","--3 ",score);
+
+
+
+  printf("Returning the performance score.\n");
+
+  // print_bloom(B);
+  return score;  // MODIFY ME
+}

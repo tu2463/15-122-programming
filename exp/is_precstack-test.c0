@@ -1,0 +1,55 @@
+/**************************************************************************/
+/*              COPYRIGHT Carnegie Mellon University 2023                 */
+/* Do not post this file or any derivative on a public site or repository */
+/**************************************************************************/
+#use <conio>
+#use <parse>
+
+// You are welcome to define helper functions for your tests
+
+
+int main() {
+  // EXAMPLE
+
+  // Define a dictionary
+  string[] A = alloc_array(string, 3);
+  A[2] = "**"; // ’**’ has the highest precedence, 2
+  A[1] = "* /"; // ’*’ and ’/’ have the same precedence, 1
+  A[0] = "+ -"; // ’+’ and ’-’ have the same precedence, 0
+  dict_t D = dict_new(A, 3);
+
+  // Define a stack of operators
+  stack_t S = stack_new();
+  push(S, "-");
+  push(S, "*"); // * -
+
+  // Check if your is_prestack works
+  assert(is_precstack(D, S));
+
+  // ADD MORE TESTS TO CONVINCE YOU THAT YOUR is_precstack WORKS
+  push(S, "*"); // * * -
+  assert(!is_precstack(D, S));
+
+  pop(S);
+  push(S,"/"); // / * -
+  assert(!is_precstack(D, S));
+
+  pop(S);
+  push(S,"**"); // ** * -
+  assert(is_precstack(D, S));
+
+  pop(S);
+  pop(S);
+  push(S, "+");
+  push(S, "**"); // ** + -
+  assert(!is_precstack(D, S));
+
+  pop(S);
+  pop(S);
+  push(S, "**");
+  push(S, "/"); // / ** -
+  assert(!is_precstack(D, S));
+
+  printf("All tests passed!\n");
+  return 0;
+}

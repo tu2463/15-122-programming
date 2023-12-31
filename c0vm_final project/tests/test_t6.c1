@@ -1,0 +1,158 @@
+#use <conio>
+#use <string>
+#use <util>
+// ### testing native ###
+
+typedef void print_fn(string s);
+
+int main()
+{
+ print_fn* pfn = &print;
+ (*pfn)("testing print function pointer \n");
+ return 0;
+}
+
+// ### leccode 12 ###
+// int main(){
+//   void* q = NULL;
+// //   string* r = (string*)q;
+//   void* r = (void*)(int*)(void*)(string*)q;
+//   return 0;
+// }
+// ### simple test of function ptr ###
+// int f(int x){
+//   return x;
+// }
+
+// typedef int f_fn(int x);
+
+// int main(){
+//   f_fn *F = &f;
+//   return (*F)(10);
+// }
+// ##### no function ptr except the ed one #####
+// int main(){
+//   int* a=alloc(int);
+//   a=NULL;
+//   //@assert(\hastag(char*, (void *)a));
+//   return 0;
+// }
+// ### lecnote14 ex1 ###
+// typedef struct list_node genlist;
+// struct list_node {
+// void* data;
+// string tag; // records the actual type of data
+// genlist* next;
+// };
+// void print_genlist(genlist* L) {
+// for (genlist* p = L; p != NULL; p = p->next) {
+// if (string_equal(p->tag, "an_int")) {
+// //@assert \hastag(int*, p->data);
+// printf("%d\n", *(int*)(p->data));
+// } else if (string_equal(p->tag, "a_string")) {
+// //@assert \hastag(string*, p->data);
+// printf("%s\n", *(string*)(p->data));
+// } else {
+// printf("%s", p->tag);
+// error(" is an unknown tag");
+// }}}
+// int main(){
+//   genlist *L = alloc(genlist);
+//   string* data=alloc(string);
+//   *data="a string";
+//   L->data = (void*)data;
+//   L->tag = "a_string";
+
+//   genlist *L2 = alloc(genlist);
+//   int* data2=alloc(int);
+//   *data2=int_max();
+//   L2->data = (void*)data2;
+//   L2->tag = "an_int";
+
+//   L->next = L2;
+//   print_genlist(L);
+//   return 0;
+// }
+// ### from lecnote 14 ###
+// typedef string elem; 
+// int main(){
+//     int* ip = alloc(int);
+//     void* p1 = (void*)ip;
+//     void* p2 = (void*)alloc(string);
+//     void* p4 = (void*)alloc(int**);
+//     //@assert \hastag(int*, p1);
+//     //@assert \hastag(string*, p2);
+//     //@assert \hastag(int***, p4);
+//     //@assert !\hastag(string*, p1);
+//     //@assert !\hastag(int**, p1);
+//     //@assert !\hastag(int***, p1);
+//     return 0;
+// }
+// ### from ed ###
+// struct test_header {
+//  string description; 
+//  int[] data; 
+// };
+
+// int test_function(int[] array) {
+//  return array[0];
+// }
+
+// typedef int int_array_to_int_fn(int[] array);
+// typedef struct test_header test;
+// typedef int max_fn(int x, int y);
+// typedef void print_fn(string s);
+
+// int main()
+// {
+//  // Testing memory...
+//  int[] array = alloc_array(int, 3);
+//  array[0] = 15;
+//  array[1] = 1;
+//  array[2] = 22;
+//  printf("Index 0 of array prints to: %d \n", array[0]);
+//  printf("Index 1 of array prints to: %d \n", array[1]);
+//  printf("Index 2 of array prints to: %d \n", array[2]);
+//  int* ptr1 = alloc(int);
+//  int* ptr2 = alloc(int);
+//  *ptr2 = -5089;
+//  ptr1 = ptr2;
+//  printf("Value of ptr1: %d \n", *ptr1);
+//  printf("Value of ptr2: %d \n", *ptr2);
+//  test* testptr1 = alloc(test);
+//  testptr1->description = "This is a test";
+//  printf("testptr1->description prints to: %s \n", testptr1->description);
+//  testptr1->data = array;
+//  printf("Index 0 of testptr1->data prints to: %d \n", testptr1->data[0]);
+//  printf("Index 1 of testptr1->data prints to: %d \n", testptr1->data[1]);
+//  printf("Index 2 of testptr1->data prints to: %d \n", testptr1->data[2]);
+//  // Testing strings...
+//  string str1 = "This is a test string";
+//  string str2 = "This is a test string";
+//  assert(string_length(str1)==21);
+//  assert(string_equal(str1, str2));
+//  assert(string_charat(str1, 0) == 'T');
+
+//  // Testing bonus...
+//  void *vptr1;
+//  vptr1 = (void*)ptr1;
+//  printf("The value of vptr1 after casting: %d \n", *((int*)vptr1));
+//  void *vptr2;
+//  string* strptr1 = alloc(string);
+//  *strptr1 = "This is a test string for the bonus";
+//  vptr2 = (void*)strptr1;
+//  printf("The value of vptr2 after casting: %s \n", *((string*)vptr2));
+
+//  // Bonus: Function pointers
+//  int_array_to_int_fn *fn = &test_function;
+//  int fnresult = (*fn)(array);
+//  printf("The result returned by fn is: %d \n", fnresult);
+//  //invokedynamic
+//  print_fn* pfn = &print;
+// //  int x = (*mfn)(13,24);
+//  (*pfn)("yo testing for native\n");
+// //  printf("The result is %d\n",x);
+//  return 0;
+// //  return testptr1->data[2];
+// }
+

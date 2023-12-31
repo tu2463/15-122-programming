@@ -1,0 +1,158 @@
+#use <util>
+#use <string>
+#use <conio>
+
+int hash1(string s)
+// Citation: this is adapted from my implementation of hash_mul32 from lab08
+// (changed mul32 to mul31)
+{
+  int result = 0;
+  int len = string_length(s);
+  for (int i = len-1; i >= 0; i--){
+    char cur_cha = string_charat(s, i);
+    result = result*31 + char_ord(cur_cha);
+    result = result*31 + char_ord(cur_cha);
+    result = result*31 + char_ord(cur_cha);
+    result = result*31 + char_ord(cur_cha);
+    result = result*31 + char_ord(cur_cha);
+  }
+  return result;
+}
+
+int hash2(string s)
+// Citation: this is from my implementation of hash_lcg from lab08
+{
+  int result = 0;
+  int len = string_length(s);
+  for (int i = len-1; i>=0; i--){
+    char cur_cha = string_charat(s, i);
+    result = (result*1664525+1013904223) + char_ord(cur_cha);
+  }
+  return result;
+}
+
+int hash3(string s)
+// Citation: this is adapted from my implementation of hash_lcg from lab08
+{
+  int result = 0;
+  int len = string_length(s);
+  for (int i = len-1; i>=0; i--){
+    char cur_cha = string_charat(s, i);
+    result = (result*270451+1013904223) + char_ord(cur_cha);
+    result = (result*1664525+1013904223) + char_ord(cur_cha);
+    result = result*31 + char_ord(cur_cha);
+    result = (result*270451+1013904223) + char_ord(cur_cha);
+    result = (result*1664525+1013904223) + char_ord(cur_cha);
+    result = result*31 + char_ord(cur_cha);
+    result = (result*270451+1013904223) + char_ord(cur_cha);
+  }
+  return result;
+}
+
+bool get_bit(int[] A, int i)
+/*@requires 0 <= i && i/32 < \length(A); @*/
+{
+  int index = i/32;
+  int numbit = i%32; //counting from the left
+
+  int shift= 31 - numbit;
+  int mask = 1<<shift; //sth like 01000000
+  int integer = A[index] & mask; // only that bit may not be 0
+  if (integer != mask) return false; // the bit = 0
+  else{
+    assert(integer == mask);
+    return true; // the bit = 1
+  }
+}
+
+void set_bit(int[] A, int i)
+/*@requires 0 <= i && i/32 < \length(A); @*/
+/*@ensures get_bit(A, i); @*/
+{
+  //*1111111 numbit = 0
+  int index = i/32;
+  int numbit = i%32;
+  int mask = 1<<(31 - numbit); // shift a 1 to the position
+  A[index] = A[index] | mask; // A[index] is the integer at this index; 
+  // make the bit at the desired position be 1
+}
+
+struct bloom_filter {
+  int limit; // limit < int_max()/8 -- max int array
+  int[] data; // limit == \length(data)
+};
+// implementation side type
+typedef struct bloom_filter bloom;
+
+bool is_bloom(bloom* B) {
+  if (B == NULL) return false;
+  //@assert(B->limit == \length(B->data));
+  return 0 < B->limit && B->limit < int_max()/8;
+}
+
+void print_bloom(bloom* B)
+//@requires is_bloom(B);
+{
+  print("Printing bloom --\n");
+  for (int i = 0; i < B->limit; i++){
+    printf("%d%s",i," ");
+    printint(B->data[i]);
+    print("\n");
+  }
+  print("Printing bloom -- done\n");
+}
+
+bloom* bloom_new(int n)
+//@requires 0 < n;
+//@requires n/32+1 < int_max()/8;
+//@ensures is_bloom(\result);
+{
+  bloom* B = alloc(bloom);
+  if (n%32!=0) B->limit = n/32+1;
+  else B->limit = n/32;
+  B->data = alloc_array(int, B->limit);
+  return B;
+}
+
+int[] index_of_string(bloom* B, string x)
+//@requires is_bloom(B);
+{
+  int[] integers = alloc_array(int, 3);
+  int max_integer = B->limit * 32;
+  int int1 = abs(hash1(x) % max_integer);
+  int int2 = abs(hash2(x) % max_integer);
+  int int3 = abs(hash3(x) % max_integer);
+  //@assert 0 <= int1 && int1 < max_integer;
+  //@assert 0 <= int2 && int2 < max_integer;
+  //@assert 0 <= int3 && int3 < max_integer;
+  integers[0] = int1;
+  integers[1] = int2;
+  integers[2] = int3;
+  return integers;
+}
+
+bool bloom_contains(bloom* B, string x)
+//@requires is_bloom(B);
+{
+  int[] integers = index_of_string(B, x);
+  for (int i = 0; i < 3; i++){
+    int integer = integers[i];
+    if (!get_bit(B->data,integer)) return false;
+  }
+  return true;
+}
+
+void bloom_add(bloom* B, string x)
+//@requires is_bloom(B);
+//@ensures is_bloom(B);
+//@ensures bloom_contains(B, x);
+{
+  int[] integers = index_of_string(B, x);
+  for (int i = 0; i < 3; i++){
+    int integer = integers[i];
+    set_bit(B->data, integer);
+  }
+}
+
+// Client type
+typedef bloom* bloom_t;

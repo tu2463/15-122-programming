@@ -1,0 +1,29 @@
+// int main() {
+//   int x = 15122;
+//   assert(true);
+//   int y = x * x;
+//   return y;
+// }
+
+// int main () { //testing athrow
+//   int n = 15122;
+//   int i = 0; int k = 0;
+//   k += 2*i + 1;
+//   i++;
+//   assert(k == 2*(i-1) + 1);
+//   error("I must abort here T_T\n");
+//   return i-1+k;
+// }
+
+// int main () {//testing aconstnull
+//   int* p = NULL;
+//   return 0;
+// }
+
+int main(){
+  string a = "a string\n";
+  string b = "b string\n";
+  if (13%3 != 25%3) return 0;
+  else return 1;
+}
+

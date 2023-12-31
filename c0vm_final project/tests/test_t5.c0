@@ -1,0 +1,237 @@
+#use <conio>
+#use <string>
+int main(){
+  int[] x = alloc_array(int, 0);
+  //@assert(\length(x) == 0);
+  return 0;
+}
+// ##### tesing array #####
+// ### from wt12 ###
+// typedef struct gap_buffer gapbuf;
+// struct gap_buffer {
+// char[] buffer; /* \length(buffer) == limit */
+// int limit; /* limit > 0 */
+// int gap_start; /* 0 <= gap_start */
+// int gap_end; /* gap_start <= gap_end <= limit */
+// };
+// int main() {
+// gapbuf* gb = alloc(gapbuf);
+// gb->buffer = string_to_chararray("alit tlep rinc eeee ");
+// gb->limit = 20;
+// gb->gap_start = 48112;
+// gb->gap_end = gb->gap_start;
+// print(string_from_chararray(gb->buffer));
+// printf("\n");
+// printf("%d %d %d\n",gb->limit,gb->gap_start,gb->gap_end);
+// return 1;
+// }
+// ###
+// int main() {
+//  int[] A = alloc_array(int, 3);
+//  A[0] = 1;
+//  A[1] = 2;
+//  A[2] = 2;
+//  int[] B = A;
+
+//  int[] C = alloc_array(int, 3);
+//  C[0] = A[0];
+//  C[1] = A[1];
+//  C[2] = A[2];
+
+//  B[2] = -1;
+//  C[2] = 1;
+//  A = C;
+//  B = alloc_array(int, 2);
+
+//  printf("A: ");
+//  for (int i = 0; i<3; i++){
+//     printf("%d, ",A[i]);
+//  }
+//  print("\n");
+//  printf("B: ");
+//  for (int i = 0; i<2; i++){
+//     printf("%d, ",B[i]);
+//  }
+//  print("\n");
+//  printf("C: ");
+//  for (int i = 0; i<3; i++){
+//     printf("%d, ",C[i]);
+//  }
+//  print("\n");
+
+//  return 0;
+//  }
+
+// ###
+//  int bigO_2(int[] L, int m, int n)//from rec 03
+//  //@requires \length(L) == m && m > 0;
+//  {
+//  //@assert(\length(L) == m);
+//  int[] A = alloc_array(int, n); // O(n)
+//  //@assert(\length(A) == n);
+ 
+//  for (int i = 0; i < n; i++) { // This loop runs n times
+//  for (int j = i; j < n; j++) { // This loop runs n − i times
+//  A[i] = i * j; // O(1)
+// } // Altogether, this loop costs O(n − i)
+// } // Altogether, this loop costs O(n
+//  int c = m - 1; // O(1)
+//  while (c > 0) { // This loop runs log c = log m times
+//  L[c] += 122; // O(1)
+//  c /= 4; // O(1)
+//  } // Altogether, this loop costs O(log m)
+//  return L[m/2]; // O(1)
+// } 
+
+// int main(){
+//   int[] L = alloc_array(int, 13);
+//   for (int i = 0; i < 13; i ++){
+//     if (i%2==0) L[i] = i*30;
+//     else L[i] = i/2;
+//   }
+//   return bigO_2(L, 13, 28);
+// }
+
+// ##### no testing array #####
+// struct X {
+// char a;
+// char b;
+// char* c;
+// };
+
+// ###
+// void f(struct X* x, struct X* y) {
+// x->b = y->a;
+// x->c = alloc(char);
+// *(x->c) = 'c';
+// char** d = alloc(char*);
+// *d = alloc(char);
+// **d = 'd';
+// x->a = **d;
+// }
+
+// int main() {
+// struct X* foo = alloc(struct X);
+// struct X* bar = alloc(struct X);
+// bar->a = 'o';
+// f(foo, bar);
+// printchar(foo->b);
+// printf("\n");
+// return 0;
+// }
+// // ###
+// void f(struct X* x, struct X* y) {
+// x->b = y->a;
+// x->c = alloc(char);
+// *(x->c) = 'c';
+// char** d = alloc(char*);
+// *d = alloc(char);
+// **d = 'd';
+// x->a = **d;
+// y->b = 'b';
+// *(y->c) = char_chr(char_ord(*(x->c))+19);
+// y->a = char_chr(char_ord(x->a)+10);
+// }
+// int main() {
+// struct X* foo = alloc(struct X);
+// foo->a = 'l';
+// foo->b = 'm';
+// foo->c = alloc(char);
+// *(foo->c) = 'n';
+// struct X* bar = alloc(struct X);
+// bar->a = 'o';
+// bar->b = 'm';
+// bar->c = alloc(char);
+// *(bar->c) = 'n';
+// f(foo, bar);
+// printf("foo: a=%c, b=%c, *c=%c\n",foo->a,foo->b,*(foo->c));
+// printf("bar: a=%c, b=%c, *c=%c\n",bar->a,bar->b,*(bar->c));
+// return 0;
+// }
+// ##### rec5 #####
+// struct X {
+// int a;
+// struct Y* b;
+// };
+
+// struct Y {
+// int* a;
+// int b;
+// struct X* c;
+// };
+
+// void f(struct X* x, struct Y* y) {
+// x->b = y;
+// y->c = x;
+// y->c->a = 15;
+// int** d = alloc(int*);
+// *d = alloc(int);
+// x->b->a = *d;
+// *(y->a) = x->a * 8 + 2;
+// x->b->b = 1000 * x->a + **d;
+// x = NULL;
+// y->c = NULL;
+// }
+
+// int main() {
+// struct X* foo = alloc(struct X);
+// struct Y* bar = alloc(struct Y);
+// f(foo, bar);
+// printf("foo->a=%d, *(bar->a)=%d, bar->b=%d\n",foo->a, *(bar->a), bar->b);
+// return 0;
+// }
+// ##### wt12 #####
+// int g(int x, int y, int z){
+//   if (z == 0) return x;
+//   if (z == 1) return y;
+//   return g(y, x + y, z - 1);
+// }
+// int main(){
+//   print("Happy Carnival!\n");
+//   return g(0, 1, 10);
+// }
+// ##### i/a m load/store only; from lec note #####
+// struct point {
+//   int x;
+//   int y;
+// };
+// typedef struct point* point;
+
+// point change(point p){
+//   point q = alloc(struct point);
+//   return q;
+// }
+
+// point reflect(point p) {
+//   point q = alloc(struct point);
+//   q->x = p->y;
+//   q->y = p->x;
+//   return q;
+// }
+
+// ##########
+// int main(){
+//   point p = alloc(struct point);
+//   p->x = 1;
+//   p->y = 2;
+//   return 0;
+// }
+// ###
+// int main(){
+//   point p = alloc(struct point);
+//   p->x = 1;
+//   p->y = 2;
+//   p = change(p);
+//   printf("%d, %d\n",p->x,p->y);
+//   return 0;
+// }
+// ###
+// int main(){
+//   point p = alloc(struct point);
+//   p->x = 1;
+//   p->y = 2;
+//   printf("%d, %d\n",p->x,p->y);
+//   p = reflect(p);
+//   printf("%d, %d\n",p->x,p->y);
+//   return 0;
+// }
